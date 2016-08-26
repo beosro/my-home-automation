@@ -1,0 +1,15 @@
+#  Turn off sleep mode if it isn't manually
+#  toggled by 10
+
+alias: Turn off sleep mode automatically
+trigger:
+  platform: time
+  after: '10:00:00'
+condition:
+- condition: state
+  entity_id: switch.sleeping
+  state: 'on'
+action:
+  service: homeassistant.turn_off
+  data:
+    entity_id: switch.sleeping

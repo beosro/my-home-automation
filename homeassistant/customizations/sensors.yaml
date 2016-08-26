@@ -21,13 +21,13 @@ sensor.glances_sensor_swap_use:
   icon: mdi:server
 sun.sun:
   icon: mdi:weather-sunny
-sensor.weather_humidity:
+sensor.forecastio_humidity:
   icon: mdi:water-percent
   friendly_name: Humidity
-sensor.weather_temperature:
+sensor.forecastio_temperature:
   icon: mdi:thermometer
   friendly_name: Temperature
-sensor.weather_summary:
+sensor.forecastio_summary:
   icon: mdi:leaf
   friendly_name: Conditions
 sensor.his_morning:

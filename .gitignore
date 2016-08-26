@@ -1,0 +1,10 @@
+mopidy/core.conf
+homeassistant/deps/*
+homeassistant/home-assistant.db
+homeassistant/home-assistant_v2.db
+homeassistant/home-assistant.log
+homeassistant/known_devices.yaml
+homeassistant/html5_push_registrations.conf
+homeassistant/.HA_VERSION
+supervisord.log
+supervisord.pid

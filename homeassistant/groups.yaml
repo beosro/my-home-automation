@@ -79,10 +79,10 @@ People:
 - switch.vacation
 - switch.guests
 Outdoors:
-- sensor.weather_summary
+- sensor.forecastio_summary
 - sun.sun
-- sensor.weather_temperature
-- sensor.weather_humidity
+- sensor.forecastio_temperature
+- sensor.forecastio_humidity
 - camera.weather_radar
 Scenes:
 - scene.lights_on
@@ -129,7 +129,9 @@ Commute:
 - sensor.her_evening
 Camera:
 - camera.camera
+- camera.last_motion
 - input_select.cam_preset
+- binary_sensor.cam_motion
 Holiday:
 - script.holiday
 - switch.smart_socket_1

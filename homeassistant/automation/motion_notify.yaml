@@ -6,14 +6,9 @@ alias: Unexpected motion
 trigger:
 - platform: state
   entity_id:
-  - sensor.living_room_motion
-  - sensor.bedroom_motion
-  - sensor.craft_room_motion
+  - binary_sensor.cam_motion
   state: 'yes'
 condition:
-- condition: state
-  entity_id: switch.detect_motion
-  state: 'on'
 - condition: state
   entity_id: switch.alert_motion
   state: 'on'
@@ -27,4 +22,4 @@ action:
   service: notify.notify
   data_template:
     message: >
-      Unexpected motion detected in the {{ trigger.entity_id.split('.')[1].replace('_motion', '').replace('_',' ') }}
+      Unexpected motion detected in the {{ states("input_select.cam_preset").lower() }}

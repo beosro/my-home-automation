@@ -11,7 +11,8 @@ homeassistant:
   name: Home
   latitude: !env_var HOME_LATITUDE
   longitude: !env_var HOME_LONGITUDE
-  temperature_unit: F
+  elevation: !env_var HOME_ELEVATION
+  unit_system: imperial
   time_zone: !env_var HASS_TIMEZONE
   customize: !include_dir_merge_named customizations
 
@@ -34,10 +35,21 @@ mqtt:
   client_id: hass
   keepalive: 60
 
+mqtt_eventstream:
+  publish_topic: automation
+  subscribe_topic: cec
+
 ###  HTTP  ###
 http:
   api_password: !env_var HASS_API_PASSWORD
+  ssl_certificate: !env_var HASS_SSL_CERT
+  ssl_key: !env_var HASS_SSL_KEY
 
+panel_iframe:
+  audio:
+    title: 'Multi-Room Audio'
+    icon: 'mdi:music-box-outline'
+    url: 'http://automation:6681/mopify/'
 ####################################################
 #                                                  #
 #                     Includes                     #

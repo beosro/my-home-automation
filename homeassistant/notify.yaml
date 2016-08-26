@@ -1,5 +1,15 @@
 #  Set up a notification platform so that alerts from
 #  Home Assistant can be received in the browser on a mobile device.
 
+- platform: group
+  name: all
+  services:
+  - service: html5
+  - service: pushbullet
 - platform: pushbullet
+  name: pushbullet
   api_key: !env_var PUSHBULLET_API_KEY
+- platform: html5
+  name: html5
+  gcm_api_key: !env_var GCM_API_KEY
+  gcm_sender_id: !env_var GCM_SENDER_ID
