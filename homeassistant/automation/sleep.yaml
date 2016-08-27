@@ -24,5 +24,4 @@ action:
     entity_id:
     - media_player.chromecast
     - media_player.firetv
-    - media_player.master_server
-    - media_player.portable
+    - media_player.multiroom_audio

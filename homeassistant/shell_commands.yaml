@@ -4,3 +4,4 @@ cam_preset_entryway: !env_var CAM_PRESET_ENTRYWAY
 cam_preset_living_room: !env_var CAM_PRESET_LIVING_ROOM
 cam_preset_sliding_door: !env_var CAM_PRESET_SLIDING_DOOR
 cam_preset_privacy: !env_var CAM_PRESET_PRIVACY
+pc_volume: !env_var PC_SOUND_VOLUME

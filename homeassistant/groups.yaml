@@ -5,7 +5,6 @@ default_view:
   - light.bedroom
   - light.craft_room
   - switch.sleeping
-  - group.multiroom_audio
 Rooms:
   view: yes
   entities:
@@ -90,6 +89,7 @@ Scenes:
 - scene.romantic
 - scene.disco
 Computer:
+- input_slider.pc_volume
 - switch.sound
 - switch.monitors
 Living Room:

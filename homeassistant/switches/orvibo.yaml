@@ -2,8 +2,3 @@
 #  and provide remote turn on/off.
 
 - platform: orvibo
-  switches:
-  - host: 192.168.1.19
-    name: Smart Socket 1
-  - host: 192.168.1.20
-    name: Smart Socket 2

@@ -42,14 +42,13 @@ mqtt_eventstream:
 ###  HTTP  ###
 http:
   api_password: !env_var HASS_API_PASSWORD
-  ssl_certificate: !env_var HASS_SSL_CERT
-  ssl_key: !env_var HASS_SSL_KEY
 
 panel_iframe:
   audio:
     title: 'Multi-Room Audio'
     icon: 'mdi:music-box-outline'
-    url: 'http://automation:6681/mopify/'
+    url: !env_var MOPIFY_URL
+
 ####################################################
 #                                                  #
 #                     Includes                     #
@@ -100,6 +99,9 @@ weblink: !include weblink.yaml
 
 ###  Input Selects  ###
 input_select: !include input_select.yaml
+
+###  Input Silders  ###
+input_slider: !include input_slider.yaml
 
 ###  Shell Commands  ###
 shell_command: !include shell_commands.yaml

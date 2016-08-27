@@ -1,0 +1,10 @@
+# Adjust volume on the PC.
+
+alias: PC volume control
+trigger:
+- platform: state
+  entity_id: input_slider.pc_volume
+action:
+  service: shell_command.pc_volume
+  data_template:
+    volume: '{{states.input_slider.pc_volume.state}}'

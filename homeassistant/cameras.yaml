@@ -1,7 +1,7 @@
 - platform: generic
   still_image_url: !env_var CAM_IMAGE_URL
   name: Camera
-- platform: local_file_camera
+- platform: local_file
   name: Last Motion
   file_path: /tmp/motion/latest.jpg
 - platform: generic

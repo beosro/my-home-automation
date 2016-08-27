@@ -25,7 +25,10 @@ switch.alert_delays:
 switch.twitch:
   icon: mdi:twitch
 switch.monitors:
- icon: mdi:monitor
+  icon: mdi:monitor
+  friendly_name: Monitors
 switch.sound:
+  icon: mdi:volume-off
+  friendly_name: Mute
+input_slider.pc_volume:
   icon: mdi:volume-high
-

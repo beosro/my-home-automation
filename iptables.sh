@@ -8,3 +8,5 @@ iptables -P OUTPUT ACCEPT
 # flush
 iptables -F
 
+# list rules
+sudo iptables -L -n

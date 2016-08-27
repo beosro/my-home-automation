@@ -11,16 +11,4 @@ trigger:
   entity_id: input_select.cam_preset
 action:
   service_template: >
-    {% if states.input_select.cam_preset.state == 'Kitchen' %}
-      shell_command.cam_preset_kitchen
-    {% elif states.input_select.cam_preset.state == 'Common Area' %}
-       shell_command.cam_preset_common_area
-    {% elif states.input_select.cam_preset.state == 'Entryway' %}
-       shell_command.cam_preset_entryway
-    {% elif states.input_select.cam_preset.state == 'Living Room' %}
-       shell_command.cam_preset_living_room
-    {% elif states.input_select.cam_preset.state == 'Sliding Door' %}
-       shell_command.cam_preset_sliding_door
-    {% elif states.input_select.cam_preset.state == 'Privacy' %}
-       shell_command.cam_preset_privacy
-    {% endif %}
+    shell_command.cam_preset_{{states.input_select.cam_preset.state.lower().replace(" ", "_")}}
