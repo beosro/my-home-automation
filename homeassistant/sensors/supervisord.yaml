@@ -1,6 +1,0 @@
-#  Home Assistant is just one of the several
-#  programs running on the home server. Supervisord
-#  monitors these processes.
-
-- platform: supervisord
-  url: http://localhost:9001/RPC2

@@ -28,6 +28,13 @@ zone:
   longitude: !env_var WORK_LONGITUDE
   radius: 100
 
+proximity:
+  zone: home
+  devices:
+    - device_tracker.her_phone
+  tolerance: 50
+  unit_of_measurement: mi
+
 ###  MQTT  ###
 mqtt:
   broker: 127.0.0.1
@@ -45,9 +52,18 @@ http:
 
 panel_iframe:
   audio:
-    title: 'Multi-Room Audio'
-    icon: 'mdi:music-box-outline'
+    title: Multi-Room Audio
+    icon: mdi:music-box-outline
     url: !env_var MOPIFY_URL
+  system:
+    title: System
+    icon: mdi:server
+    url: !env_var GLANCES_URL
+
+
+apcupsd:
+  host: localhost
+  port: 3551
 
 ####################################################
 #                                                  #

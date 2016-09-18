@@ -72,6 +72,7 @@ Server:
 - sensor.glances_sensor_disk_use
 - sensor.glances_sensor_ram_use
 - sensor.glances_sensor_swap_use
+- sensor.ups_battery
 People:
 - device_tracker.his_phone
 - device_tracker.her_phone

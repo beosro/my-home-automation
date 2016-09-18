@@ -1,6 +1,6 @@
 # Multi-Room
 - platform: mpd
-  host: automation
+  host: localhost
   port: 6601
   location: Multi-Room Audio
 # Room Audio
@@ -17,4 +17,4 @@
 - platform: firetv
   host: localhost:5556
 - platform: snapcast
-  host: automation
+  host: localhost
