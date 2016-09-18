@@ -22,7 +22,7 @@ zone:
   latitude: !env_var HOME_LATITUDE
   longitude: !env_var HOME_LONGITUDE
   radius: 20
-  icon: social:people
+  icon: mdi:people
 - name: Work
   latitude: !env_var WORK_LATITUDE
   longitude: !env_var WORK_LONGITUDE

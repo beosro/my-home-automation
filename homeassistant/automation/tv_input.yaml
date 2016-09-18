@@ -1,0 +1,11 @@
+#  Control TV's input via CEC
+
+alias: TV input via CEC
+trigger:
+- platform: state
+  entity_id: input_select.tv_input
+action:
+  service_template: >
+    shell_command.cam_preset_{{states.input_select.cam_preset.state.lower().replace(" ", "_")}}
+  data_template:
+    input: '{{states.input_select.tv_input.state}}'
