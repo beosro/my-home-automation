@@ -1,6 +1,6 @@
 # Multi-Room
 - platform: mpd
-  server: automation
+  host: automation
   port: 6601
   location: Multi-Room Audio
 # Room Audio

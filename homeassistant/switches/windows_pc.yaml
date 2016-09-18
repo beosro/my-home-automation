@@ -7,10 +7,12 @@
 - platform: command_line
   switches:
     sound:
-      oncmd: !env_var PC_SOUND_TOGGLE
-      offcmd: !env_var PC_SOUND_TOGGLE
-      initial: 'on'
+      command_on: !env_var PC_SOUND_TOGGLE
+      command_off: !env_var PC_SOUND_TOGGLE
     monitors:
-      oncmd: !env_var PC_MONITORS_ON
-      offcmd: !env_var PC_MONITORS_OFF
-      initial: 'on'
+      command_on: !env_var PC_MONITORS_ON
+      command_off: !env_var PC_MONITORS_OFF
+- platform: wake_on_lan
+  mac_address: !env_var PC_MAC_ADDRESS
+  name: "Turn On PC"
+  host: !env_var PC_IP_ADDRESS

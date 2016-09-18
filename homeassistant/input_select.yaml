@@ -10,3 +10,10 @@ cam_preset:
   - Living Room
   - Sliding Door
   - Privacy
+
+tv_input:
+  name: Input
+  options:
+  - Pi Zero
+  - Fire TV Stick
+  - Chromebox
