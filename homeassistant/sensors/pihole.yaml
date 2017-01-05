@@ -1,0 +1,2 @@
+- platform: pi_hole
+  host: localhost:8032

@@ -1,0 +1,6 @@
+#- platform: command_line
+#  scan_interval: 3600
+#  name: Heating Oil Delivery
+#  command: !env_var HEATING_OIL_WGET
+#  unit_of_measurement: 'gal'
+#  value_template: '{{value_json.aaData[0].units|round}}'

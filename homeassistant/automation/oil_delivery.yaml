@@ -1,0 +1,8 @@
+alias: Heating oil delivered
+trigger:
+  platform: state
+  entity_id: sensor.heating_oil_delivery
+action:
+  - service: notify.all
+    data_template:
+      message: '{{trigger.to_state.state}} gallons of heating oil were delivered.'

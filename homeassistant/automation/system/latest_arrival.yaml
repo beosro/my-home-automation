@@ -1,0 +1,14 @@
+#  Set the latest arrival
+
+alias: Set latest arrival
+trigger:
+  platform: state
+  entity_id:
+  - device_tracker.his_phone
+  - device_tracker.her_phone
+  state: 'home'
+action:
+  service: mqtt.publish
+  data_template:
+    topic: 'home/latest_arrival'
+    payload: '{{ trigger.to_state.attributes.friendly_name }}'

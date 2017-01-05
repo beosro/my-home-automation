@@ -1,0 +1,30 @@
+#  When the sleep switch is turned on,
+#  turn off various devices that are no
+#  longer in use, especially the lights.
+#  The sleep switch is automatically flipped
+#  when a phone is plugged in after a certain
+#  hour.
+
+alias: Sleeping
+trigger:
+  platform: state
+  entity_id: switch.sleeping
+  state: 'on'
+action:
+- service: light.turn_off
+  entity_id: group.all_lights
+- service: switch.turn_off
+  entity_id:
+  - switch.unknown_id000c_unknown_type4447_id3033_switch_13_0
+  - switch.unknown_id000c_unknown_type4447_id3033_switch_14_0
+  - switch.unknown_id000c_unknown_type4447_id3033_switch_15_0
+  - switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
+  - switch.smart_socket_1
+  - switch.smart_socket_2
+- service: lock.lock
+  entity_id: group.all_locks
+- service: media_player.turn_off
+  entity_id:
+  - media_player.chromecast
+  - media_player.firetv
+  - media_player.multiroom_audio

@@ -1,0 +1,11 @@
+#  Alert when twitch streams go live.
+
+alias: Power Loss
+trigger:
+  platform: numeric_state
+  entity_id: sensor.ups_battery 
+  below: 100
+action:
+  service: notify.all
+  data_template:
+    message: "Server lost power. Running on UPS."

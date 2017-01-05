@@ -1,0 +1,13 @@
+#  When the sleep switch turns off,
+#  fade on the bedroom light.
+
+alias: Wake Up
+trigger:
+  platform: state
+  entity_id: switch.sleeping
+  state: 'off'
+action:
+- service: scene.turn_on
+  entity_id: scene.morning_bedroom
+- service: lock.unlock
+  entity_id: group.all_locks

@@ -1,0 +1,10 @@
+alias: Vacation started
+trigger:
+  platform: state
+  entity_id: switch.vacation
+  state: 'on'
+action:
+- service: climate.set_away_mode
+  data:
+    entity_id: climate.home
+    away_mode: true

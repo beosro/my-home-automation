@@ -1,0 +1,61 @@
+- platform: template
+  sensors:
+    smoke_co_first_floor:
+      value_template: >-
+          {%- if is_state("sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_type_18_0", "13") %}
+              Idle
+          {%- elif is_state("sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_type_18_0", "1") %}
+              Smoke
+          {%- elif is_state("sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_type_18_0", "2") %}
+              Carbon Monoxide
+          {%- elif is_state("sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_type_18_0", "12") %}
+              Testing
+          {% else %}
+              Unknown
+          {%- endif %}
+      friendly_name: 'First Floor Smoke/CO Alarm'
+    smoke_co_second_floor:
+      value_template: >-
+          {%- if is_state("sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_type_19_0", "13") %}
+              Idle
+          {%- elif is_state("sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_type_19_0", "1") %}
+              Smoke
+          {%- elif is_state("sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_type_19_0", "2") %}
+              Carbon Monoxide
+          {%- elif is_state("sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_type_19_0", "12") %}
+              Testing
+          {% else %}
+              Unknown
+          {%- endif %}
+      friendly_name: 'Second Floor Smoke/CO Alarm' 
+    front_door_lock_battery:
+      value_template: '{{states.sensor.schlage_be469nxcen_touchscreen_deadbolt_alarm_type_7_0.attributes.battery_level}}'
+      unit_of_measurement: '%'
+      friendly_name: 'Front Door Lock Battery'
+    first_floor_smoke_co_battery:
+      value_template: '{{states.sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_type_18_0.attributes.battery_level}}'
+      unit_of_measurement: '%'
+      friendly_name: 'First Floor Smoke/CO Alarm Battery'
+    second_floor_smoke_co_battery:
+      value_template: '{{states.sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_type_19_0.attributes.battery_level}}'
+      unit_of_measurement: '%'
+      friendly_name: 'Second Floor Smoke/CO Alarm Battery'
+    his_phone_battery:
+      value_template: '{{states.device_tracker.his_phone.attributes.battery}}'
+      unit_of_measurement: '%'
+      friendly_name: 'His Phone Battery'
+    her_phone_battery:
+      value_template: '{{states.device_tracker.her_phone.attributes.battery}}'
+      unit_of_measurement: '%'
+      friendly_name: 'Her Phone Battery'
+    door_one_battery:
+      value_template: '{{states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_8_1.attributes.battery_level}}'
+      unit_of_measurement: '%'
+      friendly_name: 'Door One Battery'
+    door_two_battery:
+      value_template: '{{states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_9_1.attributes.battery_level}}'
+      unit_of_measurement: '%'
+      friendly_name: 'Door Two Battery'
+    last_home:
+      value_template: ''
+      friendly_name: 'Last Person Home'

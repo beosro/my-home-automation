@@ -1,67 +1,76 @@
-default_view:
+#default_view:
+Shortcuts:
   view: yes
   entities:
-  - light.living_room__hall
   - light.bedroom
-  - light.craft_room
   - switch.sleeping
+#Floors:
+#  view: yes
+#  entities:
 Rooms:
   view: yes
   entities:
-  - group.living_room
-  - group.craft_room
+  - group.kitchen
+  - group.dining_room
+  - group.den
+  - group.foyer
   - group.bedroom
+  - group.living_room
 Security:
   view: yes
   entities:
   - group.camera
+  - lock.schlage_be469nxcen_touchscreen_deadbolt_locked_7_0
+Batteries:
+  - sensor.first_floor_smoke_co_battery
+  - sensor.second_floor_smoke_co_battery
+  - sensor.front_door_lock_battery
+  - sensor.door_one_battery
+  - sensor.door_two_battery
+  - sensor.ups_battery
+  - sensor.his_phone_battery
+  - sensor.her_phone_battery
+Detectors:
+  - sensor.smoke_co_first_floor
+  - sensor.smoke_co_second_floor
 Media:
   view: yes
   entities:
-  - media_player.craft_room
-  - media_player.bedroom
-  - media_player.living_room
-  - media_player.craft_room_client
-  - media_player.bedroom_client
-  - media_player.living_room_client
-  - media_player.desktop_client
-  - weblink.craft_room_music_player
-  - weblink.bedroom_music_player
-  - weblink.living_room_music_player
-  - group.multiroom_audio
-  - group.tv
-Multi-room Audio:
-- media_player.multiroom_audio
-- weblink.multiroom_music_player
+    #- media_player.cec
+    #- media_player.usb_pi
+    #- media_player.hifiberry
+  - group.snapclients
+  - media_player.multiroom_audio
+    #  - group.tv
+#Multi-room Audio:
+#- weblink.multiroom_music_player
 TV:
 - input_select.tv_input
 - media_player.amazon_fire_tv
-- media_player.living_room
-- media_player.living_room_client
-- weblink.living_room_music_player
-Other:
-  view: yes
-  entities:
-  - group.twitch
-  - group.people
-  - group.outdoors
-  - group.scenes
-  - group.computer
-Admin:
-  view: yes
-  entities:
-  - group.home_assistant
-  - group.network
-  - group.server
-  - group.processes
-Processes:
-- sensor.mosquitto
-- sensor.firetvserver
-- sensor.glances
-- sensor.mopidy
-- sensor.mopidysnap
-- sensor.snapclient
-- sensor.snapserver
+- media_player.cec
+#Other:
+#  view: yes
+#  entities:
+#  - group.twitch
+#  - group.people
+#  - group.outdoors
+#  - group.scenes
+#  - group.computer
+#Admin:
+#  view: yes
+#  entities:
+#  - group.home_assistant
+#  - group.network
+#  - group.server
+#  - group.processes
+#Processes:
+#- sensor.mosquitto
+#- sensor.firetvserver
+#- sensor.glances
+#- sensor.mopidy
+#- sensor.mopidysnap
+#- sensor.snapclient
+#- sensor.snapserver
 Network:
 - sensor.speedtest_upload
 - sensor.speedtest_download
@@ -80,10 +89,10 @@ People:
 - switch.vacation
 - switch.guests
 Outdoors:
-- sensor.forecastio_summary
+- sensor.dark_sky_summary
 - sun.sun
-- sensor.forecastio_temperature
-- sensor.forecastio_humidity
+- sensor.dark_sky_temperature
+- sensor.dark_sky_humidity
 - camera.weather_radar
 Scenes:
 - scene.lights_on
@@ -96,22 +105,45 @@ Computer:
 - switch.sound
 - switch.monitors
 Living Room:
-- sensor.living_room_temperature
-- sensor.living_room_humidity
-- sensor.living_room_motion
-- light.living_room__hall
-- switch.cat_toy
-Craft Room:
-- sensor.craft_room_temperature
-- sensor.craft_room_humidity
-- sensor.craft_room_motion
-- light.craft_room
+- light.living_room_lamps
+- light.living_room_fan_light
+#- sensor.living_room_temperature
+#- sensor.living_room_humidity
+#- sensor.living_room_motion
+#- switch.cat_toy
+#Craft Room:
+#- sensor.craft_room_temperature
+#- sensor.craft_room_humidity
+#- sensor.craft_room_motion
+#- light.craft_room
 Bedroom:
+#- sensor.bedroom_temperature
+#- sensor.bedroom_humidity
+#- sensor.bedroom_motion
+- light.bedroom_lamp
+- light.unknown_id000c_unknown_type4447_id3034_level_17_0
+- binary_sensor.bedroom_occupancy
 - sensor.bedroom_temperature
-- sensor.bedroom_humidity
-- sensor.bedroom_motion
-- light.bedroom
-- light.bathroom
+Kitchen:
+- switch.unknown_id000c_unknown_type4447_id3033_switch_13_0
+- switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
+- binary_sensor.door_one
+- binary_sensor.kitchen_occupancy
+- sensor.kitchen_temperature
+Den:
+- light.dragon_tech_in_wall_dimmer_level_16_0
+- binary_sensor.den_occupancy
+- sensor.den_temperature
+Dining Room:
+- light.unknown_id000c_unknown_type4447_id3034_level_21_0
+Foyer:
+- switch.unknown_id000c_unknown_type4447_id3033_switch_15_0
+- switch.unknown_id000c_unknown_type4447_id3033_switch_14_0
+- lock.schlage_be469nxcen_touchscreen_deadbolt_locked_7_0
+- binary_sensor.door_two
+- binary_sensor.thermostat_occupancy
+- sensor.thermostat_temperature
+- sensor.thermostat_humidity
 Twitch:
 - sensor.twitch_fopt_membrillo
 - sensor.twitch_vooblyofficial
@@ -139,23 +171,27 @@ Holiday:
 - script.holiday
 - switch.smart_socket_1
 - switch.smart_socket_2
+Snapclients:
+- media_player.cec
+- media_player.hifiberry
+- media_player.usb_pi
 # This is a special view for taking a screenshot of all entities.
-Screenshot:
-  view: yes
-  entities:
-  - group.bedroom
-  - group.living_room
-  - group.craft_room
-  - group.multiroom_audio
-  - group.camera
-  - group.commute
-  - group.people
-  - group.outdoors
-  - group.scenes
-  - group.computer
-  - group.twitch
-  - group.processes
-  - group.network
-  - group.server
-  - group.home_assistant
-  - group.holiday
+#Screenshot:
+#  view: yes
+#  entities:
+#  - group.bedroom
+#  - group.living_room
+#  - group.craft_room
+#  - group.multiroom_audio
+#  - group.camera
+#  - group.commute
+#  - group.people
+#  - group.outdoors
+#  - group.scenes
+#  - group.computer
+#  - group.twitch
+#  - group.processes
+#  - group.network
+#  - group.server
+#  - group.home_assistant
+#  - group.holiday

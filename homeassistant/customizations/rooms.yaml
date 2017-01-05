@@ -33,9 +33,9 @@ switch.cat_toy:
 sensor.bedroom_humidity:
   icon: mdi:water-percent
   friendly_name: Humidity
-sensor.bedroom_temperature:
-  icon: mdi:thermometer
-  friendly_name: Temperature
+#sensor.bedroom_temperature:
+#  icon: mdi:thermometer
+#  friendly_name: Temperature
 sensor.bedroom_motion:
   icon: mdi:walk
   friendly_name: Motion

@@ -1,0 +1,20 @@
+alias: Turn on lights when anyone gets home
+trigger:
+  platform: state
+  entity_id:
+  - device_tracker.his_phone
+  - device_tracker.her_phone
+  state: 'home'
+condition:
+- condition: state
+  entity_id: switch.presence
+  state: 'on'
+- condition: numeric_state
+  entity_id: sun.sun
+  value_template: '{{ state.attributes.elevation }}'
+  below: !env_var SUNSET_ELEVATION
+action:
+  - service: switch.turn_on
+    entity_id:
+    - switch.unknown_id000c_unknown_type4447_id3033_switch_14_0
+    - switch.unknown_id000c_unknown_type4447_id3033_switch_15_0

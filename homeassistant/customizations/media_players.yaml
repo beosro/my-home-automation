@@ -1,8 +1,9 @@
 media_player.multiroom_audio:
   icon: mdi:music-box-outline
+  emulated_hue: true
+  emulated_hue_name: the speakers
 media_player.living_room:
-  friendly_name: Living Room Music
-  icon: mdi:music-note
+  friendly_name: Chromecast
 media_player.bedroom:
   friendly_name: Bedroom Music
   icon: mdi:music-note

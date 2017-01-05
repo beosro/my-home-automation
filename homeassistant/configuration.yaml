@@ -16,24 +16,51 @@ homeassistant:
   time_zone: !env_var HASS_TIMEZONE
   customize: !include_dir_merge_named customizations
 
+tts:
+  - platform: google
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
+
 ###  Zones  ###
-zone:
-- name: Home
-  latitude: !env_var HOME_LATITUDE
-  longitude: !env_var HOME_LONGITUDE
-  radius: 20
-  icon: mdi:people
-- name: Work
-  latitude: !env_var WORK_LATITUDE
-  longitude: !env_var WORK_LONGITUDE
-  radius: 100
+zone: !include zones.yaml
+
+emulated_hue:
+  expose_by_default: false
+
+alexa: !include alexa.yaml
 
 proximity:
-  zone: home
-  devices:
+  her_home:
+    devices:
     - device_tracker.her_phone
-  tolerance: 50
-  unit_of_measurement: mi
+    tolerance: !env_var PROXIMITY_TOLERANCE
+    unit_of_measurement: mi
+  his_home:
+    devices:
+    - device_tracker.his_phone
+    tolerance: !env_var PROXIMITY_TOLERANCE
+    unit_of_measurement: mi
+  home:
+    devices:
+    - device_tracker.his_phone
+    - device_tracker.her_phone
+    tolerance: !env_var PROXIMITY_TOLERANCE
+    unit_of_measurement: mi
+
+google:
+  client_id: !env_var GOOGLE_CLIENT_ID
+  client_secret: !env_var GOOGLE_CLIENT_SECRET
+
+ecobee:
+  api_key: !env_var ECOBEE_API_KEY
+
+digital_ocean:
+  access_token: !env_var DIGITALOCEAN_API_KEY
+
+zwave:
+  usb_path: /dev/ttyACM0
+  config_path: !env_var ZWAVE_CONFIG_PATH
 
 ###  MQTT  ###
 mqtt:
@@ -41,14 +68,25 @@ mqtt:
   port: 1883
   client_id: hass
   keepalive: 60
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+    qos: 1
+    retain: true
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
+    qos: 1
+    retain: true
 
-mqtt_eventstream:
-  publish_topic: automation
-  subscribe_topic: cec
+#mqtt_eventstream:
+#  publish_topic: automation
+#  subscribe_topic: cec
 
 ###  HTTP  ###
 http:
   api_password: !env_var HASS_API_PASSWORD
+  base_url: !env_var HASS_BASE_URL
 
 panel_iframe:
   audio:
@@ -59,11 +97,38 @@ panel_iframe:
     title: System
     icon: mdi:server
     url: !env_var GLANCES_URL
+  cams:
+    title: Cameras
+    icon: mdi:video
+    url: !env_var CAMS_URL
+  dns:
+    title: DNS
+    icon: mdi:block-helper
+    url: !env_var PI_HOLE_URL
+  ozwcp:
+    title: OZWCP
+    icon: mdi:signal-variant
+    url: !env_var OZWCP_URL
+#  wifi:
+#    title: Wifi
+#    icon: mdi:wifi
+#    url: !env_var UNIFI_URL
+#  router:
+#    title: Router
+#    icon: mdi:server-network
+#    url: !env_var EDGEMAX_URL
 
 
 apcupsd:
   host: localhost
   port: 3551
+
+
+recorder:
+  purge_days: 5
+
+cover:
+    platform: zwave
 
 ####################################################
 #                                                  #
@@ -94,6 +159,7 @@ switch: !include_dir_merge_list switches
 ###  Sensors  ###
 #  Sensors are anything (hardware or software) that has a state.
 sensor: !include_dir_merge_list sensors
+binary_sensor: !include_dir_merge_list binary_sensors
 
 ###  Groups  ###
 group: !include groups.yaml

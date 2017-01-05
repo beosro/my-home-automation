@@ -1,0 +1,18 @@
+#  Monitor some basic weather conditions.
+#  Temperature and humidity are also monitored
+#  indoors so comparisons can be made.
+
+- platform: darksky
+  api_key: !env_var DARKSKY_API_KEY
+  monitored_conditions:
+  - summary
+  - temperature
+  - humidity
+  - hourly_summary
+  - daily_summary
+  - nearest_storm_distance
+  - precip_probability
+  - precip_type
+  - cloud_cover
+  - temperature_max
+  - temperature_min

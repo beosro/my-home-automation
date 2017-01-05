@@ -1,0 +1,189 @@
+      >
+      {# Difference between dates in hours, roughly #}
+      {% macro hour_diff(first, second) -%}
+        {{((as_timestamp(first) - as_timestamp(second))/60.0/60.0)}}
+      {%- endmacro %}
+
+      {# Day of week #}
+      {% macro day_of_week(timestamp) -%}
+        {{as_timestamp(timestamp)|timestamp_custom('%A', true)|lower}}
+      {%- endmacro %}
+
+      {# On a weekend #}
+      {% macro on_weekend(timestamp) -%}
+        {%- if
+          day_of_week(timestamp) == 'saturday' or
+          day_of_week(timestamp) == 'sunday'
+        -%}
+          true
+        {%- else -%}
+          false
+         {%- endif %}
+      {%- endmacro %}
+
+      {# Is today #}
+      {% macro is_today(event) -%}
+        {%- if (hours_until(event)|int < 24) -%}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+      {%- endmacro %}
+
+      {# Friendly time #}
+      {% macro friendly_time(timestamp) -%}
+        {{as_timestamp(timestamp)|timestamp_custom('%-I', true)}}
+        {%- if as_timestamp(timestamp)|timestamp_custom('%-M', true) != '0' -%}
+          {{ ' ' }}{{as_timestamp(timestamp)|timestamp_custom('%-M', true)}}
+        {%- endif %}
+      {%- endmacro %}
+
+      {# Hours until a given event, approximately #}
+      {% macro hours_until(event) -%}
+        {% if event.attributes.all_day -%}
+          {{(hour_diff(event.attributes.start_time, now())|float-5)|round}}
+        {%- else -%}
+          {{hour_diff(event.attributes.start_time, now())|float|round}}
+        {%- endif %}
+      {%- endmacro %}
+
+      {# Upcoming event #}
+      {% macro upcoming_event(event) -%}
+        {%- set start = event.attributes.start_time -%}
+        {%- if start and is_today(event) == 'true' -%}
+          {{event.attributes.message}} is today at {{friendly_time(start)}}
+        {%- elif start and on_weekend(start) == 'true' and day_of_week(now()) == 'friday' -%}
+          {{event.attributes.message}} is on {{day_of_week(start)}} at {{friendly_time(start)}}
+        {%- endif -%}
+      {%- endmacro %}
+
+      {# Household chore #}
+      {% macro chore_sentence(event, type, sentence) -%}
+        {%- if (event.start_time and 
+                is_today(event) == 'true' and
+                event.attributes.message|lower == type) -%}
+          {{sentence}}
+        {%- endif -%}
+      {%- endmacro %}
+
+      {# Holiday sentence #}
+      {% macro holiday_sentence() -%}
+        {%- if (states.calendar.holidays_in_united_states.attributes.start_time and
+                is_today(states.calendar.holidays_in_united_states) == 'false') -%}
+          It is {{states.calendar.holidays_in_united_states.attributes.message}}.
+        {%- endif -%}
+      {%- endmacro %}
+
+      {# Event sentence #}
+      {% macro event_sentence(event, prefix, suffix) -%}
+        {%- set event_string = upcoming_event(event) -%}
+        {% if event_string != '' -%}
+          {{prefix}}{{event_string}}{{suffix}}{{'.'}}
+        {%- endif %}
+      {%- endmacro %}
+
+      {# Welcome sentence #}
+      {% macro welcome_sentence(person) -%}
+        Hey {{person}}, welcome home!
+      {%- endmacro %}
+
+      {# Weather sentence #}
+      {% macro weather_sentence() -%}
+        It is {{states.sensor.dark_sky_summary.state.lower()}} and {{states.sensor.dark_sky_temperature.state|int|round}} degrees outside.
+        {{- ' ' -}}
+        {{- states.sensor.dark_sky_hourly_summary.state-}}
+      {%- endmacro %}
+
+      {# Get person's device #}
+      {% macro get_device(person) -%}
+        {% for device in states.device_tracker -%}
+         {% if device.name == person -%}
+            {{device.entity_id}}
+          {%- endif %}
+        {%- endfor %}
+      {%- endmacro %}
+
+      {# Get person's pronoun #}
+      {%- macro get_pronoun(device_entity) -%}
+        {{device_entity.split('.')[1].split('_')[0]}}
+      {%- endmacro -%}
+
+      {# How far away is a person #}
+      {% macro minutes_away(pronoun, part_of_day, max) -%}
+        {{(states("proximity." ~ pronoun ~ "_home")|int / max|int) * states("sensor." ~ pronoun ~ "_" ~ part_of_day)|int}}
+      {%- endmacro %}
+
+      {# Who is the other person #}
+      {% macro get_other_person(person) -%}
+       {% for device in states.device_tracker -%}
+         {% if device.name != person -%}
+            {{device.name}}
+          {%- endif %}
+        {%- endfor %}
+      {%- endmacro %}
+
+      {# On My Way sentence #}
+      {%- macro omw_sentence(person) -%}
+        {%- set max = work_distance(person) -%}
+        {%- set device_entity = get_device(person) -%}
+        {%- set pronoun = get_pronoun(device_entity) -%}
+        {%- if states(device_entity) == 'not_home' -%}
+          {{person}} is on {{pronoun}} way home, about {{minutes_away(pronoun, "evening", max)|int}} minutes out.
+        {%- elif states(device_entity) != 'home' -%}
+          {{person}} is still at {{states(device_entity)}}.
+        {%- endif -%}
+      {%- endmacro -%}
+
+      {# Battery sentence #}
+      {% macro battery_sentence(person) -%}
+        {%- set device_entity = get_device(person) -%}
+        {%- set pronoun = get_pronoun(device_entity) -%}
+        {%- set percent = states("sensor." ~ pronoun ~ "_phone_battery") -%}
+        {% if percent|int < 50 %}
+          Remember to plug in your phone, it's at {{percent}} percent.
+        {% endif %}
+      {%- endmacro %}
+
+      {# Distance to a person's work - straight #}
+      {% macro work_distance(person) -%}
+        {%- set device_entity = get_device(person) -%}
+        {%- set work = states(device_entity) -%}
+        {% for zone in states.zone -%}
+          {% if zone.name == work -%}
+            {{ distance(zone.attributes.latitude, zone.attributes.longitude)|round }}
+          {%- endif %}
+        {%- endfor %}
+      {%- endmacro %}
+
+      {# Validate requested person #}
+      {% macro validate_and_brief(person) -%}
+        {% if person -%}
+          {%- set caps = person|capitalize -%}
+          {%- set device = get_device(caps) -%}
+          {%- if device -%}
+            {{briefing(caps)}}
+          {%- else -%}
+            {{caps}} doesn't live here.
+          {%- endif %}
+        {%- else -%}
+          Specify a person.
+        {%- endif %}
+      {%- endmacro %}
+
+      {# Output the briefing #}
+      {% macro briefing(person) -%}
+        {%- set other_person = get_other_person(person) %}
+        {{welcome_sentence(person)}}
+        {{holiday_sentence()}}
+        {{battery_sentence(person)}}
+        {{omw_sentence(other_person)}}
+        {{weather_sentence()}}
+        {{chore_sentence(states.calendar.general, 'trash', 'Remember to take out the trash. It is trash day.')}}
+        {{chore_sentence(states.calendar.general, 'recycling', 'Remember to take out the recycling. It is recycling day.')}}
+        {{event_sentence(states.calendar.facebook)}}
+        {{event_sentence(states.calendar.sca, '', ', get prepared')}}
+        {{event_sentence(states.calendar.combat_docket_mma_calendar, 'Oh yeah, and ')}}
+      {% endmacro %}
+
+      {# ... And, run the briefing #}
+      {{validate_and_brief(states.sensor.briefing_target.state)}}

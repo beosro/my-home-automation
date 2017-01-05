@@ -4,7 +4,15 @@
 - platform: group
   name: all
   services:
+    - service: html5
+    #- service: pushbullet
+- platform: group
+  name: her
+  services:
   - service: html5
+- platform: group
+  name: him
+  services:
   - service: pushbullet
 - platform: pushbullet
   name: pushbullet

@@ -1,0 +1,10 @@
+#  Provide a welcome briefing when someone gets home
+
+alias: Welcome briefing
+trigger:
+  platform: state
+  entity_id: sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_9_1
+  state: '255'
+action:
+  service: homeassistant.turn_on
+  entity_id: script.briefing_test

@@ -1,0 +1,8 @@
+sequence:
+- service: mqtt.publish
+  data_template:
+    payload: '{{states.sensor.latest_arrival.state}}'
+    topic: 'home/briefing_target'
+- service: notify.pushbullet
+  data_template:
+    message: !include ../templates/briefing.yaml

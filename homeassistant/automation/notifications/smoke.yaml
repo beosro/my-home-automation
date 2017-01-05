@@ -1,0 +1,9 @@
+alias: Smoke detected
+trigger:
+  platform: state
+  entity_id: group.detectors
+  state: 'Smoke'
+action:
+  - service: notify.all
+    data_template:
+      message: 'Smoke detected!'

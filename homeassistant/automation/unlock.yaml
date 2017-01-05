@@ -1,0 +1,18 @@
+alias: Unlock the door if someone arrives
+trigger:
+  platform: state
+  entity_id: group.all_devices
+  state: 'home'
+condition:
+- condition: state
+  entity_id: switch.presence
+  state: 'on'
+- condition: state
+  entity_id: group.all_locks
+  state: 'locked'
+action:
+- service: lock.unlock
+  entity_id: group.all_locks
+ - service: notify.all
+    data_template:
+      message: 'Someone got home; unlocking the door.'

@@ -5,13 +5,13 @@
   name: His Morning
   api_key: !env_var GOOGLE_API_KEY
   origin: !env_var HOME_ADDRESS
-  destination: !env_var WORK_ADDRESS
+  destination: !env_var HIS_WORK_ADDRESS
   options:
     mode: driving
 - platform: google_travel_time
   name: His Evening
   api_key: !env_var GOOGLE_API_KEY
-  origin: !env_var WORK_ADDRESS
+  origin: !env_var HIS_WORK_ADDRESS
   destination: !env_var HOME_ADDRESS
   options:
     mode: driving
@@ -19,13 +19,13 @@
   name: Her Morning
   api_key: !env_var GOOGLE_API_KEY
   origin: !env_var HOME_ADDRESS
-  destination: !env_var HER_WORK_ADDRESS
+  destination: !env_var HER_WORK_ADDRESS_1
   options:
     mode: driving
 - platform: google_travel_time
   name: Her Evening
   api_key: !env_var GOOGLE_API_KEY
-  origin: !env_var HER_WORK_ADDRESS
+  origin: !env_var HER_WORK_ADDRESS_1
   destination: !env_var HOME_ADDRESS
   options:
     mode: driving

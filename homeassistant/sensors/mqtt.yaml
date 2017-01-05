@@ -32,7 +32,7 @@
 # Bedroom sensor - Device #3
 
 - platform: mqtt
-  name: "Bedroom Temperature"
+  name: "Bedroom Temperature MQTT"
   state_topic: "sensor/3/temperature"
   unit_of_measurement: "F"
 - platform: mqtt
@@ -42,3 +42,24 @@
 - platform: mqtt
   name: "Bedroom Motion"
   state_topic: "sensor/3/motion"
+
+- platform: mqtt
+  name: "Latest Arrival"
+  state_topic: "home/latest_arrival"
+  qos: 2
+- platform: mqtt
+  name: "Briefing Target"
+  state_topic: "home/briefing_target"
+  qos: 2
+- platform: mqtt
+  name: "Her First Arrival"
+  state_topic: "home/first_arrival/her"
+- platform: mqtt
+  name: "His First Arrival"
+  state_topic: "home/first_arrival/him"
+- platform: mqtt
+  name: "Her Last Location"
+  state_topic: "home/last_location/device_tracker.her_phone"
+- platform: mqtt
+  name: "His Last Location"
+  state_topic: "home/last_location/device_tracker.his_phone"

@@ -1,18 +1,18 @@
 - platform: limitlessled
   bridges:
-  - host: 192.168.1.10
+  - host: 192.168.2.59
     version: 5
     port: 8899
     groups:
     - number: 1
       type: rgbw
-      name: Bedroom
+      name: Bedroom Lamp
     - number: 2
       type: white
-      name: Craft Room
+      name: Living Room Fan Light
     - number: 3
-      type: rgbw
-      name: Bathroom
+      type: white
+      name: Group 3
     - number: 4
       type: rgbw
-      name: Living Room & Hall
+      name: Living Room Lamps

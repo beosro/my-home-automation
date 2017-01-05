@@ -1,0 +1,29 @@
+- name: Home
+  latitude: !env_var HOME_LATITUDE
+  longitude: !env_var HOME_LONGITUDE
+  radius: !env_var ZONE_RADIUS
+  icon: mdi:people
+- name: !env_var HIS_WORK_NAME
+  latitude: !env_var HIS_WORK_LATITUDE
+  longitude: !env_var HIS_WORK_LONGITUDE
+  radius: !env_var WORK_ZONE_RADIUS
+- name: !env_var HER_WORK_NAME_1
+  latitude: !env_var HER_WORK_LATITUDE_1
+  longitude: !env_var HER_WORK_LONGITUDE_1
+  radius: !env_var WORK_ZONE_RADIUS
+- name: !env_var HER_WORK_NAME_2
+  latitude: !env_var HER_WORK_LATITUDE_2
+  longitude: !env_var HER_WORK_LONGITUDE_2
+  radius: !env_var WORK_ZONE_RADIUS
+- name: Her Home
+  latitude: !env_var HOME_LATITUDE
+  longitude: !env_var HOME_LONGITUDE
+  radius: !env_var ZONE_RADIUS
+  passive: true
+- name: His Home
+  latitude: !env_var HOME_LATITUDE
+  longitude: !env_var HOME_LONGITUDE
+  radius: !env_var ZONE_RADIUS
+  passive: true
+
+

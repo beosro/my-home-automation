@@ -1,0 +1,11 @@
+alias: Alert if the side door was left open
+trigger:
+  platform: state
+  entity_id: sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_8_1
+  state: '255'
+  for:
+    seconds: 60
+action:
+  - service: notify.all
+    data_template:
+      message: 'Side door is open! Please close it.'

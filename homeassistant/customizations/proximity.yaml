@@ -1,0 +1,6 @@
+proximity.home:
+  friendly_name: Anyone's proximity
+proximity.her_home:
+  friendly_name: Her proximity
+proximity.his_home:
+  friendly_name: His proximity

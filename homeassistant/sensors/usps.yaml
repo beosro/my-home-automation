@@ -1,0 +1,3 @@
+- platform: usps
+  username: !env_var MYUSPS_USERNAME
+  password: !env_var MYUSPS_PASSWORD

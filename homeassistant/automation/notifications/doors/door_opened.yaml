@@ -1,0 +1,12 @@
+alias: Door opened
+trigger:
+  platform: state
+  entity_id:
+  - sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_8_1
+  - sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_9_1
+  to: '100'
+action:
+  - service: notify.all
+    data_template:
+      message: >
+        {{ trigger.entity_id.split('.')[1].replace('_', ' ') }} opened

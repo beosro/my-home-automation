@@ -1,0 +1,10 @@
+sequence:
+- service: mqtt.publish
+  data_template:
+    payload: 'Mike'
+    topic: 'home/briefing_target'
+- service: persistent_notification.create
+  data_template:
+    notification_id: 'mike_briefing'
+    title: Mike's Briefing
+    message: !include ../templates/briefing.yaml

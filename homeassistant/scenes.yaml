@@ -19,6 +19,22 @@
 #  The romantic state switches the lights to purple
 #  and turns off lights in utilitarian rooms.
 
+- name: Mood Lighting
+  entities:
+    light.bedroom_lamp:
+      state: on
+      brightness: 150
+      rgb_color: [128, 0, 128]
+    light.unknown_id000c_unknown_type4447_id3034_level_17_0:
+      state: off
+
+- name: Regular Lighting
+  entities:
+    light.bedroom_lamp:
+      state: on
+      brightness: 150
+      rgb_color: [255, 255, 255]
+
 - name: Romantic
   entities:
     light.bedroom:
@@ -93,12 +109,7 @@
 
 - name: Morning Bedroom
   entities:
-    light.bedroom:
-      state: on
-      transition: 45
-      brightness: 255
-      rgb_color: [255, 255, 255]
-    light.bathroom:
+    light.bedroom_lamp:
       state: on
       transition: 45
       brightness: 255

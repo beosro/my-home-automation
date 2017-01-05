@@ -21,13 +21,13 @@ sensor.glances_sensor_swap_use:
   icon: mdi:server
 sun.sun:
   icon: mdi:weather-sunny
-sensor.forecastio_humidity:
+sensor.dark_sky_humidity:
   icon: mdi:water-percent
   friendly_name: Humidity
-sensor.forecastio_temperature:
+sensor.dark_sky_temperature:
   icon: mdi:thermometer
   friendly_name: Temperature
-sensor.forecastio_summary:
+sensor.dark_sky_summary:
   icon: mdi:leaf
   friendly_name: Conditions
 sensor.his_morning:
@@ -38,3 +38,9 @@ sensor.her_morning:
   icon: mdi:car
 sensor.her_evening:
   icon: mdi:car
+binary_sensor.thermostat_occupancy:
+  friendly_name: Foyer Occupancy
+sensor.thermostat_temperature:
+  friendly_name: Foyer Temperature
+sensor.thermostat_humidity:
+  friendly_name: Foyer Humidity
