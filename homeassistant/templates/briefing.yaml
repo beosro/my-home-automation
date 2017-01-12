@@ -23,7 +23,7 @@
 
       {# Is today #}
       {% macro is_today(event) -%}
-        {%- if (hours_until(event)|int < 24) -%}
+        {%- if event.attributes.start_time[:10]== (now()|string)[:10] -%}
           true
         {%- else -%}
           false
@@ -40,11 +40,7 @@
 
       {# Hours until a given event, approximately #}
       {% macro hours_until(event) -%}
-        {% if event.attributes.all_day -%}
-          {{(hour_diff(event.attributes.start_time, now())|float-5)|round}}
-        {%- else -%}
-          {{hour_diff(event.attributes.start_time, now())|float|round}}
-        {%- endif %}
+        {{hour_diff(event.attributes.start_time, now())|float|round}}
       {%- endmacro %}
 
       {# Upcoming event #}
@@ -59,7 +55,7 @@
 
       {# Household chore #}
       {% macro chore_sentence(event, type, sentence) -%}
-        {%- if (event.start_time and 
+        {%- if (event.attributes.start_time and 
                 is_today(event) == 'true' and
                 event.attributes.message|lower == type) -%}
           {{sentence}}
@@ -69,7 +65,7 @@
       {# Holiday sentence #}
       {% macro holiday_sentence() -%}
         {%- if (states.calendar.holidays_in_united_states.attributes.start_time and
-                is_today(states.calendar.holidays_in_united_states) == 'false') -%}
+                is_today(states.calendar.holidays_in_united_states) == 'true') -%}
           It is {{states.calendar.holidays_in_united_states.attributes.message}}.
         {%- endif -%}
       {%- endmacro %}
@@ -110,7 +106,11 @@
 
       {# How far away is a person #}
       {% macro minutes_away(pronoun, part_of_day, max) -%}
-        {{(states("proximity." ~ pronoun ~ "_home")|int / max|int) * states("sensor." ~ pronoun ~ "_" ~ part_of_day)|int}}
+        {%- if max == 0 -%}
+          unknown
+        {%- else -%}
+          {{((states("proximity." ~ pronoun ~ "_home")|int / max|int) * states("sensor." ~ pronoun ~ "_" ~ part_of_day)|int)|int}}
+        {%- endif -%}
       {%- endmacro %}
 
       {# Who is the other person #}
@@ -124,11 +124,11 @@
 
       {# On My Way sentence #}
       {%- macro omw_sentence(person) -%}
-        {%- set max = work_distance(person) -%}
         {%- set device_entity = get_device(person) -%}
         {%- set pronoun = get_pronoun(device_entity) -%}
+        {%- set max = states.sensor[pronoun ~ "_distance_mean"].attributes.max_value|int -%}
         {%- if states(device_entity) == 'not_home' -%}
-          {{person}} is on {{pronoun}} way home, about {{minutes_away(pronoun, "evening", max)|int}} minutes out.
+          {{person}} is on {{pronoun}} way home, about {{minutes_away(pronoun, "evening", max)}} minutes out.
         {%- elif states(device_entity) != 'home' -%}
           {{person}} is still at {{states(device_entity)}}.
         {%- endif -%}
@@ -144,15 +144,17 @@
         {% endif %}
       {%- endmacro %}
 
-      {# Distance to a person's work - straight #}
-      {% macro work_distance(person) -%}
-        {%- set device_entity = get_device(person) -%}
-        {%- set work = states(device_entity) -%}
-        {% for zone in states.zone -%}
-          {% if zone.name == work -%}
-            {{ distance(zone.attributes.latitude, zone.attributes.longitude)|round }}
-          {%- endif %}
-        {%- endfor %}
+      {# Deliveries #}
+      {% macro deliveries_sentence() -%}
+        {% if 'delivered' in states.sensor['4024_hanson_rd'].attributes -%}
+          {{states.sensor['4024_hanson_rd'].attributes.delivered}}{{' '}}
+          {%- if states.sensor['4024_hanson_rd'].attributes.delivered == 1 -%}
+            package was
+          {%- else -%}
+            packages were
+          {%- endif -%}
+          {{' '}}delivered today.
+        {%- endif %}
       {%- endmacro %}
 
       {# Validate requested person #}
@@ -176,8 +178,9 @@
         {{welcome_sentence(person)}}
         {{holiday_sentence()}}
         {{battery_sentence(person)}}
-        {{omw_sentence(other_person)}}
         {{weather_sentence()}}
+        {{omw_sentence(other_person)}}
+        {{deliveries_sentence()}}
         {{chore_sentence(states.calendar.general, 'trash', 'Remember to take out the trash. It is trash day.')}}
         {{chore_sentence(states.calendar.general, 'recycling', 'Remember to take out the recycling. It is recycling day.')}}
         {{event_sentence(states.calendar.facebook)}}

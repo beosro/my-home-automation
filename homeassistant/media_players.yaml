@@ -16,7 +16,7 @@
 # TV devices
 - platform: cast
 - platform: firetv
-  host: localhost:5556
+  host: localhost
 - platform: snapcast
   host: localhost
   play_media_source: 'TTS'

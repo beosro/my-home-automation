@@ -41,6 +41,8 @@ Media:
     #- media_player.hifiberry
   - group.snapclients
   - media_player.multiroom_audio
+  - media_player.amazon_fire_tv
+  - media_player.living_room
     #  - group.tv
 #Multi-room Audio:
 #- weblink.multiroom_music_player
@@ -75,6 +77,8 @@ Network:
 - sensor.speedtest_upload
 - sensor.speedtest_download
 - sensor.speedtest_ping
+- sensor.canon_ix6800
+- sensor.pihole
 - weblink.router
 Server:
 - sensor.glances_sensor_cpu_load
@@ -93,6 +97,7 @@ Outdoors:
 - sun.sun
 - sensor.dark_sky_temperature
 - sensor.dark_sky_humidity
+- sensor.dark_sky_cloud_coverage
 - camera.weather_radar
 Scenes:
 - scene.lights_on
@@ -167,6 +172,10 @@ Camera:
 - camera.last_motion
 - input_select.cam_preset
 - binary_sensor.cam_motion
+- script.cam_up
+- script.cam_down
+- script.cam_left
+- script.cam_right
 Holiday:
 - script.holiday
 - switch.smart_socket_1

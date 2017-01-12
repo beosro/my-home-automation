@@ -3,50 +3,48 @@
 
 #  Craft Room sensor - Device #1
 
-- platform: mqtt
-  name: "Craft Room Temperature"
-  state_topic: "sensor/1/temperature"
-  unit_of_measurement: "F"
-- platform: mqtt
-  name: "Craft Room Humidity"
-  state_topic: "sensor/1/humidity"
-  unit_of_measurement: "%"
-- platform: mqtt
-  name: "Craft Room Motion"
-  state_topic: "sensor/1/motion"
+#- platform: mqtt
+#  name: "Craft Room Temperature"
+#  state_topic: "sensor/1/temperature"
+#  unit_of_measurement: "F"
+#- platform: mqtt
+#  name: "Craft Room Humidity"
+#  state_topic: "sensor/1/humidity"
+#  unit_of_measurement: "%"
+#- platform: mqtt
+#  name: "Craft Room Motion"
+#  state_topic: "sensor/1/motion"
 
 # Living Room sensor - Device #2
 
-- platform: mqtt
-  name: "Living Room Temperature"
-  state_topic: "sensor/2/temperature"
-  unit_of_measurement: "F"
-- platform: mqtt
-  name: "Living Room Humidity"
-  state_topic: "sensor/2/humidity"
-  unit_of_measurement: "%"
-- platform: mqtt
-  name: "Living Room Motion"
-  state_topic: "sensor/2/motion"
+#- platform: mqtt
+#  name: "Living Room Temperature"
+#  state_topic: "sensor/2/temperature"
+#  unit_of_measurement: "F"
+#- platform: mqtt
+#  name: "Living Room Humidity"
+#  state_topic: "sensor/2/humidity"
+#  unit_of_measurement: "%"
+#- platform: mqtt
+#  name: "Living Room Motion"
+#  state_topic: "sensor/2/motion"
 
 # Bedroom sensor - Device #3
 
-- platform: mqtt
-  name: "Bedroom Temperature MQTT"
-  state_topic: "sensor/3/temperature"
-  unit_of_measurement: "F"
-- platform: mqtt
-  name: "Bedroom Humidity"
-  state_topic: "sensor/3/humidity"
-  unit_of_measurement: "%"
-- platform: mqtt
-  name: "Bedroom Motion"
-  state_topic: "sensor/3/motion"
-
-- platform: mqtt
+#- platform: mqtt
+#  name: "Bedroom Temperature MQTT"
+#  state_topic: "sensor/3/temperature"
+#  unit_of_measurement: "F"
+#- platform: mqtt
+#  name: "Bedroom Humidity"
+#  state_topic: "sensor/3/humidity"
+#  unit_of_measurement: "%"
+#- platform: mqtt
+#  name: "Bedroom Motion"
+#  state_topic: "sensor/3/motion"
+- platform: mqtt:
   name: "Latest Arrival"
   state_topic: "home/latest_arrival"
-  qos: 2
 - platform: mqtt
   name: "Briefing Target"
   state_topic: "home/briefing_target"
@@ -57,9 +55,3 @@
 - platform: mqtt
   name: "His First Arrival"
   state_topic: "home/first_arrival/him"
-- platform: mqtt
-  name: "Her Last Location"
-  state_topic: "home/last_location/device_tracker.her_phone"
-- platform: mqtt
-  name: "His Last Location"
-  state_topic: "home/last_location/device_tracker.his_phone"

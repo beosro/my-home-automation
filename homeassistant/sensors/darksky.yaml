@@ -10,9 +10,6 @@
   - humidity
   - hourly_summary
   - daily_summary
-  - nearest_storm_distance
-  - precip_probability
-  - precip_type
   - cloud_cover
   - temperature_max
   - temperature_min

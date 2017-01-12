@@ -26,7 +26,14 @@ scene.nightlight:
 
 
 #  Hidden sensors.
-
+sensor.dark_sky_daily_high_temperature:
+  hidden: true
+sensor.dark_sky_daily_low_temperature:
+  hidden: true
+sensor.dark_sky_daily_summary:
+  hidden: true
+sensor.dark_sky_hourly_summary:
+  hidden: true
 sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_level_18_1:
   hidden: true
 sensor.first_alert_zcombo_smoke_and_carbon_monoxide_detector_alarm_level_19_1:

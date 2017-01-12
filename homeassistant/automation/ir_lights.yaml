@@ -1,7 +1,9 @@
 alias: Turn on den lights via IR
 trigger:
   platform: mqtt
-  topic: lirc/status/insig/KEY_POWER
+  topic: lirc/status/insig/KEY_0
 action:
   - service: light.toggle
-    entity_id: light.dragon_tech_in_wall_dimmer_level_16_0
+    entity_id: 
+    - light.living_room_lamps
+    - light.living_room_fan_light

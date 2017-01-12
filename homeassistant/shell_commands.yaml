@@ -1,3 +1,7 @@
+cam_up: "bash /home/mzander/hass/cam.sh up &"
+cam_down: "bash /home/mzander/hass/cam.sh down &"
+cam_left: "bash /home/mzander/hass/cam.sh left &"
+cam_right: "bash /home/mzander/hass/cam.sh right &"
 cam_preset_kitchen: !env_var CAM_PRESET_KITCHEN
 cam_preset_common_area: !env_var CAM_PRESET_COMMON_AREA
 cam_preset_entryway: !env_var CAM_PRESET_ENTRYWAY

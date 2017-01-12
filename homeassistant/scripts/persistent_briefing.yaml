@@ -3,6 +3,8 @@ sequence:
   data_template:
     payload: 'Mike'
     topic: 'home/briefing_target'
+- delay:
+    seconds: 1
 - service: persistent_notification.create
   data_template:
     notification_id: 'mike_briefing'

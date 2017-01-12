@@ -35,74 +35,6 @@
       brightness: 150
       rgb_color: [255, 255, 255]
 
-- name: Romantic
-  entities:
-    light.bedroom:
-      state: on
-      brightness: 150
-      rgb_color: [128, 0, 128]
-    light.bathroom:
-      state: on
-      brightness: 150
-      rgb_color: [128, 0, 128]
-    light.living_room__hall:
-      state: on
-      brightness: 150
-      rgb_color: [128, 0, 128]
-    light.craft_room: off
-
-#  The disco scene is just for fun - cycle all the
-#  colored lights through all their colors.
-
-- name: Disco
-  entities:
-    light.living_room__hall:
-      state: on
-      effect: colorloop
-      brightness: 255
-      transition: 10
-    light.bedroom:
-      state: on
-      effect: colorloop
-      brightness: 255
-      transition: 10
-    light.bathroom:
-      state: on
-      effect: colorloop
-      brightness: 255
-      transition: 10
-
-#  Turn on all the lights to max white brightness.
-
-- name: Lights On
-  entities:
-    light.craft_room:
-      state: on
-    light.living_room__hall:
-      state: on
-      brightness: 255
-      rgb_color: [255, 255, 255]
-    light.bedroom:
-      state: on
-      brightness: 255
-      rgb_color: [255, 255, 255]
-    light.bathroom:
-      state: on
-      brightness: 255
-      rgb_color: [255, 255, 255]
-    light.kitchen:
-      state: on
-
-#  Turn off all the lights.
-
-- name: Lights Off
-  entities:
-    light.bedroom: off
-    light.living_room__hall: off
-    light.bathroom: off
-    light.craft_room: off
-    light.kitchen: off
-
 #  Used in the morning when the alarm goes off.
 #  Fade on the bedroom and bathroom lights for
 #  a gentle but persistent reminder to get up.
@@ -114,14 +46,3 @@
       transition: 45
       brightness: 255
       rgb_color: [255, 255, 255]
-
-#  Bathroom nightlight. Lowest brightness and red
-#  to not disturb other occupants and maintain
-#  night vision.
-
-- name: Nightlight
-  entities:
-    light.bathroom:
-      state: on
-      brightness: 1
-      rgb_color: [255, 0, 0]

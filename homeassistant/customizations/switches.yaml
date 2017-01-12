@@ -2,12 +2,12 @@ switch.sleeping:
   icon: mdi:sleep
   emulated_hue: true
   emulated_hue_name: Sleep Mode
-switch.smart_socket_1:
-  friendly_name: Colored Light String
-  icon: mdi:led-on
-switch.smart_socket_2:
-  friendly_name: Christmas Tree Lights
-  icon: mdi:pine-tree
+switch.smart_switch_1:
+  friendly_name: Smart Switch 1
+  icon: mdi:power-plug
+switch.smart_switch_2:
+  friendly_name: Smart Switch 1
+  icon: mdi:power-plug
 switch.vacation:
   icon: mdi:airplane
 switch.guests:
@@ -61,7 +61,9 @@ switch.unknown_id000c_unknown_type4447_id3033_switch_22_0:
   emulated_hue: true
 light.bedroom_lamp:
   emulated_hue: true
+  icon: mdi:lamp
 light.living_room_lamps:
   emulated_hue: true
+  icon: mdi:lamp
 light.living_room_fan_light:
   emulated_hue: true

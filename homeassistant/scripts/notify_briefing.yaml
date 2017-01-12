@@ -3,6 +3,8 @@ sequence:
   data_template:
     payload: '{{states.sensor.latest_arrival.state}}'
     topic: 'home/briefing_target'
+- delay:
+    seconds: 1
 - service: notify.pushbullet
   data_template:
     message: !include ../templates/briefing.yaml

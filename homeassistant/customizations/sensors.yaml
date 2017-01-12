@@ -12,12 +12,9 @@ sensor.glances_sensor_cpu_load:
   icon: mdi:memory
 sensor.glances_sensor_disk_use:
   friendly_name: Disk
-  icon: mdi:server
+  icon: mdi:harddisk
 sensor.glances_sensor_ram_use:
   friendly_name: Memory
-  icon: mdi:server
-sensor.glances_sensor_swap_use:
-  friendly_name: Swap
   icon: mdi:server
 sun.sun:
   icon: mdi:weather-sunny
@@ -44,3 +41,29 @@ sensor.thermostat_temperature:
   friendly_name: Foyer Temperature
 sensor.thermostat_humidity:
   friendly_name: Foyer Humidity
+  icon: mdi:water-percent
+sensor.smoke_co_first_floor:
+  icon: mdi:alert
+sensor.smoke_co_second_floor:
+  icon: mdi:alert
+sensor.first_floor_smoke_co_battery:
+  icon: mdi:battery
+sensor.second_floor_smoke_co_battery:
+  icon: mdi:battery
+sensor.front_door_lock_battery:
+  icon: mdi:battery
+sensor.door_one_battery:
+  icon: mdi:battery
+sensor.door_two_battery:
+  icon: mdi:battery
+sensor.his_phone_battery:
+  icon: mdi:battery
+sensor.her_phone_battery:
+  icon: mdi:battery
+sensor.canon_ix6800:
+  friendly_name: Printer
+sensor.4024_hanson_rd:
+  friendly_name: Packages
+sensor.pihole:
+  icon: mdi:block-helper
+  friendly_name: Ad Blocking

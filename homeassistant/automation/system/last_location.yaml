@@ -8,5 +8,5 @@ trigger:
 action:
   service: mqtt.publish
   data_template:
-    payload_template: '{{trigger.from_state}}'
+    payload_template: '{{trigger.from_state.state}}'
     topic: 'home/last_location/{{trigger.entity_id}}'
