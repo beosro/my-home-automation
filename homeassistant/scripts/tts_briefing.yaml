@@ -1,10 +1,4 @@
 sequence:
-- service: mqtt.publish
-  data_template:
-    payload: '{{states.sensor.latest_arrival.state}}'
-    topic: 'home/briefing_target'
-- delay:
-    seconds: 1
 - service: tts.google_say
   data_template:
     entity_id: media_player.hifiberry

@@ -109,6 +109,10 @@ panel_iframe:
     title: OZWCP
     icon: mdi:signal-variant
     url: !env_var OZWCP_URL
+  graph:
+    title: Graph
+    icon: mdi:vector-polyline
+    url: !env_var GRAPH_URL
 #  wifi:
 #    title: Wifi
 #    icon: mdi:wifi

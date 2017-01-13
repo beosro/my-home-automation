@@ -1,5 +1,6 @@
 mopidy/core.conf
 homeassistant/deps/*
+homeassistant/www/*
 homeassistant/home-assistant.db
 homeassistant/home-assistant_v2.db
 homeassistant/home-assistant.log
@@ -14,3 +15,4 @@ homeassistant/.google.token
 homeassistant/zwcfg_*
 homeassistant/pyozw.sqlite
 homeassistant/zwscene.xml
+homeassistant/secrets.yaml

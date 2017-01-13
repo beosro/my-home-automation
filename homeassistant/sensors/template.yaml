@@ -56,6 +56,4 @@
       value_template: '{{states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_9_1.attributes.battery_level}}'
       unit_of_measurement: '%'
       friendly_name: 'Door Two Battery'
-    last_home:
-      value_template: ''
-      friendly_name: 'Last Person Home'
+

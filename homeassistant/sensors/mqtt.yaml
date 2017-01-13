@@ -42,16 +42,11 @@
 #- platform: mqtt
 #  name: "Bedroom Motion"
 #  state_topic: "sensor/3/motion"
-- platform: mqtt:
+- platform: mqtt
   name: "Latest Arrival"
   state_topic: "home/latest_arrival"
 - platform: mqtt
   name: "Briefing Target"
   state_topic: "home/briefing_target"
   qos: 2
-- platform: mqtt
-  name: "Her First Arrival"
-  state_topic: "home/first_arrival/her"
-- platform: mqtt
-  name: "His First Arrival"
-  state_topic: "home/first_arrival/him"
+
