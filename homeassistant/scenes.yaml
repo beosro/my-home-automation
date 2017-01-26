@@ -5,16 +5,6 @@
 #  area lights, and turns on the smart switches, which
 #  are presumably attached to holiday lights.
 
-- name: Holiday
-  entities:
-    light.living_room__hall:
-      state: on
-      brightness: 30
-      rgb_color: [0, 0, 255]
-    switch.smart_socket_1:
-      state: on
-    switch.smart_socket_2:
-      state: on
 
 #  The romantic state switches the lights to purple
 #  and turns off lights in utilitarian rooms.

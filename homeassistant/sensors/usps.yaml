@@ -1,3 +1,4 @@
 - platform: usps
-  username: !env_var MYUSPS_USERNAME
-  password: !env_var MYUSPS_PASSWORD
+  name: 'Deliveries'
+  username: !secret myusps_username
+  password: !secret myusps_password

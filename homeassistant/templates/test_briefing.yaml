@@ -1,2 +1,0 @@
-      >
-      Hello {{states.sensor.briefing_target.state}}, this is a test.

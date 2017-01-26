@@ -7,7 +7,7 @@ trigger:
   - device_tracker.his_phone
   - device_tracker.her_phone
   value_template: '{{ state.attributes.battery }}'
-  below: !env_var PHONE_BATTERY_THRESHOLD
+  below: 30
 action:
   service: notify.all
   data_template:

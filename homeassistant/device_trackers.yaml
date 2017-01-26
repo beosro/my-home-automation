@@ -1,7 +1,1 @@
-#- platform: actiontec
-#  host: 192.168.1.1
-#  username: !env_var ROUTER_USERNAME
-#  password: !env_var ROUTER_PASSWORD
-#  track_new_devices: no
-#  consider_home: 300
 - platform: owntracks

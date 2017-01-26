@@ -1,6 +1,0 @@
-sequence:
-- service: homeassistant.turn_on
-  data:
-    entity_id:
-    - switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
-    - light.dragon_tech_in_wall_dimmer_level_16_0

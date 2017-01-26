@@ -1,3 +1,0 @@
-- platform: apcupsd
-  resources:
-  - bcharge

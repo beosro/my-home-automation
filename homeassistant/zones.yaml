@@ -1,29 +1,29 @@
 - name: Home
-  latitude: !env_var HOME_LATITUDE
-  longitude: !env_var HOME_LONGITUDE
-  radius: !env_var ZONE_RADIUS
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: !secret zone_radius
   icon: mdi:people
-- name: !env_var HIS_WORK_NAME
-  latitude: !env_var HIS_WORK_LATITUDE
-  longitude: !env_var HIS_WORK_LONGITUDE
-  radius: !env_var WORK_ZONE_RADIUS
-- name: !env_var HER_WORK_NAME_1
-  latitude: !env_var HER_WORK_LATITUDE_1
-  longitude: !env_var HER_WORK_LONGITUDE_1
-  radius: !env_var WORK_ZONE_RADIUS
-- name: !env_var HER_WORK_NAME_2
-  latitude: !env_var HER_WORK_LATITUDE_2
-  longitude: !env_var HER_WORK_LONGITUDE_2
-  radius: !env_var WORK_ZONE_RADIUS
+- name: !secret his_work_name
+  latitude: !secret his_work_latitude
+  longitude: !secret his_work_longitude
+  radius: !secret work_zone_radius
+- name: !secret her_work_name_1
+  latitude: !secret her_work_latitude_1
+  longitude: !secret her_work_longitude_1
+  radius: !secret work_zone_radius
+- name: !secret her_work_name_2
+  latitude: !secret her_work_latitude_2
+  longitude: !secret her_work_longitude_2
+  radius: !secret work_zone_radius
 - name: Her Home
-  latitude: !env_var HOME_LATITUDE
-  longitude: !env_var HOME_LONGITUDE
-  radius: !env_var ZONE_RADIUS
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: !secret zone_radius
   passive: true
 - name: His Home
-  latitude: !env_var HOME_LATITUDE
-  longitude: !env_var HOME_LONGITUDE
-  radius: !env_var ZONE_RADIUS
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: !secret zone_radius
   passive: true
 
 

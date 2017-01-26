@@ -1,0 +1,41 @@
+group:
+  Computer:
+    - switch.turn_on_pc
+    - input_slider.pc_volume
+    - switch.pc_sound
+    - switch.pc_monitors
+
+input_slider:
+  pc_volume:
+    name: Volume
+    initial: 100
+    min: 0
+    max: 100
+    step: 2
+
+shell_command:
+  pc_volume: !secret pc_sound_volume
+
+switch:
+  - platform: command_line
+    switches:
+      pc_sound:
+        command_on: !secret pc_sound_toggle
+        command_off: !secret pc_sound_toggle
+      pc_monitors:
+        command_on: !secret pc_monitors_on
+        command_off: !secret pc_monitors_off
+  - platform: wake_on_lan
+    mac_address: !secret pc_mac_address
+    name: 'Turn On PC'
+    host: !secret pc_ip_address
+
+automation:
+  - alias: PC volume control
+    trigger:
+      - platform: state
+        entity_id: input_slider.pc_volume
+    action:
+      service: shell_command.pc_volume
+      data_template:
+        volume: '{{states.input_slider.pc_volume.state}}'

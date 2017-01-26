@@ -1,0 +1,94 @@
+group:
+  Geo:
+    - sensor.his_morning
+    - sensor.his_evening
+    - sensor.her_morning
+    - sensor.her_evening
+    - sensor.her_distance_mean
+    - sensor.his_distance_mean
+    - proximity.her_home
+    - proximity.his_home
+    - proximity.home
+
+zone:
+  - name: Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: !secret zone_radius
+    icon: mdi:people
+  - name: !secret his_work_name
+    latitude: !secret his_work_latitude
+    longitude: !secret his_work_longitude
+    radius: !secret work_zone_radius
+  - name: !secret her_work_name_1
+    latitude: !secret her_work_latitude_1
+    longitude: !secret her_work_longitude_1
+    radius: !secret work_zone_radius
+  - name: !secret her_work_name_2
+    latitude: !secret her_work_latitude_2
+    longitude: !secret her_work_longitude_2
+    radius: !secret work_zone_radius
+  - name: Her Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: !secret zone_radius
+    passive: true
+  - name: His Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: !secret zone_radius
+    passive: true
+
+proximity:
+  her_home:
+    devices:
+      - device_tracker.her_phone
+    tolerance: 50
+    unit_of_measurement: !secret proximity_unit_of_measurement
+  his_home:
+    devices:
+      - device_tracker.his_phone
+    tolerance: 50
+    unit_of_measurement: !secret proximity_unit_of_measurement
+  home:
+    devices:
+      - device_tracker.his_phone
+      - device_tracker.her_phone
+    tolerance: 50
+    unit_of_measurement: !secret proximity_unit_of_measurement
+
+sensor:
+  - platform: statistics
+    name: Her Distance
+    entity_id: proximity.her_home
+  - platform: statistics
+    name: His Distance
+    entity_id: proximity.his_home
+  - platform: google_travel_time
+    name: His Morning
+    api_key: !secret google_api_key
+    origin: !secret home_address
+    destination: !secret his_work_address
+    options:
+      mode: driving
+  - platform: google_travel_time
+    name: His Evening
+    api_key: !secret google_api_key
+    origin: !secret his_work_address
+    destination: !secret home_address
+    options:
+      mode: driving
+  - platform: google_travel_time
+    name: Her Morning
+    api_key: !secret google_api_key
+    origin: !secret home_address
+    destination: !secret her_work_address_1
+    options:
+      mode: driving
+  - platform: google_travel_time
+    name: Her Evening
+    api_key: !secret google_api_key
+    origin: !secret her_work_address_1
+    destination: !secret home_address
+    options:
+      mode: driving

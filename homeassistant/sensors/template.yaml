@@ -51,9 +51,8 @@
     door_one_battery:
       value_template: '{{states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_8_1.attributes.battery_level}}'
       unit_of_measurement: '%'
-      friendly_name: 'Door One Battery'
+      friendly_name: 'Side Door Battery'
     door_two_battery:
       value_template: '{{states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_9_1.attributes.battery_level}}'
       unit_of_measurement: '%'
-      friendly_name: 'Door Two Battery'
-
+      friendly_name: 'Front Door Battery'

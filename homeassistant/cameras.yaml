@@ -1,9 +1,0 @@
-- platform: generic
-  still_image_url: !env_var CAM_IMAGE_URL
-  name: Camera
-- platform: local_file
-  name: Last Motion
-  file_path: /var/lib/motion/latest.jpg
-- platform: generic
-  still_image_url: !env_var WEATHER_MAP_URL
-  name: Weather Radar

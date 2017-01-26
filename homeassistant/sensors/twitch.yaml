@@ -1,9 +1,0 @@
-#  Favorite Twitch channels.
-
-- platform: twitch
-  entity_namespace: twitch
-  channels:
-  - fopt_membrillo
-  - vooblyofficial
-  - voobly_stream
-  - t90official

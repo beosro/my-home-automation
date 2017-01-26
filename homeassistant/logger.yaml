@@ -1,8 +1,3 @@
 default: info
 logs:
   homeassistant.components.http: warn
-  #homeassistant.components.media_player: warn
-  #  requests.packages.urllib3.connectionpool: warn
-  #homeassistant.components.device_tracker.actiontec: warn
-  #homeassistant.components.sensor: warn
-  #homeassistant.components.shell_command: debug

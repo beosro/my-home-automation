@@ -2,6 +2,7 @@ alias: Turn on den lights via IR
 trigger:
   platform: mqtt
   topic: lirc/status/insig/KEY_0
+  payload: '0'
 action:
   - service: light.toggle
     entity_id: 

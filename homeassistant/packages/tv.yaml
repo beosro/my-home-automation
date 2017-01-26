@@ -1,0 +1,117 @@
+group:
+  TV:
+    - script.tv_power
+    - input_select.tv_input
+    - switch.hdmi_4
+    - switch.hdmi_5
+    - switch.hdmi_8
+    - script.tv_volume_up
+    - script.tv_volume_down
+    - media_player.amazon_fire_tv
+    - media_player.living_room
+
+media_player:
+  - platform: cast
+  - platform: firetv
+    host: localhost
+
+input_select:
+  tv_input:
+    name: Input
+    options:
+      - Fire TV
+      - Chromecast
+      - Multi-Room Audio
+
+hdmi_cec:
+  host: 192.168.2.57
+  platform: switch
+  devices:
+    Chromecast: 1.1.0.0
+    Multi-Room Audio: 1.2.0.0
+    Fire TV: 1.3.0.0
+
+script:
+  tv_power:
+    sequence:
+      - service: mqtt.publish
+        data_template:
+          payload: '1'
+          topic: 'lirc/set/insig/KEY_POWER'
+  tv_volume_up:
+    sequence:
+      - service: hdmi_cec.volume
+        data:
+          up: 4
+  tv_volume_down:
+    sequence:
+      - service: hdmi_cec.volume
+        data:
+          down: 4
+
+automation:
+  - alias: TV input via CEC
+    trigger:
+      - platform: state
+        entity_id: input_select.tv_input
+    action:
+      service_template: hdmi_cec.select_device
+      data_template:
+        device: '{{states.input_select.tv_input.state}}'
+  - alias: Soundbar HDMI 1
+    trigger:
+      platform: mqtt
+      topic: lirc/status/insig/KEY_1
+      payload: '0'
+    action:
+      - service: hdmi_cec.select_device
+        data_template:
+          device: '1.1.0.0'
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.tv_input
+          option: 'Chromecast'
+  - alias: Soundbar HDMI 2
+    trigger:
+      platform: mqtt
+      topic: lirc/status/insig/KEY_2
+      payload: '0'
+    action:
+      - service: hdmi_cec.select_device
+        data_template:
+          device: '1.2.0.0'
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.tv_input
+          option: 'Multi-Room Audio'
+  - alias: Soundbar HDMI 3
+    trigger:
+      platform: mqtt
+      topic: lirc/status/insig/KEY_3
+      payload: '0'
+    action:
+      - service: hdmi_cec.select_device
+        data_template:
+          device: '1.3.0.0'
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.tv_input
+          option: 'Fire TV'
+  - alias: Soundbar volume up
+    trigger:
+      platform: mqtt
+      topic: lirc/status/insig/KEY_VOLUMEUP
+      payload: '0'
+    action:
+      - service: hdmi_cec.volume
+        data:
+          up: 1
+  - alias: Soundbar volume down
+    trigger:
+      platform: mqtt
+      topic: lirc/status/insig/KEY_VOLUMEDOWN
+      payload: '0'
+    action:
+      - service: hdmi_cec.volume
+        data:
+          down: 1

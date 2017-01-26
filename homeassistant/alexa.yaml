@@ -1,23 +1,4 @@
 intents:
-  LocateIntent:
-    action:
-      service: notify.all
-      data_template:
-        message: The location of {{ User }} has been queried via Alexa.
-    speech:
-      type: plaintext
-      text: >
-        {%- for state in states.device_tracker -%}
-          {%- if state.name.lower() == User.lower() -%}
-            {{ state.name }} is at {{ state.state }}
-          {%- endif -%}
-          {%- else -%}
-            I am sorry, I do not know where {{ User }} is.
-        {%- endfor -%}
-    card:
-      type: simple
-      title: Sample title
-      content: Some more content
   BriefingIntent:
     action:
       service: mqtt.publish
@@ -27,12 +8,3 @@ intents:
     speech:
       type: plaintext
       text: !include templates/briefing.yaml
-flash_briefings:
-  morning:
-  - title: Weather
-    text: >
-      It is {{ states("sensor.dark_sky_summary") }} outside.
-  - title: Time
-    text: >
-  - title: Calendar
-    text: test

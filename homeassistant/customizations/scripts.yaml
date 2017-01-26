@@ -1,0 +1,12 @@
+script.cam_up:
+  icon: mdi:arrow-up
+  friendly_name: Camera Up
+script.cam_down:
+  icon: mdi:arrow-down
+  friendly_name: Camera Down
+script.cam_left:
+  icon: mdi:arrow-left
+  friendly_name: Camera Left
+script.cam_right:
+  icon: mdi:arrow-right
+  friendly_name: Camera Right

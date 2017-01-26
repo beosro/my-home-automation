@@ -1,0 +1,27 @@
+group:
+  Server:
+    - sensor.glances_sensor_cpu_load
+    - sensor.glances_sensor_disk_use
+    - sensor.glances_sensor_ram_use
+    - sensor.glances_sensor_swap_use
+    - sensor.ups_battery
+
+apcupsd:
+  host: localhost
+  port: 3551
+
+panel_iframe:
+  system:
+    title: Server
+    icon: mdi:server
+    url: !secret glances_url
+
+sensor:
+  - platform: glances
+    name: Glances sensor
+    host: localhost
+    port: 61208
+    resources:
+      - disk_use_percent
+      - memory_use_percent
+      - processor_load

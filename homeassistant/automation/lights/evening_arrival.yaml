@@ -9,10 +9,13 @@ condition:
 - condition: state
   entity_id: switch.presence
   state: 'on'
+- condition: state
+  entity_id: switch.sleep
+  state: 'off'
 - condition: numeric_state
   entity_id: sun.sun
   value_template: '{{ state.attributes.elevation }}'
-  below: !env_var SUNSET_ELEVATION
+  below: 5
 action:
   - service: switch.turn_on
     entity_id:

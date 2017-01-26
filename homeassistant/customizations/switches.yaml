@@ -67,3 +67,5 @@ light.living_room_lamps:
   icon: mdi:lamp
 light.living_room_fan_light:
   emulated_hue: true
+switch.briefings:
+  icon: mdi:voice

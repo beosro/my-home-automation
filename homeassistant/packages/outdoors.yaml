@@ -1,0 +1,44 @@
+group:
+  Outdoors:
+    - sensor.dark_sky_summary
+    - sun.sun
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_humidity
+    - sensor.dark_sky_cloud_coverage
+    - sensor.air_quality
+    - camera.weather_radar
+
+camera:
+  - platform: generic
+    still_image_url: !secret weather_map_url
+    name: Weather Radar
+
+sensor:
+  - platform: waqi
+    locations:
+    - !secret waqi_location
+  - platform: template
+    sensors:
+      air_quality_numeric:
+        value_template: !secret air_quality_sensor_template
+      air_quality:
+        friendly_name: 'Air Quality'
+        value_template: >
+          {% if states.sensor.air_quality_numeric.state|int <= 50 %}
+            Good
+          {% elif states.sensor.air_quality_numeric.state|int <= 100 %}
+            Moderate
+          {% elif states.sensor.air_quality_numeric.state|int <= 150 %}
+            Unhealthy
+          {% endif %}
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    monitored_conditions:
+      - summary
+      - temperature
+      - humidity
+      - hourly_summary
+      - daily_summary
+      - cloud_cover
+      - temperature_max
+      - temperature_min

@@ -1,0 +1,16 @@
+panel_iframe:
+  graph:
+    title: Graph
+    icon: mdi:vector-polyline
+    url: !secret graph_url
+
+shell_command:
+  generate_graph: !secret graph_command
+
+automation:
+  - alias: Generate graph
+    trigger:
+      platform: event
+      event_type: homeassistant_start
+    action:
+      - service: shell_command.generate_graph

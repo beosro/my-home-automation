@@ -67,3 +67,11 @@ sensor.4024_hanson_rd:
 sensor.pihole:
   icon: mdi:block-helper
   friendly_name: Ad Blocking
+sensor.air_quality:
+  icon: mdi:cloud-check
+sensor.new_commits:
+  icon: mdi:github-circle
+sensor.home_assistant_errors:
+  icon: mdi:alert-circle
+sensor.home_assistant_warnings:
+  icon: mdi:alert-circle-outline

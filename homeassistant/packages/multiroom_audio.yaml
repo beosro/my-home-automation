@@ -1,0 +1,44 @@
+group:
+  Snapclients:
+    - media_player.pi
+    - media_player.hifiberry
+
+panel_iframe:
+  audio:
+    title: Multi-Room Audio
+    icon: mdi:music-box-outline
+    url: !secret audio_url
+
+tts:
+  - platform: google
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
+
+media_player:
+  - platform: mpd
+    host: localhost
+    port: 6601
+    location: Multi-Room Audio
+  - platform: snapcast
+    host: localhost
+    play_media_source: 'TTS'
+    play_media_command: 'ffmpeg -y -i {} -f u16le -acodec pcm_s16le -ac 2 -ar 48000 /tmp/snapcast_tts'
+
+automation:
+  - alias: Multi-Room Audio Pause
+    trigger:
+      platform: mqtt
+      topic: lirc/status/insig/KEY_PAUSE
+      payload: '0'
+    action:
+      service_template: media_player.media_pause
+      entity_id: media_player.multiroom_audio
+  - alias: Multi-Room Audio Play
+    trigger:
+      platform: mqtt
+      topic: lirc/status/insig/KEY_PLAY
+      payload: '0'
+    action:
+      service_template: media_player.media_play
+      entity_id: media_player.multiroom_audio

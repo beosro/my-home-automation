@@ -1,0 +1,94 @@
+group:
+  Briefings:
+    entities:
+      - input_select.briefing_target
+      - sensor.briefing_target
+      - script.tts_briefing
+      - script.persistent_briefing
+      - switch.briefings
+
+input_select:
+  briefing_target:
+    name: Briefing Target
+    options:
+      - 'Select a person'
+      - !secret her_name
+      - !secret his_name
+
+sensor:
+  - platform: mqtt
+    name: 'Briefing Target'
+    state_topic: 'home/briefing_target'
+
+script:
+  tts_briefing:
+    sequence:
+      - service: tts.google_say
+        data_template:
+          entity_id: media_player.hifiberry
+          message: !include ../templates/briefing.yaml
+  persistent_briefing:
+    sequence:
+      - service: persistent_notification.create
+        data_template:
+          notification_id: 'briefing'
+          title: "{{states.sensor.briefing_target.state}}'s Briefing"
+          message: !include ../templates/briefing.yaml
+
+switch:
+  - platform: mqtt
+    name: Briefings
+    state_topic: 'home/briefings'
+    command_topic: 'home/briefings'
+    qos: 1
+    payload_on: 'on'
+    payload_off: 'off'
+    retain: true
+
+automation:
+  - alias: Set Briefing Target
+    trigger:
+      platform: state
+      entity_id: input_select.briefing_target
+    action:
+      - service: mqtt.publish
+        data_template:
+          payload: "{{states.input_select.briefing_target.state}}"
+          topic: 'home/briefing_target'
+          retain: true
+  - alias: Play a briefing
+    trigger:
+      platform: state
+      entity_id: binary_sensor.door_two
+      to: 'off'
+    condition:
+    - condition: state
+      entity_id: switch.briefings
+      state: 'on'
+    - condition: time
+      after: '15:00:00'
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+    - condition: template
+      value_template: >
+        {{states("binary_sensor." ~ states.sensor.latest_arrival.state ~ "_first_arrival") == "off"}}
+    action:
+    - service: mqtt.publish
+      data_template:
+        topic: 'home/first_arrival/{{states.sensor.latest_arrival.state}}'
+        payload: 'ON'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        payload: >
+          {{states.device_tracker[states.sensor.latest_arrival.state ~ "_phone"].attributes.friendly_name}}
+        topic: 'home/briefing_target'
+        retain: true
+    - delay:
+        seconds: 6
+    - service: script.turn_on
+      entity_id: script.tts_briefing

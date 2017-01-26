@@ -90,3 +90,16 @@ sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_8_1:
   hidden: true
 sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_9_1:
   hidden: true
+sensor.waqi_lee_district_park__fairfax_county_northern_virginia:
+  hidden: true
+# TBD
+sensor.linear_unknown_type4744_id3030_access_control_20_9:
+  hidden: true
+sensor.linear_unknown_type4744_id3030_alarm_level_20_1:
+  hidden: true
+sensor.linear_unknown_type4744_id3030_alarm_type_20_0:
+  hidden: true
+sensor.linear_unknown_type4744_id3030_burglar_20_10:
+  hidden: true
+sensor.linear_unknown_type4744_id3030_sourcenodeid_20_2:
+  hidden: true

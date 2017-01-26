@@ -1,0 +1,12 @@
+panel_iframe:
+  ozwcp:
+    title: OZWCP
+    icon: mdi:signal-variant
+    url: !secret ozwcp_url
+
+zwave:
+  usb_path: /dev/ttyACM0
+  config_path: !secret zwave_config_path
+  customize:
+    entity_id: sensor.*
+    ignore: true

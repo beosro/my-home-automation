@@ -1,0 +1,59 @@
+sensor:
+  - platform: twitch
+    entity_namespace: twitch
+    channels:
+      - fopt_membrillo
+      - tyrant_theviper
+      - t90official
+
+# does not work 
+
+#weblink:
+#  entities:
+#    - name: Twitch
+#      url: "http://twitch.tv/directory/game/Age of Empires II%3A The Conquerors"
+#      icon: mdi:twitch
+
+switch:
+  - platform: mqtt
+    name: 'Twitch'
+    state_topic: 'twitch/enabled'
+    command_topic: 'twitch/enabled'
+    qos: 1
+    payload_on: 'yes'
+    payload_off: 'no'
+    retain: true
+
+group:
+  Twitch:
+    - sensor.twitch_fopt_membrillo
+    - sensor.twitch_t90official
+    - sensor.twitch_tyrant_theviper
+    - weblink.twitch
+
+automation:
+  - alias: Streaming
+    trigger:
+      platform: state
+      entity_id:
+        - sensor.twitch_fopt_membrillo
+        - sensor.twitch_t90official
+        - sensor.twitch_tyrant_theviper
+      state: 'streaming'
+      for:
+        seconds: 30
+    condition:
+    - condition: state
+      entity_id: device_tracker.his_phone
+      state: 'home'
+    - condition: state
+      entity_id: switch.sleeping
+      state: 'no'
+    - condition: state
+      entity_id: switch.twitch
+      state: 'yes'
+    action:
+      service: notify.pushbullet
+      data_template:
+        message: >
+          {{ trigger.to_state.attributes.friendly_name }} is streaming

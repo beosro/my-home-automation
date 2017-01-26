@@ -1,0 +1,56 @@
+group:
+  Arrivals:
+    entities:
+      - binary_sensor.her_first_arrival
+      - binary_sensor.his_first_arrival
+      - sensor.latest_arrival
+      - script.first_arrival_off
+
+binary_sensor:
+  - platform: mqtt
+    name: "Her First Arrival"
+    state_topic: "home/first_arrival/her"
+  - platform: mqtt
+    name: "His First Arrival"
+    state_topic: "home/first_arrival/his"
+
+sensor:
+  - platform: mqtt
+    name: "Latest Arrival"
+    state_topic: "home/latest_arrival"
+
+automation:
+  - alias: Set arrival
+    trigger:
+      platform: state
+      entity_id:
+        - device_tracker.his_phone
+        - device_tracker.her_phone
+      state: 'home'
+    action:
+      - service: mqtt.publish
+        data_template:
+          payload: '{{trigger.entity_id.split(".")[1].split("_")[0]}}'
+          topic: 'home/latest_arrival'
+          retain: true
+  - alias: First Arrival Off
+    trigger:
+        platform: time
+        after: '15:00:00'
+    action:
+      service: script.turn_on
+      entity_id: script.first_arrival_off
+
+script:
+  first_arrival_off:
+    sequence:
+      - service: mqtt.publish
+        data_template:
+          topic: 'home/first_arrival/his'
+          payload: 'OFF'
+          retain: true
+      - service: mqtt.publish
+        data_template:
+          topic: 'home/first_arrival/her'
+          payload: 'OFF'
+          retain: true

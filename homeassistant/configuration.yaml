@@ -1,214 +1,54 @@
-####################################################
-#                                                  #
-#                  Basic Settings                  #
-#                                                  #
-####################################################
-
-###  Global configuration ###
-#  Note that `customize` is nested within `homeassistant`.
-
 homeassistant:
   name: Home
-  latitude: !env_var HOME_LATITUDE
-  longitude: !env_var HOME_LONGITUDE
-  elevation: !env_var HOME_ELEVATION
-  unit_system: imperial
-  time_zone: !env_var HASS_TIMEZONE
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: !secret home_elevation
+  unit_system: !secret unit_system
+  time_zone: !secret timezone
   customize: !include_dir_merge_named customizations
-
-tts:
-  - platform: google
-    cache: true
-    cache_dir: /tmp/tts
-    time_memory: 300
-
-###  Zones  ###
-zone: !include zones.yaml
-
-emulated_hue:
-  expose_by_default: false
-
-alexa: !include alexa.yaml
-
-proximity:
-  her_home:
-    devices:
-    - device_tracker.her_phone
-    tolerance: !env_var PROXIMITY_TOLERANCE
-    unit_of_measurement: mi
-  his_home:
-    devices:
-    - device_tracker.his_phone
-    tolerance: !env_var PROXIMITY_TOLERANCE
-    unit_of_measurement: mi
-  home:
-    devices:
-    - device_tracker.his_phone
-    - device_tracker.her_phone
-    tolerance: !env_var PROXIMITY_TOLERANCE
-    unit_of_measurement: mi
+  packages:  !include_dir_named packages
 
 google:
-  client_id: !env_var GOOGLE_CLIENT_ID
-  client_secret: !env_var GOOGLE_CLIENT_SECRET
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
 
 ecobee:
-  api_key: !env_var ECOBEE_API_KEY
+  api_key: !secret ecobee_api_key
 
 digital_ocean:
-  access_token: !env_var DIGITALOCEAN_API_KEY
+  access_token: !secret digitalocean_api_key
 
-zwave:
-  usb_path: /dev/ttyACM0
-  config_path: !env_var ZWAVE_CONFIG_PATH
-
-###  MQTT  ###
 mqtt:
   broker: 127.0.0.1
   port: 1883
   client_id: hass
   keepalive: 60
-  birth_message:
-    topic: 'hass/status'
-    payload: 'online'
-    qos: 1
-    retain: true
-  will_message:
-    topic: 'hass/status'
-    payload: 'offline'
-    qos: 1
-    retain: true
 
-#mqtt_eventstream:
-#  publish_topic: automation
-#  subscribe_topic: cec
+emulated_hue:
+  expose_by_default: false
 
-###  HTTP  ###
 http:
-  api_password: !env_var HASS_API_PASSWORD
-  base_url: !env_var HASS_BASE_URL
-
-panel_iframe:
-  audio:
-    title: Multi-Room Audio
-    icon: mdi:music-box-outline
-    url: !env_var MOPIFY_URL
-  system:
-    title: System
-    icon: mdi:server
-    url: !env_var GLANCES_URL
-  cams:
-    title: Cameras
-    icon: mdi:video
-    url: !env_var CAMS_URL
-  dns:
-    title: DNS
-    icon: mdi:block-helper
-    url: !env_var PI_HOLE_URL
-  ozwcp:
-    title: OZWCP
-    icon: mdi:signal-variant
-    url: !env_var OZWCP_URL
-  graph:
-    title: Graph
-    icon: mdi:vector-polyline
-    url: !env_var GRAPH_URL
-#  wifi:
-#    title: Wifi
-#    icon: mdi:wifi
-#    url: !env_var UNIFI_URL
-#  router:
-#    title: Router
-#    icon: mdi:server-network
-#    url: !env_var EDGEMAX_URL
-
-
-apcupsd:
-  host: localhost
-  port: 3551
-
+  api_password: !secret hass_api_password
+  base_url: !secret hass_base_url
 
 recorder:
-  purge_days: 5
+  purge_days: 3
+  db_url: !secret recorder_db_url
 
-cover:
-    platform: zwave
-
-####################################################
-#                                                  #
-#                     Includes                     #
-#                                                  #
-####################################################
-
-###  Devices  ###
-#  Devices (usually phones) are tracked for presence detection.
 device_tracker: !include device_trackers.yaml
-
-###  Media Players  ###
-#  Media players include anything (hardware or software) that
-#  controls media (music, video, etc).
-media_player: !include media_players.yaml
-
-###  Cameras  ###
-camera: !include cameras.yaml
-
-###  Lights  ###
+alexa: !include alexa.yaml
 light: !include light.yaml
-
-###  Switches  ###
-#  Switches are anything (hardware or software) that can turn
-#  on or off.
 switch: !include_dir_merge_list switches
-
-###  Sensors  ###
-#  Sensors are anything (hardware or software) that has a state.
 sensor: !include_dir_merge_list sensors
 binary_sensor: !include_dir_merge_list binary_sensors
-
-###  Groups  ###
 group: !include groups.yaml
-
-###  Scenes  ###
 scene: !include scenes.yaml
-
-###  Scripts  ###
-script: !include_dir_named scripts
-
-###  Automation  ###
 automation: !include_dir_list automation
-
-###  Notification  ###
 notify: !include notify.yaml
-
-###  Weblinks  ###
 weblink: !include weblink.yaml
-
-###  Input Selects  ###
-input_select: !include input_select.yaml
-
-###  Input Silders  ###
-input_slider: !include input_slider.yaml
-
-###  Shell Commands  ###
-shell_command: !include shell_commands.yaml
-
-###  Logger  ###
 logger: !include logger.yaml
+logbook: !include logbook.yaml
 
-####################################################
-#                                                  #
-#                     Enables                      #
-#                                                  #
-####################################################
-
-###  Sun  ###
 sun:
-
-###  Logbook  ###
-logbook:
-
-###  History  ###
-history:
-
-###  Frontend  ###
 frontend:
+history:

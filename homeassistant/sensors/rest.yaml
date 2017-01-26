@@ -1,0 +1,7 @@
+- platform: rest
+  scan_interval: 3600
+  resource: !secret gas_buddy_resource
+  method: POST
+  name: Gas Price
+  value_template: '{{value_json.trend.Today}}'
+  unit_of_measurement: '$'

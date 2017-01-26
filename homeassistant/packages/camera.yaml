@@ -1,0 +1,48 @@
+group:
+  Camera:
+    - camera.camera
+    - camera.last_motion
+    - binary_sensor.cam_motion
+    - script.cam_up
+    - script.cam_down
+    - script.cam_left
+    - script.cam_right
+
+panel_iframe:
+  cams:
+    title: Cameras
+    icon: mdi:video
+    url: !secret cams_url
+
+camera:
+  - platform: generic
+    still_image_url: !secret cam_image_url
+    name: Camera
+  - platform: local_file
+    name: Last Motion
+    file_path: !secret cam_latest_file
+
+shell_command:
+  cam_direction: !secret cam_direction_script
+
+script:
+  cam_down:
+    sequence:
+      - service: shell_command.cam_direction
+        data:
+          direction: 'down'
+  cam_up:
+    sequence:
+      - service: shell_command.cam_direction
+        data:
+          direction: 'up'
+  cam_left:
+    sequence:
+      - service: shell_command.cam_direction
+        data:
+          direction: 'left'
+  cam_right:
+    sequence:
+      - service: shell_command.cam_direction
+        data:
+          direction: 'right'

@@ -10,9 +10,9 @@
     - number: 2
       type: white
       name: Living Room Fan Light
-    - number: 3
-      type: white
-      name: Group 3
+      #- number: 3
+      #type: white
+      #name: Group 3
     - number: 4
       type: rgbw
       name: Living Room Lamps

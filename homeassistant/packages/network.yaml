@@ -1,0 +1,29 @@
+group:
+  Network:
+    - sensor.speedtest_upload
+    - sensor.speedtest_download
+    - sensor.speedtest_ping
+    - sensor.canon_ix6800
+    - sensor.pihole
+    - weblink.router
+
+panel_iframe:
+  dns:
+    title: DNS
+    icon: mdi:block-helper
+    url: !secret pi_hole_url
+
+sensor:
+  - platform: pi_hole
+    host: localhost:8032
+  - platform: speedtest
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+  - platform: cups
+    printers:
+      - Canon_iX6800
+  - platform: apcupsd
+    resources:
+      - bcharge

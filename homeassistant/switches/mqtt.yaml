@@ -117,23 +117,11 @@
 #  Send alerts if particular Twitch channels start
 #  streaming.
 
-- platform: mqtt
-  name: "Twitch"
-  state_topic: "nfc/twitch"
-  command_topic: "nfc/twitch"
-  qos: 1
-  payload_on: "yes"
-  payload_off: "no"
-  retain: true
-
-#  Control a DIY robotic cat toy. Point the security
-#  camera at it via HA for remote cat play.
-
-- platform: mqtt
-  name: "Cat Toy"
-  state_topic: "switch/5/state"
-  command_topic: "switch/5/state"
-  qos: 1
-  payload_on: "1"
-  payload_off: "0"
-  retain: true
+#- platform: mqtt
+#  name: "Twitch"
+#  state_topic: "nfc/twitch"
+#  command_topic: "nfc/twitch"
+#  qos: 1
+#  payload_on: "yes"
+#  payload_off: "no"
+#  retain: true

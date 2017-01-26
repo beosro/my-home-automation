@@ -16,3 +16,6 @@ homeassistant/zwcfg_*
 homeassistant/pyozw.sqlite
 homeassistant/zwscene.xml
 homeassistant/secrets.yaml
+homeassistant/usps_cookies.pickle
+homeassistant/fitbit.conf
+homeassistant/cam.sh

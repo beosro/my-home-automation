@@ -5,7 +5,7 @@ trigger:
   platform: numeric_state
   entity_id: sun.sun
   value_template: '{{ state.attributes.elevation }}'
-  below: !env_var SUNSET_ELEVATION
+  below: 5
 condition:
 - condition: state
   entity_id: switch.presence
@@ -17,5 +17,7 @@ condition:
   entity_id: switch.vacation
   state: 'off'
 action:
-  service: homeassistant.turn_on
-  entity_id: script.main_lights
+  service: light.turn_on
+  entity_id:
+    - switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
+    - light.dragon_tech_in_wall_dimmer_level_16_0

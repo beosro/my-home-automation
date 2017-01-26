@@ -1,0 +1,17 @@
+alias: Turn off thermostat away mode
+trigger:
+  platform: state
+  entity_id: group.all_devices
+  state: 'home'
+condition:
+- condition: state
+  entity_id: switch.presence
+  state: 'on'
+- condition: state
+  entity_id: switch.guests
+  state: 'off'
+action:
+- service: climate.set_away_mode
+  data:
+    entity_id: climate.thermostat
+    away_mode: false

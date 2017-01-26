@@ -1,5 +1,0 @@
-sequence:
-- service: tts.google_say
-  data_template:
-    entity_id: media_player.hifiberry
-    message: !include ../templates/briefing.yaml

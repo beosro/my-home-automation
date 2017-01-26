@@ -4,31 +4,38 @@ media_player.multiroom_audio:
   emulated_hue_name: the speakers
 media_player.living_room:
   friendly_name: Chromecast
-media_player.bedroom:
-  friendly_name: Bedroom Music
-  icon: mdi:music-note
-media_player.craft_room:
-  friendly_name: Craft Room Music
-  icon: mdi:music-note
-media_player.living_room_client:
-  friendly_name: Living Room Volume
-  icon: mdi:speaker
-media_player.bedroom_client:
-  friendly_name: Bedroom Volume
-  icon: mdi:speaker
-media_player.craft_room_client:
-  friendly_name: Craft Room Volume
-  icon: mdi:speaker
-weblink.living_room_music_player:
-  friendly_name: Living Room Player
-  icon: mdi:play-pause
-weblink.craft_room_music_player:
-  friendly_name: Craft Room Player
-  icon: mdi:play-pause
-weblink.bedroom_music_player:
-  friendly_name: Bedroom Player
-  icon: mdi:play-pause
-weblink.multiroom_music_player:
-  icon: mdi:play-pause
 media_player.amazon_fire_tv:
   icon: mdi:amazon
+media_player.hifiberry:
+  friendly_name: Kitchen Audio
+  icon: mdi:music-note
+media_player.pi:
+  friendly_name: Living Room Audio
+  icon: mdi:music-note
+#media_player.bedroom:
+#  friendly_name: Bedroom Music
+#  icon: mdi:music-note
+#media_player.craft_room:
+#  friendly_name: Craft Room Music
+#  icon: mdi:music-note
+#media_player.living_room_client:
+#  friendly_name: Living Room Volume
+#  icon: mdi:speaker
+#media_player.bedroom_client:
+#  friendly_name: Bedroom Volume
+#  icon: mdi:speaker
+#media_player.craft_room_client:
+#  friendly_name: Craft Room Volume
+#  icon: mdi:speaker
+#weblink.living_room_music_player:
+#  friendly_name: Living Room Player
+#  icon: mdi:play-pause
+#weblink.craft_room_music_player:
+#  friendly_name: Craft Room Player
+#  icon: mdi:play-pause
+#weblink.bedroom_music_player:
+#  friendly_name: Bedroom Player
+#  icon: mdi:play-pause
+#weblink.multiroom_music_player:
+#  icon: mdi:play-pause
+
