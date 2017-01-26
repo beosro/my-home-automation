@@ -19,3 +19,4 @@ homeassistant/secrets.yaml
 homeassistant/usps_cookies.pickle
 homeassistant/fitbit.conf
 homeassistant/cam.sh
+homeassistant/emulated_hue_ids.json
