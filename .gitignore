@@ -9,7 +9,6 @@ homeassistant/ecobee.conf
 homeassistant/google_calendars.yaml
 homeassistant/html5_push_registrations.conf
 homeassistant/.HA_VERSION
-homeassistant/log*
 homeassistant/OZW_Log.txt
 homeassistant/.google.token
 homeassistant/zwcfg_*

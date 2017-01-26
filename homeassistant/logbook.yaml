@@ -1,0 +1,13 @@
+exclude:
+  entities:
+    - sensor.home_assistant_errors
+    - sensor.home_assistant_warnings
+    - sensor.her_distance_mean
+    - sensor.his_distance_mean
+    - sensor.new_commits
+    - sensor.pihole
+    - proximity.her_home
+    - proximity.his_home
+    - proximity.home
+  domains:
+    - group
