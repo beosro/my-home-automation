@@ -1,0 +1,18 @@
+Batteries:
+  - sensor.first_floor_smoke_co_battery
+  - sensor.second_floor_smoke_co_battery
+  - sensor.front_door_lock_battery
+  - sensor.door_one_battery
+  - sensor.door_two_battery
+  - sensor.ups_battery
+  - sensor.his_phone_battery
+  - sensor.her_phone_battery
+Detectors:
+  - sensor.smoke_co_first_floor
+  - sensor.smoke_co_second_floor
+Misc:
+  - sensor.gas_price
+  - sensor.deliveries
+  - binary_sensor.medieval
+  - sensor.distance
+  - sensor.steps

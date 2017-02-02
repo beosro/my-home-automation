@@ -1,5 +1,4 @@
 - platform: fitbit
   monitored_resources:
-  - 'activities/heart'
-  - 'activities/distance'
-  - 'activities/steps'
+    - 'activities/distance'
+    - 'activities/steps'

@@ -1,9 +1,20 @@
+homeassistant:
+  customize:
+    - entity_id: sensor.glances_sensor_cpu_load
+      friendly_name: CPU Load
+      icon: mdi:memory
+    - entity_id: sensor.glances_sensor_disk_use
+      friendly_name: Disk
+      icon: mdi:harddisk
+    - entity_id: sensor.glances_sensor_ram_use
+      friendly_name: Memory
+      icon: mdi:server
+
 group:
   Server:
     - sensor.glances_sensor_cpu_load
     - sensor.glances_sensor_disk_use
     - sensor.glances_sensor_ram_use
-    - sensor.glances_sensor_swap_use
     - sensor.ups_battery
 
 apcupsd:

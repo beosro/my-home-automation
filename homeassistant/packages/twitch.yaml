@@ -1,3 +1,9 @@
+homeassistant:
+  customize:
+    - entity_id: switch.twitch
+      friendly_name: Twitch Alerts
+      icon: mdi:twitch
+
 sensor:
   - platform: twitch
     entity_namespace: twitch
@@ -30,6 +36,7 @@ group:
     - sensor.twitch_t90official
     - sensor.twitch_tyrant_theviper
     - weblink.twitch
+    - switch.twitch
 
 automation:
   - alias: Streaming
@@ -43,17 +50,17 @@ automation:
       for:
         seconds: 30
     condition:
-    - condition: state
-      entity_id: device_tracker.his_phone
-      state: 'home'
-    - condition: state
-      entity_id: switch.sleeping
-      state: 'no'
-    - condition: state
-      entity_id: switch.twitch
-      state: 'yes'
+      - condition: state
+        entity_id: device_tracker.his_phone
+        state: 'home'
+      - condition: state
+        entity_id: switch.sleeping
+        state: 'no'
+      - condition: state
+        entity_id: switch.twitch
+        state: 'yes'
     action:
-      service: notify.pushbullet
+      service: notify.him
       data_template:
         message: >
           {{ trigger.to_state.attributes.friendly_name }} is streaming

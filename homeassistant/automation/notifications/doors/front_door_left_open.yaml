@@ -1,8 +1,8 @@
 alias: Alert if the front door was left open
 trigger:
   platform: state
-  entity_id: sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_9_1
-  state: '255'
+  entity_id: sensor.door_two
+  state: 'off'
   for:
     seconds: 120
 action:

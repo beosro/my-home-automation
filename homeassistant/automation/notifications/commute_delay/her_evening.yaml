@@ -1,7 +1,7 @@
 alias: Commute delay - her evening
 trigger:
   platform: numeric_state
-  entity_id: sensor.her_evening
+  entity_id: sensor.her_evening_commute
   above: 45
 condition:
 - condition: time

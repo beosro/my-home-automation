@@ -6,8 +6,12 @@ exclude:
     - sensor.his_distance_mean
     - sensor.new_commits
     - sensor.pihole
+    - sensor.cam_motion
     - proximity.her_home
     - proximity.his_home
     - proximity.home
   domains:
     - group
+include:
+  entities:
+    - sensor.deliveries

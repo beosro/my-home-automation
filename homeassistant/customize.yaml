@@ -1,0 +1,45 @@
+- entity_id: lock.schlage_be469nxcen_touchscreen_deadbolt_locked_7_0
+  friendly_name: Front Door
+- entity_id: scene.mood_lighting
+  icon: mdi:heart
+  emulated_hue: true
+- entity_id: scene.regular_lighting
+  icon: mdi:lightbulb
+  emulated_hue: true
+- entity_id: switch.unknown_id000c_unknown_type4447_id3033_switch_13_0
+  friendly_name: Kitchen Fluorescent
+  icon: mdi:lightbulb
+  emulated_hue: true
+- entity_id: switch.unknown_id000c_unknown_type4447_id3033_switch_14_0
+  friendly_name: Porch Lanterns
+  icon: mdi:lightbulb
+  emulated_hue: true
+- entity_id: switch.unknown_id000c_unknown_type4447_id3033_switch_15_0
+  friendly_name: Foyer Light
+  icon: mdi:lightbulb
+  emulated_hue: true
+- entity_id: light.dragon_tech_in_wall_dimmer_level_16_0
+  friendly_name: Den Light
+  emulated_hue: true
+- entity_id: light.unknown_id000c_unknown_type4447_id3034_level_17_0
+  friendly_name: Bedroom Light
+  emulated_hue: true
+- entity_id: light.unknown_id000c_unknown_type4447_id3034_level_21_0
+  friendly_name: Dining Room Chandelier
+  emulated_hue: true
+- entity_id: switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
+  friendly_name: Dinette Light
+  icon: mdi:lightbulb
+  emulated_hue: true
+- entity_id: light.bedroom_lamp
+  emulated_hue: true
+  icon: mdi:lamp
+- entity_id: light.living_room_lamps
+  emulated_hue: true
+  icon: mdi:lamp
+- entity_id: light.living_room_fan_light
+  emulated_hue: true
+- entity_id: sensor.smoke_co_*
+  icon: mdi:alert
+- entity_id: sensor.*_battery
+  icon: mdi:battery

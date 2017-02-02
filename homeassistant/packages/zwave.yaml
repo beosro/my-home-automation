@@ -1,3 +1,14 @@
+homeassistant:
+  customize:
+    - entity_id:
+        - sensor.vision*
+        - sensor.schlage*
+        - sensor.linear*
+        - sensor.first_alert*
+        - binary_sensor.*
+      hidden: True
+
+
 panel_iframe:
   ozwcp:
     title: OZWCP
@@ -7,6 +18,3 @@ panel_iframe:
 zwave:
   usb_path: /dev/ttyACM0
   config_path: !secret zwave_config_path
-  customize:
-    entity_id: sensor.*
-    ignore: true

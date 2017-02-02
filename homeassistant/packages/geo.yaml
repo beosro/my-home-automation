@@ -1,9 +1,20 @@
+homeassistant:
+  customize:
+    - entity_id: proximity.home
+      friendly_name: Anyone's proximity
+    - entity_id: proximity.her_home
+      friendly_name: Her proximity
+    - entity_id: proximity.his_home
+      friendly_name: His proximity
+    - entity_id: sensor.*_commute
+      icon: mdi:car
+
 group:
   Geo:
-    - sensor.his_morning
-    - sensor.his_evening
-    - sensor.her_morning
-    - sensor.her_evening
+    - sensor.his_morning_commute
+    - sensor.his_evening_commute
+    - sensor.her_morning_commute
+    - sensor.her_evening_commute
     - sensor.her_distance_mean
     - sensor.his_distance_mean
     - proximity.her_home
@@ -65,28 +76,28 @@ sensor:
     name: His Distance
     entity_id: proximity.his_home
   - platform: google_travel_time
-    name: His Morning
+    name: His Morning Commute
     api_key: !secret google_api_key
     origin: !secret home_address
     destination: !secret his_work_address
     options:
       mode: driving
   - platform: google_travel_time
-    name: His Evening
+    name: His Evening Commute
     api_key: !secret google_api_key
     origin: !secret his_work_address
     destination: !secret home_address
     options:
       mode: driving
   - platform: google_travel_time
-    name: Her Morning
+    name: Her Morning Commute
     api_key: !secret google_api_key
     origin: !secret home_address
     destination: !secret her_work_address_1
     options:
       mode: driving
   - platform: google_travel_time
-    name: Her Evening
+    name: Her Evening Commute
     api_key: !secret google_api_key
     origin: !secret her_work_address_1
     destination: !secret home_address

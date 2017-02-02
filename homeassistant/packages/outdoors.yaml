@@ -1,3 +1,33 @@
+homeassistant:
+  customize:
+    - entity_id: sensor.air_quality_numeric
+      hidden: true
+    - entity_id: sensor.air_quality
+      icon: mdi:cloud-check
+    - entity_id: sun.sun
+      icon: mdi:weather-sunny
+    - entity_id: sensor.dark_sky_humidity
+      icon: mdi:water-percent
+      friendly_name: Humidity
+    - entity_id: sensor.dark_sky_temperature
+      icon: mdi:thermometer
+      friendly_name: Temperature
+    - entity_id: sensor.dark_sky_summary
+      icon: mdi:leaf
+      friendly_name: Conditions
+    - entity_id: sensor.dark_sky_cloud_coverage
+      friendly_name: Cloud Coverage
+    - entity_id: sensor.dark_sky_daily_high_temperature
+      hidden: true
+    - entity_id: sensor.dark_sky_daily_low_temperature
+      hidden: true
+    - entity_id: sensor.dark_sky_daily_summary
+      hidden: true
+    - entity_id: sensor.dark_sky_hourly_summary
+      hidden: true
+    - entity_id: sensor.waqi*
+      hidden: true
+
 group:
   Outdoors:
     - sensor.dark_sky_summary

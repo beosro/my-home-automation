@@ -5,7 +5,7 @@ trigger:
   platform: numeric_state
   entity_id: sun.sun
   value_template: '{{ state.attributes.elevation }}'
-  below: 5
+  below: 0
 condition:
 - condition: state
   entity_id: switch.presence

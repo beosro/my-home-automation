@@ -1,3 +1,20 @@
+homeassistant:
+  customize:
+    - entity_id: sensor.canon_ix6800
+      friendly_name: Printer
+    - entity_id: sensor.pihole
+      icon: mdi:block-helper
+      friendly_name: Ad Blocking
+    - entity_id: sensor.speedtest_download
+      icon: mdi:download
+      friendly_name: Download
+    - entity_id: sensor.speedtest_upload
+      icon: mdi:upload
+      friendly_name: Upload
+    - entity_id: sensor.speedtest_ping
+      icon: mdi:timer
+      friendly_name: Ping
+
 group:
   Network:
     - sensor.speedtest_upload
@@ -15,6 +32,7 @@ panel_iframe:
 
 sensor:
   - platform: pi_hole
+    scan_interval: 600
     host: localhost:8032
   - platform: speedtest
     monitored_conditions:

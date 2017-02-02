@@ -1,0 +1,73 @@
+homeassistant:
+  customize:
+    - entity_id: switch.presence
+      icon: mdi:account-multiple
+      friendly_name: Detect Presence
+    - entity_id: switch.alert_motion
+      icon: mdi:walk
+    - entity_id: switch.alert_delays
+      icon: mdi:car
+    - entity_id: sensor.new_commits
+      icon: mdi:github-circle
+    - entity_id: sensor.home_assistant_errors
+      icon: mdi:alert-circle
+    - entity_id: sensor.home_assistant_warnings
+      icon: mdi:alert-circle-outline
+
+group:
+  Home Assistant:
+    - switch.detect_motion
+    - switch.presence
+    - switch.alert_motion
+    - switch.alert_delays
+    - sensor.home_assistant_errors
+    - sensor.home_assistant_warnings
+    - sensor.new_commits
+
+sensor:
+  - platform: command_line
+    name: New Commits
+    scan_interval: 600
+    command: "git fetch origin && git log dev..origin/dev --pretty=oneline | wc -l"
+  - platform: command_line
+    name: Home Assistant Errors
+    scan_interval: 3600
+    command: !secret ha_error_command
+  - platform: command_line
+    name: Home Assistant Warnings
+    scan_interval: 3600
+    command: !secret ha_warning_command
+
+switch:
+  - platform: mqtt
+    name: "Detect Motion"
+    state_topic: "nfc/detect_motion"
+    command_topic: "nfc/detect_motion"
+    qos: 1
+    payload_on: "yes"
+    payload_off: "no"
+    retain: true
+  - platform: mqtt
+    name: "Alert Motion"
+    state_topic: "nfc/alert_motion"
+    command_topic: "nfc/alert_motion"
+    qos: 1
+    payload_on: "yes"
+    payload_off: "no"
+    retain: true
+  - platform: mqtt
+    name: "Alert Delays"
+    state_topic: "nfc/alert_delays"
+    command_topic: "nfc/alert_delays"
+    qos: 1
+    payload_on: "yes"
+    payload_off: "no"
+    retain: true
+  - platform: mqtt
+    name: "Presence"
+    state_topic: "nfc/presence"
+    command_topic: "nfc/presence"
+    qos: 1
+    payload_on: "yes"
+    payload_off: "no"
+    retain: true

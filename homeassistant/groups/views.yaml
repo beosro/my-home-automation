@@ -1,0 +1,30 @@
+Shortcuts:
+  view: yes
+  entities:
+    - switch.sleeping
+Rooms:
+  view: yes
+  entities:
+    - group.kitchen
+    - group.dining_room
+    - group.den
+    - group.foyer
+    - group.bedroom
+    - group.living_room
+Security:
+  view: yes
+  entities:
+    - group.camera
+    - lock.schlage_be469nxcen_touchscreen_deadbolt_locked_7_0
+Media:
+  view: yes
+  entities:
+    - group.tv
+    - group.snapclients
+    - media_player.multiroom_audio
+Admin:
+  view: yes
+  entities:
+    - group.home_assistant
+    - group.briefings
+    - group.arrivals

@@ -1,0 +1,102 @@
+homeassistant:
+  customize:
+    - entity_id: switch.sleeping
+      icon: mdi:sleep
+      emulated_hue: true
+      emulated_hue_name: Sleep Mode
+    - entity_id: switch.vacation
+      icon: mdi:airplane
+    - entity_id: switch.guests
+      icon: mdi:human-male-female
+
+group:
+  People:
+    - device_tracker.his_phone
+    - device_tracker.her_phone
+    - switch.sleeping
+    - switch.vacation
+    - switch.guests
+
+switch:
+  - platform: mqtt
+    name: "Sleeping"
+    state_topic: "nfc/sleeping"
+    command_topic: "nfc/sleeping"
+    qos: 1
+    payload_on: "yes"
+    payload_off: "no"
+    retain: true
+  - platform: mqtt
+    name: "Vacation"
+    state_topic: "nfc/vacation"
+    command_topic: "nfc/vacation"
+    qos: 1
+    payload_on: "yes"
+    payload_off: "no"
+    retain: true
+  - platform: mqtt
+    name: "Guests"
+    state_topic: "nfc/guests"
+    command_topic: "nfc/guests"
+    qos: 1
+    payload_on: "yes"
+    payload_off: "no"
+    retain: true
+
+automation:
+  - alias: Vacation started
+    trigger:
+      platform: state
+      entity_id: switch.vacation
+      state: 'on'
+    action:
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.thermostat
+          away_mode: true
+  - alias: Sleeping
+    trigger:
+      platform: state
+      entity_id: switch.sleeping
+      state: 'on'
+    action:
+      - service: light.turn_off
+        entity_id: group.all_lights
+      - service: switch.turn_off
+        entity_id:
+          - switch.unknown_id000c_unknown_type4447_id3033_switch_13_0
+          - switch.unknown_id000c_unknown_type4447_id3033_switch_14_0
+          - switch.unknown_id000c_unknown_type4447_id3033_switch_15_0
+          - switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
+          - switch.smart_socket_1
+          - switch.smart_socket_2
+      - service: lock.lock
+        entity_id: group.all_locks
+      - service: media_player.turn_off
+        entity_id:
+          - media_player.chromecast
+          - media_player.firetv
+          - media_player.multiroom_audio
+  - alias: Turn off sleep mode automatically
+    trigger:
+      platform: time
+      after: '10:00:00'
+    condition:
+    - condition: state
+      entity_id: switch.sleeping
+      state: 'on'
+    action:
+      service: homeassistant.turn_off
+      data:
+        entity_id: switch.sleeping
+  - alias: Wake Up
+    trigger:
+      platform: state
+      entity_id: switch.sleeping
+      state: 'off'
+    action:
+      - service: scene.turn_on
+        entity_id: scene.morning_bedroom
+      - service: lock.unlock
+        entity_id: group.all_locks
+

@@ -1,3 +1,27 @@
+homeassistant:
+  customize:
+    - entity_id: switch.hdmi_0
+      hidden: true
+    - entity_id: switch.hdmi_4
+      friendly_name: Chromecast
+      icon: mdi:cast-connected
+    - entity_id: switch.hdmi_5
+      friendly_name: Soundbar
+    - entity_id: switch.hdmi_8
+      friendly_name: Fire TV
+      icon: mdi:amazon
+    - entity_id: script.tv_volume_up
+      friendly_name: Volume Up
+      icon: mdi:arrow-up-bold
+      order: 1
+    - entity_id: script.tv_volume_down
+      friendly_name: Volume Down
+      icon: mdi:arrow-down-bold
+      order: 2
+    - entity_id: script.tv_power
+      friendly_name: TV Power
+      icon: mdi:power
+
 group:
   TV:
     - script.tv_power

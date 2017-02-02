@@ -1,7 +1,7 @@
 alias: Commute delay - his morning
 trigger:
   platform: numeric_state
-  entity_id: sensor.his_morning
+  entity_id: sensor.his_morning_commute
   above: 30
 condition:
 - condition: time

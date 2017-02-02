@@ -5,7 +5,7 @@ homeassistant:
   elevation: !secret home_elevation
   unit_system: !secret unit_system
   time_zone: !secret timezone
-  customize: !include_dir_merge_named customizations
+  customize: !include customize.yaml
   packages:  !include_dir_named packages
 
 google:
@@ -31,23 +31,20 @@ http:
   api_password: !secret hass_api_password
   base_url: !secret hass_base_url
 
-recorder:
-  purge_days: 3
-  db_url: !secret recorder_db_url
-
-device_tracker: !include device_trackers.yaml
 alexa: !include alexa.yaml
-light: !include light.yaml
-switch: !include_dir_merge_list switches
-sensor: !include_dir_merge_list sensors
-binary_sensor: !include_dir_merge_list binary_sensors
-group: !include groups.yaml
-scene: !include scenes.yaml
 automation: !include_dir_list automation
+binary_sensor: !include_dir_merge_list binary_sensors
+device_tracker: !include device_trackers.yaml
+group: !include_dir_merge_named groups
+light: !include light.yaml
 notify: !include notify.yaml
-weblink: !include weblink.yaml
+recorder: !include recorder.yaml
+scene: !include scenes.yaml
+sensor: !include_dir_merge_list sensors
+switch: !include_dir_merge_list switches
 logger: !include logger.yaml
 logbook: !include logbook.yaml
+weblink: !include weblink.yaml
 
 sun:
 frontend:

@@ -15,7 +15,7 @@ condition:
 - condition: numeric_state
   entity_id: sun.sun
   value_template: '{{ state.attributes.elevation }}'
-  below: 5
+  below: 0
 action:
   - service: switch.turn_on
     entity_id:
