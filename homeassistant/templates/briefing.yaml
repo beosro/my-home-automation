@@ -163,9 +163,9 @@
 
       {# Deliveries #}
       {% macro deliveries_sentence() -%}
-        {% if 'delivered' in states.sensor.deliveries.attributes -%}
-          {{states.sensor.deliveries.attributes.delivered}}{{' '}}
-          {%- if states.sensor.deliveries.attributes.delivered == 1 -%}
+        {% if states.sensor.deliveries_today.state|int > 0 -%}
+          {{states.sensor.deliveries_today.state}}{{' '}}
+          {%- if states.sensor.deliveries_today.state|int == 1 -%}
             package was
           {%- else -%}
             packages were

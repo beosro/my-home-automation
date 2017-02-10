@@ -47,13 +47,13 @@ input_select:
       - Chromecast
       - Multi-Room Audio
 
-hdmi_cec:
-  host: 192.168.2.57
-  platform: switch
-  devices:
-    Chromecast: 1.1.0.0
-    Multi-Room Audio: 1.2.0.0
-    Fire TV: 1.3.0.0
+#hdmi_cec:
+#  host: 192.168.2.57
+#  platform: switch
+#  devices:
+#    Chromecast: 1.1.0.0
+#    Multi-Room Audio: 1.2.0.0
+#    Fire TV: 1.3.0.0
 
 script:
   tv_power:

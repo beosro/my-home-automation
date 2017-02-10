@@ -36,3 +36,6 @@ sensor:
       - disk_use_percent
       - memory_use_percent
       - processor_load
+  - platform: apcupsd
+    resources:
+      - bcharge

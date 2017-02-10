@@ -12,7 +12,6 @@ Detectors:
   - sensor.smoke_co_second_floor
 Misc:
   - sensor.gas_price
-  - sensor.deliveries
   - binary_sensor.medieval
   - sensor.distance
   - sensor.steps

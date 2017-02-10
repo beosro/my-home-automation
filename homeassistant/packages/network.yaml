@@ -42,6 +42,3 @@ sensor:
   - platform: cups
     printers:
       - Canon_iX6800
-  - platform: apcupsd
-    resources:
-      - bcharge

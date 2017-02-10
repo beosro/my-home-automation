@@ -22,8 +22,9 @@ media_player:
     location: Multi-Room Audio
   - platform: snapcast
     host: localhost
-    play_media_source: 'TTS'
-    play_media_command: 'ffmpeg -y -i {} -f u16le -acodec pcm_s16le -ac 2 -ar 48000 /tmp/snapcast_tts'
+  - platform: gstreamer
+    name: 'TTS'
+    pipeline: 'audioresample ! audioconvert ! audio/x-raw,rate=48000,channels=2,format=S16LE ! wavenc ! filesink location=/tmp/snapcast_tts'
 
 automation:
   - alias: Multi-Room Audio Pause

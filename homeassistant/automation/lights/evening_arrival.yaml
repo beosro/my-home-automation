@@ -2,8 +2,7 @@ alias: Turn on lights when anyone gets home
 trigger:
   platform: state
   entity_id:
-  - device_tracker.his_phone
-  - device_tracker.her_phone
+    - group.all_devices
   state: 'home'
 condition:
 - condition: state

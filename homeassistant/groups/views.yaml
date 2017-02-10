@@ -22,6 +22,7 @@ Media:
     - group.tv
     - group.snapclients
     - media_player.multiroom_audio
+    - media_player.tts
 Admin:
   view: yes
   entities:

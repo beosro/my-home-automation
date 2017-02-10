@@ -1,0 +1,10 @@
+exclude:
+  entities:
+    - proximity.his_home
+    - proximity.home
+  domains:
+    - calendar
+    - zone
+include:
+  entities:
+    - sensor.deliveries
