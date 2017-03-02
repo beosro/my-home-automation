@@ -1,17 +1,17 @@
 homeassistant:
   customize:
-    - entity_id: switch.presence
+    switch.presence:
       icon: mdi:account-multiple
       friendly_name: Detect Presence
-    - entity_id: switch.alert_motion
+    switch.alert_motion:
       icon: mdi:walk
-    - entity_id: switch.alert_delays
+    switch.alert_delays:
       icon: mdi:car
-    - entity_id: sensor.new_commits
+    sensor.new_commits:
       icon: mdi:github-circle
-    - entity_id: sensor.home_assistant_errors
+    sensor.home_assistant_errors:
       icon: mdi:alert-circle
-    - entity_id: sensor.home_assistant_warnings
+    sensor.home_assistant_warnings:
       icon: mdi:alert-circle-outline
 
 group:

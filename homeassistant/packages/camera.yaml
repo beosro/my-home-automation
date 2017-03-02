@@ -1,15 +1,15 @@
 homeassistant:
   customize:
-    - entity_id: script.cam_up
+    script.cam_up:
       icon: mdi:arrow-up
       friendly_name: Camera Up
-    - entity_id: script.cam_down
+    script.cam_down:
       icon: mdi:arrow-down
       friendly_name: Camera Down
-    - entity_id: script.cam_left
+    script.cam_left:
       icon: mdi:arrow-left
       friendly_name: Camera Left
-    - entity_id: script.cam_right
+    script.cam_right:
       icon: mdi:arrow-right
       friendly_name: Camera Right
 

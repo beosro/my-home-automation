@@ -1,14 +1,14 @@
 homeassistant:
   customize:
-    - entity_id: switch.pc_monitors
+    switch.pc_monitors:
       icon: mdi:monitor
       friendly_name: Monitors
-    - entity_id: switch.pc_sound
+    switch.pc_sound:
       icon: mdi:volume-off
       friendly_name: Mute
-    - entity_id: input_slider.pc_volume
+    input_slider.pc_volume:
       icon: mdi:volume-high
-    - entity_id: switch.turn_on_pc
+    switch.turn_on_pc:
       icon: mdi:power
 
 group:

@@ -6,6 +6,7 @@ homeassistant:
   unit_system: !secret unit_system
   time_zone: !secret timezone
   customize: !include customize.yaml
+  customize_glob: !include customize_glob.yaml
   packages:  !include_dir_named packages
 
 google:
@@ -49,3 +50,4 @@ weblink: !include weblink.yaml
 sun:
 frontend:
 history:
+config:

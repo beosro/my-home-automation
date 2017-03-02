@@ -1,12 +1,13 @@
 homeassistant:
   customize:
-    - entity_id: proximity.home
+    proximity.home:
       friendly_name: Anyone's proximity
-    - entity_id: proximity.her_home
+    proximity.her_home:
       friendly_name: Her proximity
-    - entity_id: proximity.his_home
+    proximity.his_home:
       friendly_name: His proximity
-    - entity_id: sensor.*_commute
+  customize_glob:
+    'sensor.*_commute':
       icon: mdi:car
 
 group:
@@ -48,6 +49,11 @@ zone:
     latitude: !secret home_latitude
     longitude: !secret home_longitude
     radius: !secret zone_radius
+    passive: true
+  - name: Neighborhood
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: !secret neighborhood_radius
     passive: true
 
 proximity:

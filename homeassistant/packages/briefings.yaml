@@ -1,12 +1,13 @@
 homeassistant:
   customize:
-    - entity_id: switch.briefings
+    switch.briefings:
       icon: mdi:voice
 
 group:
   Briefings:
     entities:
       - input_select.briefing_target
+      - input_select.tts_engine
       - sensor.briefing_target
       - script.tts_briefing
       - script.persistent_briefing
@@ -19,6 +20,12 @@ input_select:
       - 'Select a person'
       - !secret her_name
       - !secret his_name
+  tts_engine:
+    name: TTS Engine
+    options:
+      - 'google'
+      - 'amazon_polly'
+      - 'voicerss'
 
 sensor:
   - platform: mqtt
@@ -28,10 +35,20 @@ sensor:
 script:
   tts_briefing:
     sequence:
-      - service: tts.google_say
+      - service: media_player.select_source
+        data:
+          entity_id: media_player.hifiberry
+          source: 'TTS'
+      - service_template: "tts.{{states.input_select.tts_engine.state}}_say"
         data_template:
           entity_id: media_player.tts
           message: !include ../templates/briefing.yaml
+      - wait_template: "{{states.media_player.tts.state == 'idle'}}"
+        timeout: 30
+      - service: media_player.select_source
+        data:
+          entity_id: media_player.hifiberry
+          source: 'Spotify'
   persistent_briefing:
     sequence:
       - service: persistent_notification.create

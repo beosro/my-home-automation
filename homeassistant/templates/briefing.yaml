@@ -18,7 +18,7 @@
           true
         {%- else -%}
           false
-         {%- endif %}
+        {%- endif %}
       {%- endmacro %}
 
       {# Is today #}
@@ -48,7 +48,7 @@
         {%- set start = event.attributes.start_time -%}
         {%- if start and is_today(event) == 'true' -%}
           {{event.attributes.message}} is today at {{friendly_time(start)}}
-        {%- elif start and on_weekend(start) == 'true' and day_of_week(now()) == 'friday' -%}
+        {%- elif start and on_weekend(start) == 'true' and day_of_week(now()) == 'friday' and hours_until(event)|int < 72 -%}
           {{event.attributes.message}} is on {{day_of_week(start)}} at {{friendly_time(start)}}
         {%- endif -%}
       {%- endmacro %}
@@ -84,7 +84,10 @@
           "Welcome home " ~ person,
           "Hey there " ~ person,
           person ~ "! You're home!",
-          "Welcome back " ~ person
+          "Welcome back " ~ person,
+          "Welcome home " ~ person + ". I've missed you. Or at least the cats did.",
+          "Our home is now complete, rest your head and relax your feet! Welcome back " ~ person,
+          "Life is like a song, you’re back where you belong. Welcome home " ~ person
         ] %}
         {{greetings|random}}.
       {% endmacro %}
@@ -174,6 +177,18 @@
         {%- endif %}
       {%- endmacro %}
 
+      {# Moon sentence #}
+      {% macro moon_sentence() -%}
+        {%- if states.sensor.moon.state == 'Full moon' -%}
+          Check out the full moon tonight!
+        {%- endif -%}
+      {%- endmacro %}
+
+      {# Quote sentence #}
+      {% macro quote_sentence() -%}
+        A parting thought: {{states.sensor.quote.state}}
+      {%- endmacro %}
+
       {# Validate requested person #}
       {% macro validate_and_brief(person) -%}
         {% if person -%}
@@ -200,9 +215,11 @@
         {{deliveries_sentence()}}
         {{chore_sentence(states.calendar.general, 'trash', 'Remember to take out the trash. It is trash day.')}}
         {{chore_sentence(states.calendar.general, 'recycling', 'Remember to take out the recycling. It is recycling day.')}}
-        {{event_sentence(states.calendar.facebook)}}
+        {#{{event_sentence(states.calendar.facebook)}}#}
         {{event_sentence(states.calendar.sca, '', ', get prepared')}}
         {{event_sentence(states.calendar.combat_docket_mma_calendar, 'Oh yeah, and ')}}
+        {{moon_sentence()}}
+        {{quote_sentence()}}
         {{closing_sentence(person)}}
       {% endmacro %}
 

@@ -1,11 +1,14 @@
 homeassistant:
-  customize:
-    - entity_id:
-        - sensor.vision*
-        - sensor.schlage*
-        - sensor.linear*
-        - sensor.first_alert*
-        - binary_sensor.*
+  customize_glob:
+    'sensor.vision*':
+      hidden: true
+    'sensor.schlage*':
+      hidden: true
+    'sensor.linear*':
+      hidden: true
+    'sensor.first_alert*':
+      hidden: true
+    'binary_sensor.vision*':
       hidden: True
 
 

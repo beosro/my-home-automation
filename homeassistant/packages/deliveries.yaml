@@ -1,8 +1,8 @@
 homeassistant:
   customize:
-    - entity_id: sensor.deliveries_today
+    sensor.deliveries_today:
       icon: mdi:package-variant
-    - entity_id: sensor.packages_in_transit
+    sensor.packages_in_transit:
       icon: mdi:truck-delivery
 
 group:
@@ -53,3 +53,20 @@ sensor:
             {% endif %}
           {% endmacro %} 
           {{delivered(states.sensor.usps)|int + delivered(states.sensor.ups)|int + delivered(states.sensor.fedex)|int}}
+
+automation:
+  - alias: Announce package delivery
+    trigger:
+      platform: state
+      entity_id: sensor.deliveries_today
+    condition:
+      - condition: template
+        value_template: '{{trigger.to_state.state|int > trigger.from_state.state|int}}'
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+    action:
+      - service: tts.google_say
+        data_template:
+          entity_id: media_player.tts
+          message: "A package was just delivered."

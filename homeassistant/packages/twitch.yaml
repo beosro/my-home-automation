@@ -1,6 +1,6 @@
 homeassistant:
   customize:
-    - entity_id: switch.twitch
+    switch.twitch:
       friendly_name: Twitch Alerts
       icon: mdi:twitch
 

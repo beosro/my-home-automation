@@ -1,7 +1,14 @@
+homeassistant:
+  customize:
+    script.all_rooms_audio:
+      friendly_name: Spotify Everywhere
+      icon: mdi:spotify
+
 group:
   Snapclients:
     - media_player.pi
     - media_player.hifiberry
+    - script.all_rooms_audio
 
 panel_iframe:
   audio:
@@ -14,7 +21,13 @@ tts:
     cache: true
     cache_dir: /tmp/tts
     time_memory: 300
-
+  - platform: amazon_polly
+    aws_access_key_id: !secret aws_access_key_id
+    aws_secret_access_key: !secret aws_secret_access_key
+    region_name: !secret aws_region
+  - platform: voicerss
+    api_key: !secret voicerss_api_key
+                      
 media_player:
   - platform: mpd
     host: localhost
@@ -25,6 +38,28 @@ media_player:
   - platform: gstreamer
     name: 'TTS'
     pipeline: 'audioresample ! audioconvert ! audio/x-raw,rate=48000,channels=2,format=S16LE ! wavenc ! filesink location=/tmp/snapcast_tts'
+
+script:
+  all_rooms_audio:
+    sequence:
+      - service: media_player.select_source
+        data:
+          entity_id: media_player.pi
+          source: 'Spotify'
+      - service: media_player.select_source
+        data:
+          entity_id: media_player.hifiberry
+          source: 'Spotify'
+      - service: switch.turn_on
+        data:
+          entity_id: switch.hdmi_5
+      - service: hdmi_cec.select_device
+        data:
+          device: '1.2.0.0'
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.tv_input
+          option: 'Multi-Room Audio'
 
 automation:
   - alias: Multi-Room Audio Pause

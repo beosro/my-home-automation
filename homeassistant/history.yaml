@@ -5,6 +5,7 @@ exclude:
   domains:
     - calendar
     - zone
+    - persistent_notification
 include:
   entities:
     - sensor.deliveries

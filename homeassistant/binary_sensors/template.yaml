@@ -3,8 +3,8 @@
     door_one:
       value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_8_1.state == '0' }}"
       friendly_name: 'Side Door'
-      sensor_class: 'opening'
+      device_class: 'opening'
     door_two:
       value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_9_1.state == '0' }}"
       friendly_name: 'Front Door'
-      sensor_class: 'opening'
+      device_class: 'opening'
