@@ -1,0 +1,11 @@
+alias: Incoming text message
+trigger:
+  platform: event
+  event_type: twilio_data_received
+  event_data:
+    SmsStatus: 'received'
+action:
+  service: tts.amazon_polly_say
+  data_template:
+    entity_id: media_player.tts
+    message: "{{trigger.event.data.Body}}"

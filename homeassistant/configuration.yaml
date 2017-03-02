@@ -19,6 +19,10 @@ ecobee:
 digital_ocean:
   access_token: !secret digitalocean_api_key
 
+twilio:
+  account_sid: !secret twilio_account_sid
+  auth_token: !secret twilio_auth_token
+
 mqtt:
   broker: 127.0.0.1
   port: 1883

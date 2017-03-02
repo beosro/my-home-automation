@@ -20,3 +20,9 @@
   name: html5
   gcm_api_key: !secret gcm_api_key
   gcm_sender_id: !secret gcm_sender_id
+- name: sms
+  platform: twilio_sms
+  from_number: !secret twilio_number
+- name: call
+  platform: twilio_call
+  from_number: !secret twilio_number

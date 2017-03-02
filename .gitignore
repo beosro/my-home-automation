@@ -19,3 +19,4 @@ homeassistant/*_cookies.pickle
 homeassistant/fitbit.conf
 homeassistant/cam.sh
 homeassistant/emulated_hue_ids.json
+homeassistant/zwave_device_config.yaml

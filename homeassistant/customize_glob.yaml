@@ -1,0 +1,4 @@
+'sensor.smoke_co_*':
+  icon: mdi:alert
+'sensor.*_battery':
+  icon: mdi:battery
