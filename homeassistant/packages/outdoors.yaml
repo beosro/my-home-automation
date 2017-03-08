@@ -17,6 +17,8 @@ homeassistant:
       friendly_name: Conditions
     sensor.dark_sky_cloud_coverage:
       friendly_name: Cloud Coverage
+    sensor.dark_sky_wind_speed:
+      friendly_name: Wind Speed
     sensor.dark_sky_daily_high_temperature:
       hidden: true
     sensor.dark_sky_daily_low_temperature:
@@ -27,6 +29,14 @@ homeassistant:
       hidden: true
     sensor.moon:
       icon: mdi:vector-circle-variant
+    sensor.pollen:
+      hidden: true
+    sensor.cold_flu:
+      hidden: true
+    sensor.pollen_level:
+      icon: mdi:chart-bar
+    sensor.cold_flu_risk:
+      icon: mdi:chart-bubble
   customize_glob:
     'sensor.waqi*':
       hidden: true
@@ -38,8 +48,11 @@ group:
     - sensor.dark_sky_temperature
     - sensor.dark_sky_humidity
     - sensor.dark_sky_cloud_coverage
+    - sensor.dark_sky_wind_speed
     - sensor.air_quality
     - sensor.moon
+    - sensor.pollen_level
+    - sensor.cold_flu_risk
     - camera.weather_radar
 
 camera:
@@ -53,6 +66,20 @@ sensor:
     token: !secret waqi_token
     locations:
     - !secret waqi_location
+  - platform: rest
+    name: pollen
+    resource: !secret pollen_url
+    value_template: "{{value_json.Location.periods[1].Index}}"
+    scan_interval: 21600
+    headers:
+       Referer: "https://www.pollen.com"
+  - platform: rest
+    name: cold_flu
+    resource: !secret cold_flu_url
+    value_template: "{{value_json.Location.periods[0].Index}}"
+    scan_interval: 21600
+    headers:
+       Referer: "https://www.pollen.com"
   - platform: template
     sensors:
       air_quality_numeric:
@@ -67,6 +94,38 @@ sensor:
           {% elif states.sensor.air_quality_numeric.state|int <= 150 %}
             Unhealthy
           {% endif %}
+      pollen_level:
+        friendly_name: 'Pollen Level'
+        value_template: >-
+          {%- if states.sensor.pollen.state|float <= 2.4 %}
+              Low
+          {%- elif states.sensor.pollen.state|float <= 4.8 %}
+              Medium-Low
+          {%- elif states.sensor.pollen.state|float <= 7.2 %}
+              Medium
+          {%- elif states.sensor.pollen.state|float <= 9.6 %}
+              Medium-High
+          {%- elif states.sensor.pollen.state|float <= 12.0 %}
+              High
+          {% else %}
+              Unknown
+          {%- endif %}
+      cold_flu_risk:
+        friendly_name: 'Cold & Flu Risk'
+        value_template: >-
+          {%- if states.sensor.cold_flu.state|float <= 2.4 %}
+              Low
+          {%- elif states.sensor.cold_flu.state|float <= 4.8 %}
+              Medium-Low
+          {%- elif states.sensor.cold_flu.state|float <= 7.2 %}
+              Medium
+          {%- elif states.sensor.cold_flu.state|float <= 9.6 %}
+              Medium-High
+          {%- elif states.sensor.cold_flu.state|float <= 12.0 %}
+              High
+          {% else %}
+              Unknown
+          {%- endif %}
   - platform: darksky
     api_key: !secret darksky_api_key
     monitored_conditions:
@@ -78,3 +137,4 @@ sensor:
       - cloud_cover
       - temperature_max
       - temperature_min
+      - wind_speed

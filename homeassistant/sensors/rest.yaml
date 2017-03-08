@@ -4,10 +4,26 @@
   method: POST
   name: Gas Price
   value_template: '{{value_json.trend.Today}}'
-  unit_of_measurement: '$'
+  unit_of_measurement: '$/gal'
 - platform: rest
   scan_interval: 3600
   resource: 'http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en'
   method: GET
   name: Quote
   value_template: '{{value_json.quoteText}}'
+- platform: rest
+  scan_interval: 7200
+  resource: !secret horoscope_url
+  name: His Horoscope
+  value_template: !secret his_horoscope_path
+- platform: rest
+  scan_interval: 7200
+  resource: !secret horoscope_url
+  name: Her Horoscope
+  value_template: !secret her_horoscope_path
+- platform: command_line
+  name: Electricity Rate
+  unit_of_measurement: '¢/kWh'
+  scan_interval: 86400
+  command: !secret electricity_rate_command
+  value_template: '{{value|round(1)}}'

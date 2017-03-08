@@ -43,3 +43,5 @@ sensor.gas_price:
   icon: mdi:car
 sensor.quote:
   hidden: true
+sensor.electricity_rate:
+  icon: mdi:flash

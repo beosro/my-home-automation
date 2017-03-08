@@ -9,6 +9,17 @@ homeassistant:
     sensor.glances_sensor_ram_use:
       friendly_name: Memory
       icon: mdi:server
+    sensor.process_mosquitto:
+      friendly_name: mosquitto
+    sensor.process_postgres:
+      friendly_name: postgres
+    sensor.process_snapserver:
+      friendly_name: snapserver
+    sensor.process_glances:
+      friendly_name: glances
+  customize_glob:
+    'sensor.process_*':
+      icon: mdi:check
 
 group:
   Server:
@@ -16,6 +27,11 @@ group:
     - sensor.glances_sensor_disk_use
     - sensor.glances_sensor_ram_use
     - sensor.ups_battery
+  Services:
+    - sensor.process_mosquitto
+    - sensor.process_postgres
+    - sensor.process_glances
+    - sensor.process_snapserver
 
 apcupsd:
   host: localhost
@@ -39,3 +55,13 @@ sensor:
   - platform: apcupsd
     resources:
       - bcharge
+  - platform: systemmonitor
+    resources:
+      - type: process
+        arg: mosquitto
+      - type: process
+        arg: snapserver
+      - type: process
+        arg: glances
+      - type: process
+        arg: postgres

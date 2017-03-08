@@ -13,6 +13,12 @@ Detectors:
 Misc:
   - sensor.gas_price
   - sensor.neighborhood_incidents
+  - sensor.electricity_rate
+  - sensor.pocketcasts_unlistened_episodes
   - binary_sensor.medieval
   - sensor.distance
   - sensor.steps
+  - sensor.dia
+  - sensor.qqq
+  - sensor.his_horoscope
+  - sensor.her_horoscope

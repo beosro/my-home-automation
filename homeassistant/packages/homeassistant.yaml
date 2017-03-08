@@ -13,6 +13,8 @@ homeassistant:
       icon: mdi:alert-circle
     sensor.home_assistant_warnings:
       icon: mdi:alert-circle-outline
+    sensor.connected_clients:
+      icon: mdi:account-multiple
 
 group:
   Home Assistant:
@@ -20,6 +22,7 @@ group:
     - switch.presence
     - switch.alert_motion
     - switch.alert_delays
+    - sensor.connected_clients
     - sensor.home_assistant_errors
     - sensor.home_assistant_warnings
     - sensor.new_commits

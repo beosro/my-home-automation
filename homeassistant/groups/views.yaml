@@ -1,7 +1,3 @@
-Shortcuts:
-  view: yes
-  entities:
-    - switch.sleeping
 Rooms:
   view: yes
   entities:
@@ -29,3 +25,6 @@ Admin:
     - group.home_assistant
     - group.briefings
     - group.arrivals
+    - group.server
+    - group.network
+    - group.services
