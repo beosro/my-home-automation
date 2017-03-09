@@ -10,6 +10,12 @@ Batteries:
 Detectors:
   - sensor.smoke_co_first_floor
   - sensor.smoke_co_second_floor
+Verizon:
+  - sensor.vzw_number_1
+  - sensor.vzw_number_2
+  - sensor.vzw_number_3
+  - sensor.vzw_number_4
+  - sensor.vzw_number_5
 Misc:
   - sensor.gas_price
   - sensor.neighborhood_incidents

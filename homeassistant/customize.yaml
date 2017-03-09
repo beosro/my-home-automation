@@ -45,3 +45,17 @@ sensor.quote:
   hidden: true
 sensor.electricity_rate:
   icon: mdi:flash
+sensor.vzw_number_1:
+  friendly_name: !secret her_name
+sensor.vzw_number_2:
+  friendly_name: !secret vzw_2
+sensor.vzw_number_3:
+  friendly_name: !secret vzw_3
+sensor.vzw_number_4:
+  friendly_name: !secret his_name
+sensor.vzw_number_5:
+  friendly_name: !secret vzw_5
+sensor.his_horoscope:
+  hidden: true
+sensor.her_horoscope:
+  hidden: true

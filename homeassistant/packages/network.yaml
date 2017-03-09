@@ -1,10 +1,9 @@
 homeassistant:
-  customize:
+  customize_glob:
     sensor.canon_ix6800:
       friendly_name: Printer
-    sensor.pihole:
+    'sensor.pihole_*':
       icon: mdi:block-helper
-      friendly_name: Ad Blocking
     sensor.speedtest_download:
       icon: mdi:download
       friendly_name: Download
@@ -21,7 +20,9 @@ group:
     - sensor.speedtest_download
     - sensor.speedtest_ping
     - sensor.canon_ix6800
-    - sensor.pihole
+    - sensor.pihole_ads_blocked_today
+    - sensor.pihole_ads_percentage_blocked_today
+    - sensor.pihole_dns_queries_today
     - weblink.router
 
 panel_iframe:
