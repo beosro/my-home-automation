@@ -7,10 +7,11 @@ automation:
     action:
       - service: switch.turn_on
         entity_id: switch.unknown_id000c_unknown_type4447_id3033_switch_14_0
-      - service: tts.amazon_polly_say
-        data_template:
+      - service: media_player.play_media
+        data:
           entity_id: media_player.tts
-          message: 'Someone rang the doorbell.'
+          media_content_id: !secret doorbell_mp3
+          media_content_type: 'music'
       - service: notify.all
         data_template:
           message: 'Someone rang the doorbell.'
