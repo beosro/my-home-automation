@@ -5,3 +5,4 @@ exclude:
     - sensor.his_horoscope
     - sensor.her_horoscope
     - sensor.quote
+    - sun.sun

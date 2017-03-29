@@ -85,6 +85,9 @@ automation:
       to: 'off'
     condition:
     - condition: state
+      entity_id: group.all_devices
+      state: 'home'
+    - condition: state
       entity_id: switch.briefings
       state: 'on'
     - condition: time

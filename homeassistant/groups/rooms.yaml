@@ -11,10 +11,18 @@ Kitchen:
   - switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
   - binary_sensor.door_one
   - binary_sensor.kitchen_occupancy
+  - binary_sensor.kitchen_motion_active
+  - sensor.kitchen_sound
+  - sensor.kitchen_light_level
+  - sensor.kitchen_pressure
   - sensor.kitchen_temperature
 Den:
   - light.dragon_tech_in_wall_dimmer_level_16_0
   - binary_sensor.den_occupancy
+  - binary_sensor.den_motion_active
+  - sensor.den_sound
+  - sensor.den_light_level
+  - sensor.den_pressure
   - sensor.den_temperature
 Dining Room:
   - light.unknown_id000c_unknown_type4447_id3034_level_21_0
@@ -26,3 +34,5 @@ Foyer:
   - binary_sensor.thermostat_occupancy
   - sensor.thermostat_temperature
   - sensor.thermostat_humidity
+Garage:
+  - cover.linear_unknown_type4744_id3030_open_25_0

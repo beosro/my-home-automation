@@ -51,7 +51,7 @@ sensor:
             {% else %}
                0
             {% endif %}
-          {% endmacro %} 
+          {% endmacro %}
           {{delivered(states.sensor.usps)|int + delivered(states.sensor.ups)|int + delivered(states.sensor.fedex)|int}}
 
 automation:

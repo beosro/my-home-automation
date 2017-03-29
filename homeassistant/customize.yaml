@@ -31,6 +31,8 @@ switch.unknown_id000c_unknown_type4447_id3033_switch_22_0:
   friendly_name: Dinette Light
   icon: mdi:lightbulb
   emulated_hue: true
+cover.linear_unknown_type4744_id3030_open_25_0:
+  friendly_name: Garage Door
 light.bedroom_lamp:
   emulated_hue: true
   icon: mdi:lamp

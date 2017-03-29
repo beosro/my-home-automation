@@ -12,6 +12,21 @@ homeassistant:
     script.cam_right:
       icon: mdi:arrow-right
       friendly_name: Camera Right
+  customize_glob:
+    'sensor.*_battery_temperature':
+      hidden: true
+    'sensor.*_battery_voltage':
+      hidden: true
+    'sensor.den_motion':
+      hidden: true
+    'sensor.kitchen_motion':
+      hidden: true
+    'sensor.*_proximity':
+      hidden: true
+    'sensor.*_audio_connections':
+      hidden: true
+    'sensor.*_video_connections':
+      hidden: true
 
 group:
   Camera:
@@ -22,12 +37,22 @@ group:
     - script.cam_down
     - script.cam_left
     - script.cam_right
+    - camera.den
+    - camera.kitchen
 
 panel_iframe:
   cams:
     title: Cameras
     icon: mdi:video
     url: !secret cams_url
+
+android_ip_webcam:
+  - host: !secret android_ip_1
+    scan_interval: 60
+    name: Kitchen
+  - host: !secret android_ip_2
+    scan_interval: 60
+    name: Den
 
 camera:
   - platform: generic

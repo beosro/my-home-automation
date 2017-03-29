@@ -3,6 +3,7 @@ homeassistant:
     script.all_rooms_audio:
       friendly_name: Spotify Everywhere
       icon: mdi:spotify
+      emulated_hue: true
 
 group:
   Snapclients:
@@ -29,10 +30,6 @@ tts:
     api_key: !secret voicerss_api_key
                       
 media_player:
-  - platform: mpd
-    host: localhost
-    port: 6601
-    location: Multi-Room Audio
   - platform: snapcast
     host: localhost
   - platform: gstreamer

@@ -7,6 +7,7 @@ Rooms:
     - group.foyer
     - group.bedroom
     - group.living_room
+    - group.garage
 Security:
   view: yes
   entities:

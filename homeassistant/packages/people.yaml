@@ -89,14 +89,3 @@ automation:
       service: homeassistant.turn_off
       data:
         entity_id: switch.sleeping
-  - alias: Wake Up
-    trigger:
-      platform: state
-      entity_id: switch.sleeping
-      state: 'off'
-    action:
-      - service: scene.turn_on
-        entity_id: scene.morning_bedroom
-      - service: lock.unlock
-        entity_id: group.all_locks
-
