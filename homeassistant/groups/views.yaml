@@ -18,8 +18,8 @@ Media:
   entities:
     - group.tv
     - group.snapclients
-    - media_player.multiroom_audio
     - media_player.tts
+    - media_player.spotify
 Admin:
   view: yes
   entities:

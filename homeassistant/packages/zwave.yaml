@@ -10,6 +10,8 @@ homeassistant:
       hidden: true
     'binary_sensor.vision*':
       hidden: True
+    'zwave.*':
+      hidden: True
 
 
 panel_iframe:

@@ -13,16 +13,6 @@ homeassistant:
       icon: mdi:arrow-right
       friendly_name: Camera Right
   customize_glob:
-    'sensor.*_battery_temperature':
-      hidden: true
-    'sensor.*_battery_voltage':
-      hidden: true
-    'sensor.den_motion':
-      hidden: true
-    'sensor.kitchen_motion':
-      hidden: true
-    'sensor.*_proximity':
-      hidden: true
     'sensor.*_audio_connections':
       hidden: true
     'sensor.*_video_connections':
@@ -48,11 +38,23 @@ panel_iframe:
 
 android_ip_webcam:
   - host: !secret android_ip_1
-    scan_interval: 60
+    scan_interval: 20
     name: Kitchen
+    motion_sensor: true
+    sensors:
+      - battery_level
+      - light
+      - sound
+      - pressure
   - host: !secret android_ip_2
-    scan_interval: 60
+    scan_interval: 20
     name: Den
+    motion_sensor: true
+    sensors:
+      - battery_level
+      - light
+      - sound
+      - pressure
 
 camera:
   - platform: generic

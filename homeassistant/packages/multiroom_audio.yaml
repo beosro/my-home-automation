@@ -7,8 +7,9 @@ homeassistant:
 
 group:
   Snapclients:
-    - media_player.pi
-    - media_player.hifiberry
+    - media_player.usb_pi_snapcast_client
+    - media_player.hifiberry2_snapcast_client
+    - media_player.2460d731f12d94d93ddfb2dc77969fac
     - script.all_rooms_audio
 
 panel_iframe:
@@ -28,24 +29,23 @@ tts:
     region_name: !secret aws_region
   - platform: voicerss
     api_key: !secret voicerss_api_key
-                      
+
 media_player:
   - platform: snapcast
     host: localhost
   - platform: gstreamer
     name: 'TTS'
     pipeline: 'audioresample ! audioconvert ! audio/x-raw,rate=48000,channels=2,format=S16LE ! wavenc ! filesink location=/tmp/snapcast_tts'
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
 
 script:
   all_rooms_audio:
     sequence:
       - service: media_player.select_source
         data:
-          entity_id: media_player.pi
-          source: 'Spotify'
-      - service: media_player.select_source
-        data:
-          entity_id: media_player.hifiberry
+          entity_id: media_player.2460d731f12d94d93ddfb2dc77969fac
           source: 'Spotify'
       - service: switch.turn_on
         data:

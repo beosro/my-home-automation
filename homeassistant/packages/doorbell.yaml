@@ -7,11 +7,35 @@ automation:
     action:
       - service: switch.turn_on
         entity_id: switch.unknown_id000c_unknown_type4447_id3033_switch_14_0
+      - service: snapcast.snapcast_snapshot
+        data:
+          entity_id:
+            - media_player.2460d731f12d94d93ddfb2dc77969fac
+            - media_player.hifiberry2_snapcast_client
+      - service: media_player.select_source
+        data:
+          entity_id: media_player.2460d731f12d94d93ddfb2dc77969fac
+          source: TTS
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.hifiberry2_snapcast_client
+          volume_level: 1.0
+      - delay:
+          seconds: 1
       - service: media_player.play_media
         data:
           entity_id: media_player.tts
           media_content_id: !secret doorbell_mp3
           media_content_type: 'music'
-      - service: notify.all
+      - wait_template: "{{states.media_player.tts.state == 'idle'}}"
+        timeout: 30
+      - delay:
+          seconds: 1
+      - service: snapcast.snapcast_restore
+        data:
+          entity_id:
+            - media_player.2460d731f12d94d93ddfb2dc77969fac
+            - media_player.hifiberry2_snapcast_client
+      - service: notify.him
         data_template:
           message: 'Someone rang the doorbell.'
