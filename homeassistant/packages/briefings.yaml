@@ -33,36 +33,6 @@ sensor:
     state_topic: 'home/briefing_target'
 
 script:
-  tts_briefing:
-    sequence:
-      - service: snapcast.snapcast_snapshot
-        data:
-          entity_id:
-            - media_player.2460d731f12d94d93ddfb2dc77969fac
-            - media_player.hifiberry2_snapcast_client
-      - service: media_player.select_source
-        data:
-          entity_id: media_player.2460d731f12d94d93ddfb2dc77969fac
-          source: TTS
-      - service: media_player.volume_set
-        data:
-          entity_id: media_player.hifiberry2_snapcast_client
-          volume_level: 1.0
-      - delay:
-          seconds: 1
-      - service_template: "tts.{{states.input_select.tts_engine.state}}_say"
-        data_template:
-          entity_id: media_player.tts
-          message: !include ../templates/briefing.yaml
-      - wait_template: "{{states.media_player.tts.state == 'idle'}}"
-        timeout: 120
-      - delay:
-          seconds: 1
-      - service: snapcast.snapcast_restore
-        data:
-          entity_id:
-            - media_player.2460d731f12d94d93ddfb2dc77969fac
-            - media_player.hifiberry2_snapcast_client
   persistent_briefing:
     sequence:
       - service: persistent_notification.create
@@ -130,4 +100,7 @@ automation:
     - delay:
         seconds: 5
     - service: script.turn_on
-      entity_id: script.tts_briefing
+      entity_id: script.play_tts
+      data_template:
+        variables:
+          message: !include ../templates/briefing.yaml

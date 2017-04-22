@@ -1,6 +1,7 @@
 Living Room:
   - light.living_room_lamps
   - light.living_room_fan_light
+  - binary_sensor.door_four
 Bedroom:
   - light.bedroom_lamp
   - light.unknown_id000c_unknown_type4447_id3034_level_17_0
@@ -18,6 +19,8 @@ Kitchen:
   - sensor.kitchen_temperature
 Den:
   - light.dragon_tech_in_wall_dimmer_level_16_0
+  - binary_sensor.door_three
+  - binary_sensor.door_five
   - binary_sensor.den_occupancy
   - binary_sensor.den_motion_active
   - sensor.den_sound

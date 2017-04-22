@@ -26,7 +26,7 @@ Misc:
   - binary_sensor.medieval
   - sensor.distance
   - sensor.steps
+  - binary_sensor.workday_sensor
+  - sensor.opensky
   - sensor.dia
   - sensor.qqq
-  - sensor.his_horoscope
-  - sensor.her_horoscope

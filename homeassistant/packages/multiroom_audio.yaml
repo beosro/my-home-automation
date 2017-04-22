@@ -7,9 +7,9 @@ homeassistant:
 
 group:
   Snapclients:
-    - media_player.usb_pi_snapcast_client
-    - media_player.hifiberry2_snapcast_client
-    - media_player.2460d731f12d94d93ddfb2dc77969fac
+    - media_player.snapcast_client_74da3868e5f1
+    - media_player.snapcast_client_b827ebc8b2f8
+    - media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
     - script.all_rooms_audio
 
 panel_iframe:
@@ -45,7 +45,11 @@ script:
     sequence:
       - service: media_player.select_source
         data:
-          entity_id: media_player.2460d731f12d94d93ddfb2dc77969fac
+          entity_id: media_player.spotify
+          source: 'Multi-Room Audio'
+      - service: media_player.select_source
+        data:
+          entity_id: media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
           source: 'Spotify'
       - service: switch.turn_on
         data:
@@ -57,6 +61,36 @@ script:
         data:
           entity_id: input_select.tv_input
           option: 'Multi-Room Audio'
+  play_tts:
+    sequence:
+      - service: snapcast.snapcast_snapshot
+        data:
+          entity_id:
+            - media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+            - media_player.snapcast_client_b827ebc8b2f8
+      - service: media_player.select_source
+        data:
+          entity_id: media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+          source: TTS
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.snapcast_client_b827ebc8b2f8
+          volume_level: 1.0
+      - service_template: "tts.{{states.input_select.tts_engine.state}}_say"
+        data_template:
+          entity_id: media_player.tts
+          message: "{{message}}"
+      - delay:
+          seconds: 1
+      - wait_template: "{{states.media_player.tts.state == 'idle'}}"
+        timeout: 120
+      - delay:
+          seconds: 1
+      - service: snapcast.snapcast_restore
+        data:
+          entity_id:
+            - media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+            - media_player.snapcast_client_b827ebc8b2f8
 
 automation:
   - alias: Multi-Room Audio Pause

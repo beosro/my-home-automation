@@ -1,3 +1,4 @@
 - platform: crimereports
-  zone: 'neighborhood'
   exclude: ['Community Policing']
+  name: Neighborhood Incidents
+  radius: !secret neighborhood_radius

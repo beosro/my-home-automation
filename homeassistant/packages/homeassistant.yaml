@@ -25,6 +25,7 @@ group:
     - sensor.connected_clients
     - sensor.home_assistant_errors
     - sensor.home_assistant_warnings
+    - sensor.home_assistant_last_restart
     - sensor.new_commits
 
 sensor:
@@ -40,6 +41,11 @@ sensor:
     name: Home Assistant Warnings
     scan_interval: 3600
     command: !secret ha_warning_command
+  - platform: template
+    sensors:
+      home_assistant_last_restart:
+        value_template: '{{ as_timestamp(states.automation.startup_notification.attributes.last_triggered) | timestamp_custom("%Y-%m-%d %H:%M:%S") }}'
+        friendly_name: Last Restart
 
 switch:
   - platform: mqtt
@@ -74,3 +80,10 @@ switch:
     payload_on: "yes"
     payload_off: "no"
     retain: true
+
+#automation:
+#  - alias: "Startup Notification"
+#    trigger:
+#      platform: homeassistant
+#      event_type: homeassistant_start
+#    action:
