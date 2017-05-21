@@ -4,6 +4,9 @@ homeassistant:
       friendly_name: Spotify Everywhere
       icon: mdi:spotify
       emulated_hue: true
+    media_player.spotify:
+      emulated_hue: true
+      emulated_hue_name: speakers
 
 group:
   Snapclients:
@@ -30,12 +33,19 @@ tts:
   - platform: voicerss
     api_key: !secret voicerss_api_key
 
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+
 media_player:
   - platform: snapcast
     host: localhost
-  - platform: gstreamer
+#  - platform: gstreamer
+#    name: 'TTS'
+#    pipeline: 'audioresample ! audioconvert ! audio/x-raw,rate=48000,channels=2,format=S16LE ! wavenc ! filesink location=/tmp/snapcast_tts'
+  - platform: ffmpeg
     name: 'TTS'
-    pipeline: 'audioresample ! audioconvert ! audio/x-raw,rate=48000,channels=2,format=S16LE ! wavenc ! filesink location=/tmp/snapcast_tts'
+    output: "- > /tmp/snapcast_tts"
+    extra_arguments: "-f u16le -acodec pcm_s16le -ac 2 -ar 48000"
   - platform: spotify
     client_id: !secret spotify_client_id
     client_secret: !secret spotify_client_secret
@@ -75,17 +85,13 @@ script:
       - service: media_player.volume_set
         data:
           entity_id: media_player.snapcast_client_b827ebc8b2f8
-          volume_level: 1.0
+          volume_level: 0.5
       - service_template: "tts.{{states.input_select.tts_engine.state}}_say"
         data_template:
           entity_id: media_player.tts
           message: "{{message}}"
-      - delay:
-          seconds: 1
       - wait_template: "{{states.media_player.tts.state == 'idle'}}"
         timeout: 120
-      - delay:
-          seconds: 1
       - service: snapcast.snapcast_restore
         data:
           entity_id:

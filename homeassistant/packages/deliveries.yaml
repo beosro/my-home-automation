@@ -7,7 +7,8 @@ homeassistant:
 
 group:
   Deliveries:
-    - sensor.usps
+    - sensor.usps_mail
+    - sensor.usps_packages
     - sensor.ups
     - sensor.fedex
     - sensor.deliveries_today
@@ -41,7 +42,7 @@ sensor:
                0
             {% endif %}
           {% endmacro %}
-          {{in_transit(states.sensor.usps)|int + in_transit(states.sensor.ups)|int + in_transit(states.sensor.fedex)|int}}
+          {{in_transit(states.sensor.usps_packages)|int + in_transit(states.sensor.ups)|int + in_transit(states.sensor.fedex)|int}}
       deliveries_today:
         friendly_name: "Today's Deliveries"
         value_template: >
@@ -52,7 +53,7 @@ sensor:
                0
             {% endif %}
           {% endmacro %}
-          {{delivered(states.sensor.usps)|int + delivered(states.sensor.ups)|int + delivered(states.sensor.fedex)|int}}
+          {{delivered(states.sensor.usps_packages)|int + delivered(states.sensor.ups)|int + delivered(states.sensor.fedex)|int}}
 
 automation:
   - alias: Announce package delivery
@@ -67,6 +68,7 @@ automation:
         state: 'home'
     action:
       - service: tts.google_say
+        entity_id: script.play_tts
         data_template:
-          entity_id: media_player.tts
-          message: "A package was just delivered."
+          variables:
+            message: "A package was just delivered."

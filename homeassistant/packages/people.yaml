@@ -74,9 +74,11 @@ automation:
         entity_id: group.all_locks
       - service: media_player.turn_off
         entity_id:
-          - media_player.chromecast
+          - media_player.living_room
           - media_player.firetv
-          - media_player.multiroom_audio
+      - service: media_player.pause
+        entity_id:
+          - media_player.spotify
   - alias: Turn off sleep mode automatically
     trigger:
       platform: time

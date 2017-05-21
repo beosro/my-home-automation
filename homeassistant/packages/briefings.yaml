@@ -9,7 +9,7 @@ group:
       - input_select.briefing_target
       - input_select.tts_engine
       - sensor.briefing_target
-      - script.tts_briefing
+      - automation.play_a_briefing
       - script.persistent_briefing
       - switch.briefings
 
