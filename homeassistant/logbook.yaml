@@ -12,6 +12,7 @@ exclude:
     - proximity.home
   domains:
     - group
+    - persistent_notification
 include:
   entities:
     - sensor.deliveries

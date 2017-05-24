@@ -55,7 +55,8 @@
 
       {# Household chore #}
       {% macro chore_sentence(event, type, sentence) -%}
-        {%- if (event.attributes.start_time and
+        {%- if (event and
+                event.attributes.start_time and
                 is_today(event) == 'true' and
                 event.attributes.message|lower == type) -%}
           {{sentence}}
@@ -64,7 +65,8 @@
 
       {# Holiday sentence #}
       {% macro holiday_sentence() -%}
-        {%- if (states.calendar.holidays_in_united_states.attributes.start_time and
+        {%- if (states.calendar.holidays_in_united_states and
+                states.calendar.holidays_in_united_states.attributes.start_time and
                 is_today(states.calendar.holidays_in_united_states) == 'true') -%}
           It is {{states.calendar.holidays_in_united_states.attributes.message}}.
         {%- endif -%}
@@ -72,23 +74,24 @@
 
       {# Event sentence #}
       {% macro event_sentence(event, prefix, suffix) -%}
-        {%- set event_string = upcoming_event(event) -%}
-        {% if event_string != '' -%}
-          {{prefix}}{{event_string}}{{suffix}}{{'.'}}
-        {%- endif %}
+        {%- if event -%}
+          {%- set event_string = upcoming_event(event) -%}
+          {% if event_string != '' -%}
+            {{prefix}}{{event_string}}{{suffix}}{{'.'}}
+          {%- endif %}
+        {%- endif -%}
       {%- endmacro %}
 
       {# Evening greeting sentence #}
       {% macro evening_greeting_sentence(person) %}
         {% set greetings = [
-          "Welcome home " ~ person,
-          "Hey there " ~ person,
+          "Welcome home " ~ person ~ ".",
+          "Hey there " ~ person ~ ".",
           person ~ "! You're home!",
-          "Welcome back " ~ person,
-          "Welcome home " ~ person + ". I've missed you. Or at least the cats did.",
-          "Life is like a song, you’re back where you belong. Welcome home " ~ person
+          "Welcome back " ~ person ~ ".",
+          "Welcome home " ~ person + ". I've missed you. Or at least the cats did."
         ] %}
-        {{greetings|random}}.
+        {{greetings|random}}
       {% endmacro %}
 
       {# Evening closing sentence #}
@@ -107,11 +110,11 @@
         {% set greetings = [
           "Good morning " ~ person ~ "!",
           "Hey there, " ~ person ~ ", good to see you!",
-          "Ah, you're awake " ~ person,
+          "Ah, you're awake " ~ person ~ ".",
           "I see you finally got up. The bed must have been comfortable.",
-          "Morning " ~ person
+          "Morning " ~ person ~ "."
         ] %}
-        {{greetings|random}}.
+        {{greetings|random}}
       {%- endmacro %}
 
       {# Morning closing sentence #}
@@ -173,6 +176,8 @@
         {%- set mins = minutes_away(pronoun, "evening", max) -%}
         {%- if states(device_entity) == 'not_home' and mins|int > 0 -%}
           {{person}} is on {{pronoun}} way home, about {{mins}} minutes out.
+        {%- elif states(device_entity) == 'not_home' -%}
+          {{person}} is still out and about.
         {%- elif states(device_entity) != 'home' -%}
           {{person}} is still at {{states(device_entity)}}.
         {%- endif -%}

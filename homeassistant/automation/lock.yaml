@@ -2,7 +2,7 @@ alias: Lock up if everyone leaves
 trigger:
   platform: state
   entity_id: group.all_devices
-  state: 'not_home'
+  to: 'not_home'
 condition:
 - condition: state
   entity_id: switch.presence

@@ -67,7 +67,7 @@ automation:
         entity_id: group.all_devices
         state: 'home'
     action:
-      - service: tts.google_say
+      - service: script.turn_on
         entity_id: script.play_tts
         data_template:
           variables:

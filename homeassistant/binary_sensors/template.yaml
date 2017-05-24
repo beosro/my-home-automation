@@ -1,23 +1,23 @@
 - platform: template
   sensors:
     door_one:
-      value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_8_1.state == '0' }}"
+      value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_8_1.state == '255' }}"
       friendly_name: 'Side Door'
       device_class: 'opening'
     door_two:
-      value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_9_1.state == '0' }}"
+      value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_9_1.state == '255' }}"
       friendly_name: 'Front Door'
       device_class: 'opening'
     door_three:
-      value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_26_1.state == '0' }}"
+      value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_26_1.state == '255' }}"
       friendly_name: 'Den Door'
       device_class: 'opening'
     door_four:
-      value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_27_1.state == '0' }}"
+      value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_27_1.state == '255' }}"
       friendly_name: 'Porch Door'
       device_class: 'opening' 
     door_five:
-      value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_28_1.state == '0' }}"
+      value_template: "{{ states.sensor.vision_zd2102_eu_doorwindow_sensor_alarm_level_28_1.state == '255' }}"
       friendly_name: 'Cat Door'
       device_class: 'opening'
 

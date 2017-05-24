@@ -8,7 +8,7 @@ alias: Turn off lights and set thermostat away mode
 trigger:
   platform: state
   entity_id: group.all_devices
-  state: 'not_home'
+  to: 'not_home'
 condition:
 - condition: state
   entity_id: switch.presence

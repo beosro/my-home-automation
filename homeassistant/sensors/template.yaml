@@ -27,7 +27,7 @@
           {% else %}
               Unknown
           {%- endif %}
-      friendly_name: 'Second Floor Smoke/CO Alarm' 
+      friendly_name: 'Second Floor Smoke/CO Alarm'
     front_door_lock_battery:
       value_template: '{{states.sensor.schlage_be469nxcen_touchscreen_deadbolt_alarm_type_7_0.attributes.battery_level}}'
       unit_of_measurement: '%'
