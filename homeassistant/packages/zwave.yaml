@@ -8,6 +8,8 @@ homeassistant:
       hidden: true
     'sensor.first_alert*':
       hidden: true
+    'sensor.everspring*':
+      hidden: true
     'binary_sensor.vision*':
       hidden: True
     'zwave.*':

@@ -1,0 +1,62 @@
+homeassistant:
+  customize:
+    script.living_room_lights:
+      emulated_hue: True
+      emulated_hue_name: 'Living Room Lights'
+
+script:
+  living_room_lights:
+    sequence:
+      - service: light.toggle
+        entity_id:
+          - light.living_room_lamps
+          - light.living_room_fan_light
+
+automation:
+  - alias: Bedroom light occupancy
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.bedroom_occupancy
+        from: 'on'
+        to: 'off'
+    action:
+      - service: light.turn_off
+        entity_id:
+          - light.bedroom_lamp
+          - light.unknown_id000c_unknown_type4447_id3034_level_17_0
+  - alias: Den light occupancy
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.den_occupancy
+        from: 'on'
+        to: 'off'
+    action:
+      - service: light.turn_off
+        entity_id:
+          - light.dragon_tech_in_wall_dimmer_level_16_0
+  - alias: Kitchen light occupancy
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.kitchen_occupancy
+        from: 'on'
+        to: 'off'
+    action:
+      - service: switch.turn_off
+        entity_id:
+          - switch.unknown_id000c_unknown_type4447_id3033_switch_13_0
+          - switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
+  - alias: Turn on foyer and kitchen lights after dark when door opens
+    trigger:
+      platform: state
+      entity_id: binary_sensor.door_two
+      to: 'on'
+    condition:
+      - condition: numeric_state
+        entity_id: sun.sun
+        value_template: '{{ state.attributes.elevation }}'
+        below: 0
+    action:
+      - service: switch.turn_on
+        entity_id:
+          - switch.unknown_id000c_unknown_type4447_id3033_switch_15_0
+          - switch.unknown_id000c_unknown_type4447_id3033_switch_13_0

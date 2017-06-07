@@ -63,6 +63,9 @@ camera:
   - platform: local_file
     name: Last Motion
     file_path: !secret cam_latest_file
+  - platform: ffmpeg
+    input: !secret wansview_rtsp
+    name: Backyard
 
 shell_command:
   cam_direction: !secret cam_direction_script

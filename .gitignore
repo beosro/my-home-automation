@@ -16,6 +16,7 @@ homeassistant/pyozw.sqlite
 homeassistant/zwscene.xml
 homeassistant/secrets.yaml
 homeassistant/*_cookies.pickle
+homeassistant/.spotify-token-cache
 homeassistant/fitbit.conf
 homeassistant/cam.sh
 homeassistant/emulated_hue_ids.json

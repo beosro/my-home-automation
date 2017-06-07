@@ -1,0 +1,38 @@
+automation:
+  - alias: Announce when cat door is opened
+    trigger:
+      platform: state
+      entity_id: binary_sensor.door_five
+      from: 'off'
+      to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data:
+          variables:
+            message: "The cat door was opened."
+  - alias: Announce when cat door is closed
+    trigger:
+      platform: state
+      entity_id: binary_sensor.door_five
+      from: 'on'
+      to: 'off'
+    action:
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data:
+          variables:
+            message: "The cat door is now closed."
+  - alias: Warn if cat door is open when not home
+    trigger:
+      platform: state
+      entity_id: group.all_devices
+      state: 'not_home'
+    condition:
+      condition: state
+      entity_id: binary_sensor.door_five
+      state: 'on'
+    action:
+      - service: notify.all
+        data_template:
+          message: "You left the cat door open. Better go back and close it!"

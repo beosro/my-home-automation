@@ -26,7 +26,7 @@ automation:
       entity_id:
         - device_tracker.his_phone
         - device_tracker.her_phone
-      state: 'home'
+      to: 'home'
     action:
       - service: mqtt.publish
         data_template:
@@ -36,7 +36,7 @@ automation:
   - alias: First Arrival Off
     trigger:
         platform: time
-        after: '15:00:00'
+        at: '15:00:00'
     action:
       service: script.turn_on
       entity_id: script.first_arrival_off

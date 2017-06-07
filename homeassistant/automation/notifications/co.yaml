@@ -2,7 +2,7 @@ alias: Carbon monoxide detected
 trigger:
   platform: state
   entity_id: group.detectors
-  state: 'Carbon Monoxide'
+  to: 'Carbon Monoxide'
 action:
   - service: notify.all
     data_template:
