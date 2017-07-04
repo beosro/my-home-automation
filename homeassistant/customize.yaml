@@ -1,4 +1,4 @@
-lock.schlage_be469nxcen_touchscreen_deadbolt_locked_7_0:
+lock.zwave_lock_locked:
   friendly_name: Front Door
 scene.mood_lighting:
   icon: mdi:heart
@@ -6,32 +6,32 @@ scene.mood_lighting:
 scene.regular_lighting:
   icon: mdi:lightbulb
   emulated_hue: true
-switch.unknown_id000c_unknown_type4447_id3033_switch_13_0:
+switch.zwave_switch_1_switch:
   friendly_name: Kitchen Fluorescent
   icon: mdi:lightbulb
   emulated_hue: true
-switch.unknown_id000c_unknown_type4447_id3033_switch_14_0:
+switch.zwave_switch_2_switch:
   friendly_name: Porch Lanterns
   icon: mdi:lightbulb
   emulated_hue: true
-switch.unknown_id000c_unknown_type4447_id3033_switch_15_0:
+switch.zwave_switch_3_switch:
   friendly_name: Foyer Light
   icon: mdi:lightbulb
   emulated_hue: true
-light.dragon_tech_in_wall_dimmer_level_16_0:
+light.zwave_dimmer_1_level:
   friendly_name: Den Light
   emulated_hue: true
-light.unknown_id000c_unknown_type4447_id3034_level_17_0:
+light.zwave_dimmer_2_level:
   friendly_name: Bedroom Light
   emulated_hue: true
-light.unknown_id000c_unknown_type4447_id3034_level_21_0:
+light.zwave_dimmer_3_level:
   friendly_name: Dining Room Chandelier
   emulated_hue: true
-switch.unknown_id000c_unknown_type4447_id3033_switch_22_0:
+switch.zwave_switch_4_level:
   friendly_name: Dinette Light
   icon: mdi:lightbulb
   emulated_hue: true
-cover.linear_unknown_type4744_id3030_open_25_0:
+cover.zwave_garage_door_opener_open:
   friendly_name: Garage Door
 light.bedroom_lamp:
   emulated_hue: true

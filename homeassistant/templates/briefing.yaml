@@ -229,7 +229,9 @@
 
       {# Quote sentence #}
       {% macro quote_sentence() -%}
-        A parting thought: {{states.sensor.quote.state}}
+        {% if states.sensor.quote.state != 'unknown' %}
+          A parting thought: {{states.sensor.quote.state}}
+        {% endif %}
       {%- endmacro %}
 
       {# Market sentence #}

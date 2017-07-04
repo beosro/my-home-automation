@@ -18,5 +18,5 @@ condition:
 action:
   - service: switch.turn_on
     entity_id:
-    - switch.unknown_id000c_unknown_type4447_id3033_switch_14_0
-    - switch.unknown_id000c_unknown_type4447_id3033_switch_15_0
+    - switch.zwave_switch_2_switch
+    - switch.zwave_switch_3_switch

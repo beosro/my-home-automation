@@ -55,13 +55,13 @@ sensor:
   - platform: apcupsd
     resources:
       - bcharge
-  - platform: systemmonitor
-    resources:
-      - type: process
-        arg: mosquitto
-      - type: process
-        arg: snapserver
-      - type: process
-        arg: glances
-      - type: process
-        arg: postgres
+#  - platform: systemmonitor
+#    resources:
+#      - type: process
+#        arg: mosquitto
+#      - type: process
+#        arg: snapserver
+#      - type: process
+#        arg: glances
+#      - type: process
+#        arg: postgres

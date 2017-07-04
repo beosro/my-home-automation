@@ -4,12 +4,12 @@ Living Room:
   - binary_sensor.door_four
 Bedroom:
   - light.bedroom_lamp
-  - light.unknown_id000c_unknown_type4447_id3034_level_17_0
+  - light.zwave_dimmer_2_level
   - binary_sensor.bedroom_occupancy
   - sensor.bedroom_temperature
 Kitchen:
-  - switch.unknown_id000c_unknown_type4447_id3033_switch_13_0
-  - switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
+  - switch.zwave_switch_1_switch
+  - switch.zwave_switch_4_switch
   - binary_sensor.door_one
   - binary_sensor.kitchen_occupancy
   - binary_sensor.kitchen_motion_active
@@ -18,7 +18,7 @@ Kitchen:
   - sensor.kitchen_pressure
   - sensor.kitchen_temperature
 Den:
-  - light.dragon_tech_in_wall_dimmer_level_16_0
+  - light.zwave_dimmer_1_level
   - binary_sensor.door_three
   - binary_sensor.door_five
   - binary_sensor.den_occupancy
@@ -28,14 +28,14 @@ Den:
   - sensor.den_pressure
   - sensor.den_temperature
 Dining Room:
-  - light.unknown_id000c_unknown_type4447_id3034_level_21_0
+  - light.zwave_dimmer_3_level
 Foyer:
-  - switch.unknown_id000c_unknown_type4447_id3033_switch_15_0
-  - switch.unknown_id000c_unknown_type4447_id3033_switch_14_0
-  - lock.schlage_be469nxcen_touchscreen_deadbolt_locked_7_0
+  - switch.zwave_switch_3_switch
+  - switch.zwave_switch_2_switch
+  - lock.zwave_lock_locked
   - binary_sensor.door_two
   - binary_sensor.thermostat_occupancy
   - sensor.thermostat_temperature
   - sensor.thermostat_humidity
 Garage:
-  - cover.linear_unknown_type4744_id3030_open_25_0
+  - cover.zwave_garage_door_opener

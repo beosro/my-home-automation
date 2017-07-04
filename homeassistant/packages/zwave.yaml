@@ -1,20 +1,11 @@
 homeassistant:
   customize_glob:
-    'sensor.vision*':
-      hidden: true
-    'sensor.schlage*':
-      hidden: true
-    'sensor.linear*':
-      hidden: true
-    'sensor.first_alert*':
-      hidden: true
-    'sensor.everspring*':
-      hidden: true
-    'binary_sensor.vision*':
+    'sensor.zwave_*':
+      hidden: True
+    'binary_sensor.zwave_*':
       hidden: True
     'zwave.*':
       hidden: True
-
 
 panel_iframe:
   ozwcp:

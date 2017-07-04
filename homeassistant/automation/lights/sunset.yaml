@@ -19,5 +19,5 @@ condition:
 action:
   service: light.turn_on
   entity_id:
-    - switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
-    - light.dragon_tech_in_wall_dimmer_level_16_0
+    - switch.zwave_switch_4_switch
+    - light.zwave_dimmer_1_level

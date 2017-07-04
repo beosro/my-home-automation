@@ -7,12 +7,15 @@
     - number: 1
       type: rgbw
       name: Bedroom Lamp
+      fade: true
     - number: 2
       type: white
       name: Living Room Fan Light
+      fade: true
       #- number: 3
       #type: white
       #name: Group 3
     - number: 4
       type: rgbw
       name: Living Room Lamps
+      fade: true

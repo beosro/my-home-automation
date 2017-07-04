@@ -12,6 +12,8 @@ homeassistant:
     script.cam_right:
       icon: mdi:arrow-right
       friendly_name: Camera Right
+    camera.camera:
+      friendly_name: Front
   customize_glob:
     'sensor.*_audio_connections':
       hidden: true

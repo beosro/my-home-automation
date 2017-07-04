@@ -1,9 +1,0 @@
-alias: Carbon monoxide detected
-trigger:
-  platform: state
-  entity_id: group.detectors
-  to: 'Carbon Monoxide'
-action:
-  - service: notify.all
-    data_template:
-      message: 'Carbon monoxide detected!'

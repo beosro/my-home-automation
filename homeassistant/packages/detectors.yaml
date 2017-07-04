@@ -1,0 +1,65 @@
+sensor:
+  - platform: template
+    sensors:
+      smoke_co_first_floor:
+        value_template: >-
+            {%- if is_state("sensor.zwave_detector_1_alarm_type", "13") %}
+                Idle
+            {%- elif is_state("sensor.zwave_detector_1_alarm_type", "1") %}
+                Smoke
+            {%- elif is_state("sensor.zwave_detector_1_alarm_type", "2") %}
+                Carbon Monoxide
+            {%- elif is_state("sensor.zwave_detector_1_alarm_type", "12") %}
+                Testing
+            {% else %}
+                Unknown
+            {%- endif %}
+        friendly_name: 'First Floor Smoke/CO Alarm'
+      smoke_co_second_floor:
+        value_template: >-
+            {%- if is_state("sensor.zwave_detector_2_alarm_type", "13") %}
+                Idle
+            {%- elif is_state("sensor.zwave_detector_2_alarm_type", "1") %}
+                Smoke
+            {%- elif is_state("sensor.zwave_detector_2_alarm_type", "2") %}
+                Carbon Monoxide
+            {%- elif is_state("sensor.zwave_detector_2_alarm_type", "12") %}
+                Testing
+            {% else %}
+                Unknown
+            {%- endif %}
+        friendly_name: 'Second Floor Smoke/CO Alarm'
+
+automation:
+  - alias: Smoke detected
+    trigger:
+      platform: state
+      entity_id:
+        - sensor.smoke_co_first_floor
+        - sensor.smoke_co_second_floor
+      to: 'Smoke'
+    action:
+      - service: notify.all
+        data_template:
+          message: 'Smoke detected!'
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data:
+          variables:
+            message: 'Smoke detected!'
+  - alias: Carbon monoxide detected
+    trigger:
+      platform: state
+      entity_id:
+        - sensor.smoke_co_first_floor
+        - sensor.smoke_co_second_floor
+      to: 'Carbon Monoxide'
+    action:
+      - service: notify.all
+        data_template:
+          message: 'Carbon monoxide!'
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data:
+          variables:
+            message: 'Carbon monoxide detected!'

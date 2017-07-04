@@ -13,7 +13,7 @@ Security:
   entities:
     - group.camera
     - group.pests
-    - lock.schlage_be469nxcen_touchscreen_deadbolt_locked_7_0
+    - lock.zwave_lock_locked
 Media:
   view: yes
   entities:

@@ -1,6 +1,6 @@
 homeassistant:
   customize:
-    switch.everspring_se812_siren_switch_29_0:
+    switch.zwave_siren_switch:
       hidden: true
     script.scare_pests:
       icon: mdi:play
@@ -18,26 +18,26 @@ binary_sensor:
   - platform: template
     sensors:
       siren:
-        value_template: "{{ states.switch.everspring_se812_siren_switch_29_0.state == 'on' }}"
+        value_template: "{{ states.zwave_siren_switch.state == 'on' }}"
 
 script:
   scare_pests:
     sequence:
       - service: switch.turn_on
-        entity_id: switch.everspring_se812_siren_switch_29_0
+        entity_id: switch.zwave_siren_switch
       - delay:
           seconds: 2
       - service: switch.turn_off
-        entity_id: switch.everspring_se812_siren_switch_29_0
+        entity_id: switch.zwave_siren_switch
 
 automation:
   - alias: Ensure alarm doesn't stay on
     trigger:
       platform: state
-      entity_id: switch.everspring_se812_siren_switch_29_0
+      entity_id: switch.zwave_siren_switch
       to: 'on'
       for:
         seconds: 4
     action:
       - service: switch.turn_off
-        entity_id: switch.everspring_se812_siren_switch_29_0
+        entity_id: switch.zwave_siren_switch

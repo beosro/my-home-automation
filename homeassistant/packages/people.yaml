@@ -64,10 +64,10 @@ automation:
         entity_id: group.all_lights
       - service: switch.turn_off
         entity_id:
-          - switch.unknown_id000c_unknown_type4447_id3033_switch_13_0
-          - switch.unknown_id000c_unknown_type4447_id3033_switch_14_0
-          - switch.unknown_id000c_unknown_type4447_id3033_switch_15_0
-          - switch.unknown_id000c_unknown_type4447_id3033_switch_22_0
+          - switch.zwave_switch_1_switch
+          - switch.zwave_switch_2_switch
+          - switch.zwave_switch_3_switch
+          - switch.zwave_switch_4_switch
           - switch.smart_socket_1
           - switch.smart_socket_2
       - service: lock.lock
