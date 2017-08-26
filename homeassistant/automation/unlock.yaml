@@ -13,6 +13,3 @@ condition:
 action:
 - service: lock.unlock
   entity_id: group.all_locks
-- service: notify.all
-  data_template:
-    message: 'Someone got home; unlocking the door.'

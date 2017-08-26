@@ -13,6 +13,16 @@ group:
     - sensor.fedex
     - sensor.deliveries_today
     - sensor.packages_in_transit
+    - camera.usps_mail
+
+usps:
+  username: !secret myusps_username
+  password: !secret myusps_password
+  name: 'USPS'
+
+camera:
+  - platform: usps
+    scan_interval: 5
 
 sensor:
   - platform: usps

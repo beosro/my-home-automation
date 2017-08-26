@@ -46,7 +46,7 @@ automation:
         - sensor.twitch_fopt_membrillo
         - sensor.twitch_t90official
         - sensor.twitch_tyrant_theviper
-      state: 'streaming'
+      to: 'streaming'
       for:
         seconds: 30
     condition:

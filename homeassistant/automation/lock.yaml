@@ -13,6 +13,3 @@ condition:
 action:
   - service: lock.lock
     entity_id: group.all_locks
-  - service: notify.all
-    data_template:
-      message: 'Door was not locked when you left; locking it now.'

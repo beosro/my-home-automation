@@ -27,6 +27,7 @@ group:
     - sensor.glances_sensor_disk_use
     - sensor.glances_sensor_ram_use
     - sensor.ups_battery
+    - sensor.ssl_certificate_expiry
   Services:
     - sensor.process_mosquitto
     - sensor.process_postgres
@@ -55,6 +56,9 @@ sensor:
   - platform: apcupsd
     resources:
       - bcharge
+  - platform: cert_expiry
+    host: !secret hass_base_url
+    name: SSL Certificate Expiry
 #  - platform: systemmonitor
 #    resources:
 #      - type: process

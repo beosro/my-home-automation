@@ -19,7 +19,6 @@ Verizon:
   - sensor.vzw_number_4
   - sensor.vzw_number_5
 Misc:
-  - sensor.gas_price
   - sensor.neighborhood_incidents
   - sensor.electricity_rate
   - sensor.pocketcasts_unlistened_episodes
@@ -30,3 +29,5 @@ Misc:
   - sensor.opensky
   - sensor.dia
   - sensor.qqq
+  - sensor.equifax
+  - sensor.transunion

@@ -27,7 +27,8 @@ automation:
     trigger:
       platform: state
       entity_id: group.all_devices
-      state: 'not_home'
+      from: 'home'
+      to: 'not_home'
     condition:
       condition: state
       entity_id: binary_sensor.door_five

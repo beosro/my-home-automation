@@ -1,6 +1,7 @@
 Rooms:
   view: yes
   entities:
+    - binary_sensor.floorplan
     - group.kitchen
     - group.dining_room
     - group.den

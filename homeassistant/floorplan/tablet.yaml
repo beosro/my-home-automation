@@ -1,0 +1,5 @@
+name: Tablet Floorplan
+image: /local/custom_ui/floorplan/tablet_floorplan.svg
+stylesheet: /local/custom_ui/floorplan/floorplan.css
+#hide_app_toolbar:
+groups: !include groups.yaml

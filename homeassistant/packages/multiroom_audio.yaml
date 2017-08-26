@@ -15,11 +15,11 @@ group:
     - media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
     - script.all_rooms_audio
 
-panel_iframe:
-  audio:
-    title: Multi-Room Audio
-    icon: mdi:music-box-outline
-    url: !secret audio_url
+#panel_iframe:
+#  audio:
+#    title: Multi-Room Audio
+#    icon: mdi:music-box-outline
+#    url: !secret audio_url
 
 tts:
   - platform: google

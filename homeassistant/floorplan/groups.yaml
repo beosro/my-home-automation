@@ -1,0 +1,64 @@
+- name: Lights
+  entities:
+     - light.living_room_lamps
+     - light.living_room_fan_light
+     - light.zwave_dimmer_1_level
+     - light.zwave_dimmer_2_level
+     - light.zwave_dimmer_3_level
+     - light.bedroom_lamp
+     - switch.zwave_switch_1_switch
+     - switch.zwave_switch_2_switch
+     - switch.zwave_switch_3_switch
+     - switch.zwave_switch_4_switch
+  states:
+    - state: 'on'
+      class: 'light-on'
+    - state: 'off'
+      class: 'light-off'
+- name: Locks
+  entities:
+    - lock.zwave_lock_locked
+  states:
+    - state: 'unlocked'
+      class: 'unlocked'
+    - state: 'locked'
+      class: 'locked'
+- name: Occupancy
+  entities:
+    - binary_sensor.den_occupancy
+    - binary_sensor.kitchen_occupancy
+    - binary_sensor.thermostat_occupancy
+    - binary_sensor.bedroom_occupancy
+  states:
+    - state: 'off'
+      class: 'occupancy-clear'
+    - state: 'on'
+      class: 'occupancy-detected'
+- name: Doors
+  entities:
+    - binary_sensor.door_one
+    - binary_sensor.door_two
+    - binary_sensor.door_three
+    - binary_sensor.door_four
+    - binary_sensor.door_five
+  states:
+    - state: 'off'
+      class: 'door-closed'
+    - state: 'on'
+      class: 'door-open'
+- name: Snapclient
+  entities:
+    - media_player.snapcast_client_74da3868e5f1
+    - media_player.snapcast_client_b827ebc8b2f8
+  states:
+    - state: 'on'
+      class: 'snapclient'
+- name: Cameras
+  entities:
+    - camera.den
+    - camera.kitchen
+    - camera.camera
+    - camera.backyard
+  states:
+    - state: 'idle'
+      class: 'camera-idle'

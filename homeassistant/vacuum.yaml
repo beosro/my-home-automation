@@ -1,0 +1,4 @@
+- platform: xiaomi
+  name: Vacuum
+  host: 192.168.2.103
+  token: !secret xiaomi_token

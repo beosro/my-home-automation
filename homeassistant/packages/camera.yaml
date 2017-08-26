@@ -32,11 +32,11 @@ group:
     - camera.den
     - camera.kitchen
 
-panel_iframe:
-  cams:
-    title: Cameras
-    icon: mdi:video
-    url: !secret cams_url
+#panel_iframe:
+#  cams:
+#    title: Cameras
+#    icon: mdi:video
+#    url: !secret cams_url
 
 android_ip_webcam:
   - host: !secret android_ip_1

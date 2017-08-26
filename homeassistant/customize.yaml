@@ -27,12 +27,15 @@ light.zwave_dimmer_2_level:
 light.zwave_dimmer_3_level:
   friendly_name: Dining Room Chandelier
   emulated_hue: true
-switch.zwave_switch_4_level:
+switch.zwave_switch_4_switch:
   friendly_name: Dinette Light
   icon: mdi:lightbulb
   emulated_hue: true
 cover.zwave_garage_door_opener_open:
   friendly_name: Garage Door
+binary_sensor.zwave_water_sensor_1_sensor:
+  friendly_name: Water Sensor
+  icon: mdi:water
 light.bedroom_lamp:
   emulated_hue: true
   icon: mdi:lamp
@@ -41,8 +44,6 @@ light.living_room_lamps:
   icon: mdi:lamp
 light.living_room_fan_light:
   emulated_hue: true
-sensor.gas_price:
-  icon: mdi:car
 sensor.quote:
   hidden: true
 sensor.electricity_rate:

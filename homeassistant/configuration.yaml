@@ -23,12 +23,6 @@ twilio:
   account_sid: !secret twilio_account_sid
   auth_token: !secret twilio_auth_token
 
-telegram_bot:
-  - platform: webhooks
-    api_key: !secret telegram_api_key
-    allowed_chat_ids:
-      - !secret his_telegram_chat_id
-
 mailgun:
   domain: !secret mailgun_domain
   api_key: !secret mailgun_api_key
@@ -56,6 +50,7 @@ binary_sensor: !include_dir_merge_list binary_sensors
 device_tracker: !include device_trackers.yaml
 group: !include_dir_merge_named groups
 light: !include light.yaml
+vacuum: !include vacuum.yaml
 notify: !include notify.yaml
 recorder: !include recorder.yaml
 scene: !include scenes.yaml

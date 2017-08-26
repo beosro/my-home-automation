@@ -2,16 +2,16 @@ homeassistant:
   customize_glob:
     'sensor.zwave_*':
       hidden: True
-    'binary_sensor.zwave_*':
+    'binary_sensor.zwave_door_*':
       hidden: True
     'zwave.*':
       hidden: True
 
-panel_iframe:
-  ozwcp:
-    title: OZWCP
-    icon: mdi:signal-variant
-    url: !secret ozwcp_url
+#panel_iframe:
+#  ozwcp:
+#    title: OZWCP
+#    icon: mdi:signal-variant
+#    url: !secret ozwcp_url
 
 cover:
   platform: zwave

@@ -1,12 +1,5 @@
 - platform: rest
   scan_interval: 3600
-  resource: !secret gas_buddy_resource
-  method: POST
-  name: Gas Price
-  value_template: '{{value_json.trend.Today}}'
-  unit_of_measurement: '$/gal'
-- platform: rest
-  scan_interval: 3600
   resource: 'http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en'
   method: GET
   name: Quote

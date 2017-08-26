@@ -39,3 +39,4 @@ Foyer:
   - sensor.thermostat_humidity
 Garage:
   - cover.zwave_garage_door_opener
+  - binary_sensor.zwave_water_sensor_1_sensor
