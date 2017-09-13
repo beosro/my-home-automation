@@ -4,8 +4,12 @@ homeassistant:
      hidden: true
    sensor.2015_ram_1500:
      icon: 'mdi:car-pickup'
+   device_tracker.2015_ram_1500:
+     icon: 'mdi:car-pickup'
    sensor.gas_price:
      icon: 'mdi:gas-station'
+   sensor.gas_tank:
+     icon: 'mdi:fuel'
    script.lock_truck:
      friendly_name: 'Lock Truck'
      icon: 'mdi:lock'
@@ -34,6 +38,18 @@ sensor:
     name: Gas Price
     value_template: '{{value_json.trend.Today}}'
     unit_of_measurement: '$/gal'
+  - platform: template
+    sensors:
+      gas_tank:
+        value_template: '{{states.device_tracker["2015_ram_1500"].attributes.fuel_level}}'
+        friendly_name: 'Gas Tank'
+        unit_of_measurement: '%'
+
+device_tracker:
+  - platform: automatic
+    client_id: !secret automatic_client_id
+    secret: !secret automatic_secret
+    current_location: false
 
 script:
   lock_truck:
@@ -67,12 +83,12 @@ script:
           vehicle_index: 0
           command: horn
 
-# todo: automatic
-
 group:
   Vehicles:
-    - sensor.gas_price
+    - device_tracker.2015_ram_1500
     - sensor.2015_ram_1500
+    - sensor.gas_tank
+    - sensor.gas_price
     - script.lock_truck
     - script.unlock_truck
     - script.truck_on

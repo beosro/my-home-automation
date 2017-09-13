@@ -15,6 +15,7 @@ Security:
     - group.camera
     - group.pests
     - lock.zwave_lock_locked
+    - binary_sensor.any_door_open
 Media:
   view: yes
   entities:

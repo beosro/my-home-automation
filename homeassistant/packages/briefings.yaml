@@ -104,3 +104,22 @@ automation:
       data_template:
         variables:
           message: !include ../templates/briefing.yaml
+  - alias: Play morning bedroom briefing
+    trigger:
+      platform: state
+      entity_id: light.zwave_dimmer_2_level
+      to: 'on'
+    condition:
+      - condition: state
+        entity_id: switch.briefings
+        state: 'on'
+      - condition: time
+        after: '04:00:00'
+      - condition: time
+        before: '09:00:00'
+    action:
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: !include ../templates/briefing.yaml

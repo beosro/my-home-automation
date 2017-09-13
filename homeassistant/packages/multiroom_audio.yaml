@@ -12,7 +12,8 @@ group:
   Snapclients:
     - media_player.snapcast_client_74da3868e5f1
     - media_player.snapcast_client_b827ebc8b2f8
-    - media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+    - media_player.snapcast_client_b827ebacb8f7
+    - media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
     - script.all_rooms_audio
 
 #panel_iframe:
@@ -59,7 +60,7 @@ script:
           source: 'Multi-Room Audio'
       - service: media_player.select_source
         data:
-          entity_id: media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+          entity_id: media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
           source: 'Spotify'
       - service: switch.turn_on
         data:
@@ -76,16 +77,21 @@ script:
       - service: snapcast.snapcast_snapshot
         data:
           entity_id:
-            - media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+            - media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
             - media_player.snapcast_client_b827ebc8b2f8
+            - media_player.snapcast_client_b827ebacb8f7
       - service: media_player.select_source
         data:
-          entity_id: media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+          entity_id: media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
           source: TTS
       - service: media_player.volume_set
         data:
           entity_id: media_player.snapcast_client_b827ebc8b2f8
           volume_level: 0.5
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.snapcast_client_b827ebacb8f7
+          volume_level: 1.0
       - service_template: "tts.{{states.input_select.tts_engine.state}}_say"
         data_template:
           entity_id: media_player.tts
@@ -95,8 +101,9 @@ script:
       - service: snapcast.snapcast_restore
         data:
           entity_id:
-            - media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+            - media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
             - media_player.snapcast_client_b827ebc8b2f8
+            - media_player.snapcast_client_b827ebacb8f7
 
 automation:
   - alias: Multi-Room Audio Pause

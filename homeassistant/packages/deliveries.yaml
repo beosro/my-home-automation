@@ -66,19 +66,60 @@ sensor:
           {{delivered(states.sensor.usps_packages)|int + delivered(states.sensor.ups)|int + delivered(states.sensor.fedex)|int}}
 
 automation:
-  - alias: Announce package delivery
+  - alias: USPS delivery notification
     trigger:
-      platform: state
-      entity_id: sensor.deliveries_today
+      platform: event
+      event_type: mailgun_message_received
+      event_data:
+        from: !secret usps_sender
     condition:
       - condition: template
-        value_template: '{{trigger.to_state.state|int > trigger.from_state.state|int}}'
-      - condition: state
-        entity_id: group.all_devices
-        state: 'home'
+        value_template: '{{"Delivered" in trigger.event.data.subject}}'
     action:
+      - service: persistent_notification.create
+        data_template:
+          title: '{{trigger.event.data.subject.split("for")[0]}}'
+          message: '{{trigger.event.data.subject.split("for")[0]}}'
       - service: script.turn_on
         entity_id: script.play_tts
         data_template:
           variables:
-            message: "A package was just delivered."
+            message: '{{trigger.event.data.subject.split("for")[0]}}'
+  - alias: Fedex delivery notification
+    trigger:
+      platform: event
+      event_type: mailgun_message_received
+      event_data:
+        from: !secret fedex_sender
+    condition:
+      - condition: template
+        value_template: '{{"been delivered" in trigger.event.data.subject}}'
+    action:
+      - service: persistent_notification.create
+        data_template:
+          title: 'Fedex package delivered'
+          message: '{{trigger.event.data.subject}}'
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: 'Fedex package delivered'
+  - alias: UPS delivery notification
+    trigger:
+      platform: event
+      event_type: mailgun_message_received
+      event_data:
+        from: !secret ups_sender
+    condition:
+      - condition: template
+        value_template: '{{"was delivered" in trigger.event.data.subject}}'
+    action:
+      - service: persistent_notification.create
+        data_template:
+          title: 'UPS package delivered'
+          message: '{{trigger.event.data.subject}}'
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: 'UPS package delivered'

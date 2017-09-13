@@ -15,9 +15,19 @@
     door_four:
       value_template: "{{ states.sensor.zwave_door_sensor_4_alarm_level.state == '255' }}"
       friendly_name: 'Porch Door'
-      device_class: 'opening' 
+      device_class: 'opening'
     door_five:
       value_template: "{{ states.sensor.zwave_door_sensor_5_alarm_level.state == '255' }}"
       friendly_name: 'Cat Door'
       device_class: 'opening'
-
+    any_door_open:
+      value_template: >
+        {% set doors = ["door_one", "door_two", "door_three", "door_four", "door_five"] %}
+        {% macro is_open() %}
+          {% for door in doors %}
+            {%- if states.binary_sensor[door].state == 'on' -%}1{%- endif -%}
+          {%- endfor -%}
+        {% endmacro %}
+        {{is_open()|int != 0}}
+      friendly_name: 'Any door open'
+      device_class: 'opening'

@@ -51,6 +51,7 @@ group:
     - sensor.dark_sky_wind_speed
     - sensor.air_quality
     - sensor.moon
+    - sensor.season
     - sensor.pollen_level
     - sensor.cold_flu_risk
     - camera.weather_radar
@@ -62,6 +63,7 @@ camera:
 
 sensor:
   - platform: moon
+  - platform: season
   - platform: waqi
     token: !secret waqi_token
     locations:

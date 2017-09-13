@@ -14,11 +14,11 @@ script:
       - service: snapcast.snapcast_snapshot
         data:
           entity_id:
-            - media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+            - media_player.snapcast_group_12a48ec83a0f70ea581539a0763918b6
             - media_player.snapcast_client_b827ebc8b2f8
       - service: media_player.select_source
         data:
-          entity_id: media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+          entity_id: media_player.snapcast_group_12a48ec83a0f70ea581539a0763918b6
           source: TTS
       - service: media_player.volume_set
         data:
@@ -38,5 +38,5 @@ script:
       - service: snapcast.snapcast_restore
         data:
           entity_id:
-            - media_player.snapcast_group_2460d731f12d94d93ddfb2dc77969fac
+            - media_player.snapcast_group_12a48ec83a0f70ea581539a0763918b6
             - media_player.snapcast_client_b827ebc8b2f8

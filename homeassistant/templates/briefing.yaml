@@ -82,6 +82,16 @@
         {%- endif -%}
       {%- endmacro %}
 
+      {# Her name #}
+      {%- macro her_name() -%}
+        {{states.device_tracker.her_phone.attributes.friendly_name}}
+      {%- endmacro -%}
+
+      {# His name #}
+      {%- macro his_name() -%}
+        {{states.device_tracker.his_phone.attributes.friendly_name}}
+      {%- endmacro -%}
+
       {# Evening greeting sentence #}
       {% macro evening_greeting_sentence(person) %}
         {% set greetings = [
@@ -162,7 +172,7 @@
       {# Who is the other person #}
       {% macro get_other_person(person) -%}
        {% for device in states.device_tracker -%}
-         {% if device.name != person -%}
+         {% if device.name != person and ('his_' in device.entity_id or 'her_' in device.entity_id) -%}
             {{device.name}}
           {%- endif %}
         {%- endfor %}
@@ -187,6 +197,11 @@
         {%- set device_entity = get_device(person) -%}
         {%- set pronoun = get_pronoun(device_entity) -%}
         It will take you {{states.sensor[pronoun ~ "_morning_commute"].state}} minutes to get to work if you leave soon.
+        It's {{friendly_time(now())}} now.
+      {%- endmacro %}
+
+      {% macro everyones_commute_sentence() -%}
+        It will take {{his_name()}} {{states.sensor["his_morning_commute"].state}} minutes and {{her_name()}} {{states.sensor["her_morning_commute"].state}} minutes to get to work if you leave soon.
         It's {{friendly_time(now())}} now.
       {%- endmacro %}
 
@@ -237,13 +252,15 @@
       {# Market sentence #}
       {# `DIA` is a standin until Yahoo Finance sensor supports indexes. #}
       {% macro market_sentence() -%}
-        The market is
-        {%- if states.sensor.dia.attributes.Change|float < 0 -%}
-          {{' down '}}
-        {%- else -%}
-          {{' up '}}
+        {%- if 'dia' in states.sensor -%}
+          The market is
+          {%- if states.sensor.dia.attributes.Change|float < 0 -%}
+            {{' down '}}
+          {%- else -%}
+            {{' up '}}
+          {%- endif -%}
+          {{(states.sensor.dia.attributes.Change|float|abs * 100)|int}} points.
         {%- endif -%}
-        {{(states.sensor.dia.attributes.Change|float|abs * 100)|int}} points.
       {%- endmacro %}
 
       {# Pollen sentence #}
@@ -274,6 +291,16 @@
           Specify a person.
         {%- endif %}
       {%- endmacro %}
+
+      {# Morning briefing - generic #}
+      {% macro morning_briefing_generic() -%}
+        Good morning!
+        {{weather_sentence()}}
+        {{pollen_sentence()}}
+        {{cold_flu_sentence()}}
+        {{everyones_commute_sentence()}}
+        {{morning_closing_sentence("")}}
+      {% endmacro %}
 
       {# Morning briefing #}
       {% macro morning_briefing(person) -%}
@@ -309,7 +336,7 @@
       {# Output the briefing #}
       {% macro briefing(person) -%}
         {%- if as_timestamp(now())|timestamp_custom("%H", true)|int < 12 -%}
-          {{morning_briefing(person)}}
+          {{morning_briefing_generic()}}
             {%- else -%}
           {{evening_briefing(person)}}
         {%- endif -%}

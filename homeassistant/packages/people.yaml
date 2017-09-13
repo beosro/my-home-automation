@@ -59,6 +59,10 @@ automation:
       platform: state
       entity_id: switch.sleeping
       to: 'on'
+    condition:
+      - condition: state
+        entity_id: binary_sensor.any_door_open
+        state: 'off'
     action:
       - service: light.turn_off
         entity_id: group.all_lights
@@ -79,6 +83,34 @@ automation:
       - service: media_player.pause
         entity_id:
           - media_player.spotify
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: "Good night."
+  - alias: Don't sleep yet
+    trigger:
+      platform: state
+      entity_id: switch.sleeping
+      to: 'on'
+    condition:
+      - condition: state
+        entity_id: binary_sensor.any_door_open
+        state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.sleeping
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: >
+              {% set doors = ["door_one", "door_two", "door_three", "door_four", "door_five"] %}
+              {% for door in doors %}
+                {% if states.binary_sensor[door].state == 'on' -%}
+                  The {{states.binary_sensor[door].attributes.friendly_name.lower()}} is open and must be closed.
+                {%- endif -%}
+              {% endfor %}
   - alias: Turn off sleep mode automatically
     trigger:
       platform: time
