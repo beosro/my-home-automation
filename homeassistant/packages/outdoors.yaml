@@ -64,10 +64,10 @@ camera:
 sensor:
   - platform: moon
   - platform: season
-  - platform: waqi
-    token: !secret waqi_token
-    locations:
-    - !secret waqi_location
+    #- platform: waqi
+    #token: !secret waqi_token
+    #locations:
+    #- !secret waqi_location
   - platform: rest
     name: pollen
     resource: !secret pollen_url

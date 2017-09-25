@@ -46,8 +46,6 @@ light.living_room_fan_light:
   emulated_hue: true
 sensor.quote:
   hidden: true
-sensor.electricity_rate:
-  icon: mdi:flash
 sensor.vzw_number_1:
   friendly_name: !secret her_name
 sensor.vzw_number_2:

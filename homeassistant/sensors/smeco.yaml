@@ -1,0 +1,3 @@
+- platform: smeco
+  username: !secret smeco_username
+  password: !secret smeco_password

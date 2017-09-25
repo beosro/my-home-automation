@@ -6,6 +6,8 @@ exclude:
     - calendar
     - zone
     - persistent_notification
+    - script
+    - automation
 include:
   entities:
     - sensor.deliveries

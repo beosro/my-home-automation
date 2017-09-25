@@ -47,7 +47,6 @@ android_ip_webcam:
       - battery_level
       - light
       - sound
-      - pressure
   - host: !secret android_ip_2
     scan_interval: 20
     name: Den
@@ -56,7 +55,6 @@ android_ip_webcam:
       - battery_level
       - light
       - sound
-      - pressure
 
 camera:
   - platform: generic
@@ -65,9 +63,9 @@ camera:
   - platform: local_file
     name: Last Motion
     file_path: !secret cam_latest_file
-  - platform: ffmpeg
-    input: !secret wansview_rtsp
-    name: Backyard
+#  - platform: ffmpeg
+#    input: !secret wansview_rtsp
+#    name: Backyard
 
 shell_command:
   cam_direction: !secret cam_direction_script

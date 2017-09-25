@@ -4,6 +4,9 @@ homeassistant:
       friendly_name: Spotify Everywhere
       icon: mdi:spotify
       emulated_hue: true
+    script.ui_tts:
+      friendly_name: Play TTS
+      icon: mdi:play
     media_player.spotify:
       emulated_hue: true
       emulated_hue_name: speakers
@@ -15,12 +18,10 @@ group:
     - media_player.snapcast_client_b827ebacb8f7
     - media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
     - script.all_rooms_audio
-
-#panel_iframe:
-#  audio:
-#    title: Multi-Room Audio
-#    icon: mdi:music-box-outline
-#    url: !secret audio_url
+  TTS:
+    - media_player.mpd
+    - input_text.tts
+    - script.ui_tts
 
 tts:
   - platform: google
@@ -34,19 +35,18 @@ tts:
   - platform: voicerss
     api_key: !secret voicerss_api_key
 
+input_text:
+  tts:
+    name: Text to speak
+
 ffmpeg:
   ffmpeg_bin: /usr/bin/ffmpeg
 
 media_player:
   - platform: snapcast
     host: localhost
-#  - platform: gstreamer
-#    name: 'TTS'
-#    pipeline: 'audioresample ! audioconvert ! audio/x-raw,rate=48000,channels=2,format=S16LE ! wavenc ! filesink location=/tmp/snapcast_tts'
-  - platform: ffmpeg
-    name: 'TTS'
-    output: "- > /tmp/snapcast_tts"
-    extra_arguments: "-f u16le -acodec pcm_s16le -ac 2 -ar 48000"
+  - platform: mpd
+    host: localhost
   - platform: spotify
     client_id: !secret spotify_client_id
     client_secret: !secret spotify_client_secret
@@ -72,6 +72,13 @@ script:
         data:
           entity_id: input_select.tv_input
           option: 'Multi-Room Audio'
+  ui_tts:
+    sequence:
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: '{{states.input_text.tts.state}}'
   play_tts:
     sequence:
       - service: snapcast.snapcast_snapshot
@@ -94,9 +101,9 @@ script:
           volume_level: 1.0
       - service_template: "tts.{{states.input_select.tts_engine.state}}_say"
         data_template:
-          entity_id: media_player.tts
+          entity_id: media_player.mpd
           message: "{{message}}"
-      - wait_template: "{{states.media_player.tts.state == 'idle'}}"
+      - wait_template: "{{states.media_player.mpd.state == 'off'}}"
         timeout: 120
       - service: snapcast.snapcast_restore
         data:

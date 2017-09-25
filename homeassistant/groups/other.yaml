@@ -21,6 +21,7 @@ Verizon:
 Misc:
   - sensor.neighborhood_incidents
   - sensor.electricity_rate
+  - sensor.heating_oil
   - sensor.pocketcasts_unlistened_episodes
   - binary_sensor.medieval
   - sensor.distance

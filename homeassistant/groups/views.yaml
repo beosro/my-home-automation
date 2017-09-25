@@ -21,7 +21,7 @@ Media:
   entities:
     - group.tv
     - group.snapclients
-    - media_player.tts
+    - group.tts
     - media_player.spotify
 Admin:
   view: yes

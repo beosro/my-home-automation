@@ -1,0 +1,3 @@
+- platform: griffithenergy
+  username: !secret griffith_username
+  password: !secret griffith_password

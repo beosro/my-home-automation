@@ -14,9 +14,3 @@
   resource: !secret horoscope_url
   name: Her Horoscope
   value_template: !secret her_horoscope_path
-- platform: command_line
-  name: Electricity Rate
-  unit_of_measurement: '¢/kWh'
-  scan_interval: 86400
-  command: !secret electricity_rate_command
-  value_template: '{{value|round(1)}}'

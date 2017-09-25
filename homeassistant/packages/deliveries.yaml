@@ -20,15 +20,7 @@ usps:
   password: !secret myusps_password
   name: 'USPS'
 
-camera:
-  - platform: usps
-    scan_interval: 5
-
 sensor:
-  - platform: usps
-    name: 'USPS'
-    username: !secret myusps_username
-    password: !secret myusps_password
   - platform: ups
     name: 'UPS'
     username: !secret upsmychoice_username

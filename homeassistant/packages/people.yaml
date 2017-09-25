@@ -64,6 +64,11 @@ automation:
         entity_id: binary_sensor.any_door_open
         state: 'off'
     action:
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: "Good night."
       - service: light.turn_off
         entity_id: group.all_lights
       - service: switch.turn_off
@@ -83,11 +88,6 @@ automation:
       - service: media_player.pause
         entity_id:
           - media_player.spotify
-      - service: script.turn_on
-        entity_id: script.play_tts
-        data_template:
-          variables:
-            message: "Good night."
   - alias: Don't sleep yet
     trigger:
       platform: state

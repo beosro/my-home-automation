@@ -15,7 +15,6 @@ Kitchen:
   - binary_sensor.kitchen_motion_active
   - sensor.kitchen_sound
   - sensor.kitchen_light_level
-  - sensor.kitchen_pressure
   - sensor.kitchen_temperature
 Den:
   - light.zwave_dimmer_1_level
@@ -25,7 +24,6 @@ Den:
   - binary_sensor.den_motion_active
   - sensor.den_sound
   - sensor.den_light_level
-  - sensor.den_pressure
   - sensor.den_temperature
 Dining Room:
   - light.zwave_dimmer_3_level
