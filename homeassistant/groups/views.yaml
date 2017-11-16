@@ -1,5 +1,24 @@
+#default_view:
+#  view: yes
+#  name: Home
+#  icon: mdi:earth
+
+Bookmarks:
+  - switch.sleeping
+  - lock.zwave_lock_locked
+  - group.living_room
+  - script.all_rooms_audio
+  - scene.mood_lighting
+
+Bookmark Container:
+  view: yes
+  icon: mdi:bookmark
+  entities:
+    - group.bookmarks
+
 Rooms:
   view: yes
+  icon: mdi:home
   entities:
     - binary_sensor.floorplan
     - group.kitchen
@@ -7,24 +26,37 @@ Rooms:
     - group.den
     - group.foyer
     - group.bedroom
+    - group.bathroom
     - group.living_room
     - group.garage
 Security:
   view: yes
+  icon: mdi:key-variant
   entities:
+    - group.doors
+    - group.doorbell
     - group.camera
     - group.pests
     - lock.zwave_lock_locked
     - binary_sensor.any_door_open
 Media:
   view: yes
+  icon: mdi:music
   entities:
     - group.tv
     - group.snapclients
     - group.tts
     - media_player.spotify
+Outdoors:
+  view: yes
+  icon: mdi:pine-tree
+  entities:
+    - group.weather
+    - group.health
+    - group.orbits
 Admin:
   view: yes
+  icon: mdi:settings
   entities:
     - group.home_assistant
     - group.briefings

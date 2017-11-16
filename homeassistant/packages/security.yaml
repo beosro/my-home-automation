@@ -1,0 +1,78 @@
+group:
+  Doors:
+    entities:
+      - binary_sensor.any_door_open
+      - binary_sensor.lock_error
+      - binary_sensor.door_one
+      - binary_sensor.door_two
+      - binary_sensor.door_three
+      - binary_sensor.door_four
+      - binary_sensor.door_five
+
+binary_sensor:
+  - platform: template
+    sensors:
+      door_one:
+        value_template: "{{ states.sensor.zwave_door_sensor_1_alarm_level.state == '255' }}"
+        icon_template: "{% if states.sensor.zwave_door_sensor_1_alarm_level.state == '255' %}mdi:door-closed{% else %}mdi:door-open{% endif %}"
+        friendly_name: 'Side Door'
+        device_class: 'opening'
+      door_two:
+        value_template: "{{ states.sensor.zwave_door_sensor_2_alarm_level.state == '255' }}"
+        friendly_name: 'Front Door'
+        device_class: 'opening'
+      door_three:
+        value_template: "{{ states.sensor.zwave_door_sensor_3_alarm_level.state == '255' }}"
+        friendly_name: 'Den Door'
+        device_class: 'opening'
+      door_four:
+        value_template: "{{ states.sensor.zwave_door_sensor_4_alarm_level.state == '255' }}"
+        friendly_name: 'Porch Door'
+        device_class: 'opening'
+      door_five:
+        value_template: "{{ states.sensor.zwave_door_sensor_5_alarm_level.state == '255' }}"
+        friendly_name: 'Cat Door'
+        device_class: 'opening'
+      any_door_open:
+        value_template: >
+          {% set doors = ["door_one", "door_two", "door_three", "door_four", "door_five"] %}
+          {% macro is_open() %}
+            {% for door in doors %}
+              {%- if states.binary_sensor[door].state == 'on' -%}1{%- endif -%}
+            {%- endfor -%}
+          {% endmacro %}
+          {{is_open()|int != 0}}
+        friendly_name: 'Any door open'
+        device_class: 'opening'
+      lock_error:
+        friendly_name: "Lock Error"
+        entity_id: lock.zwave_lock_locked
+        value_template: >
+          {% macro error_state(entity) %}
+            {% if states.lock[entity].attributes.notification %}
+              {%- for state in ['Keypad Lock', 'Keypad Unlock', 'Manual Lock', 'Manual Unlock'] -%}
+               {%- if is_state_attr('lock.' ~ entity, 'notification', state) -%}1{%- endif -%}
+              {%- endfor -%}
+              0
+            {% else %}
+              1
+            {% endif %}
+          {% endmacro %}
+          {{error_state('zwave_lock_locked')|int == 0}}
+
+automation:
+  - alias: Warn if door fails to lock
+    trigger:
+      platform: state
+      entity_id: binary_sensor.lock_error
+      from: "off"
+      to: "on"
+    action:
+      - service: notify.all
+        data_template:
+          message: 'Door lock error: {{states.lock.zwave_lock_locked.attributes.notification}}'
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: 'Door lock error: {{states.lock.zwave_lock_locked.attributes.notification}}'

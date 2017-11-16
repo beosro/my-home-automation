@@ -2,7 +2,7 @@ homeassistant:
   customize:
     switch.sleeping:
       icon: mdi:sleep
-      emulated_hue: true
+      emulated_hue_hidden: true
       emulated_hue_name: Sleep Mode
     switch.vacation:
       icon: mdi:airplane
@@ -77,6 +77,9 @@ automation:
           - switch.zwave_switch_2_switch
           - switch.zwave_switch_3_switch
           - switch.zwave_switch_4_switch
+          - switch.zwave_switch_5_switch
+          - switch.zwave_switch_6_switch
+          - switch.zwave_switch_7_switch
           - switch.smart_socket_1
           - switch.smart_socket_2
       - service: lock.lock
@@ -88,6 +91,13 @@ automation:
       - service: media_player.pause
         entity_id:
           - media_player.spotify
+      - condition: numeric_state
+        entity_id: sensor.dark_sky_temperature
+        above: 60
+      - service: fan.turn_on
+        entity_id: fan.zwave_fan_1_level
+        data:
+          speed: 'low'
   - alias: Don't sleep yet
     trigger:
       platform: state

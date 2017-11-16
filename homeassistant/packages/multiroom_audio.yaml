@@ -3,12 +3,12 @@ homeassistant:
     script.all_rooms_audio:
       friendly_name: Spotify Everywhere
       icon: mdi:spotify
-      emulated_hue: true
+      emulated_hue_hidden: true
     script.ui_tts:
       friendly_name: Play TTS
       icon: mdi:play
     media_player.spotify:
-      emulated_hue: true
+      emulated_hue_hidden: true
       emulated_hue_name: speakers
 
 group:
@@ -16,7 +16,7 @@ group:
     - media_player.snapcast_client_74da3868e5f1
     - media_player.snapcast_client_b827ebc8b2f8
     - media_player.snapcast_client_b827ebacb8f7
-    - media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
+    - media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
     - script.all_rooms_audio
   TTS:
     - media_player.mpd
@@ -60,7 +60,7 @@ script:
           source: 'Multi-Room Audio'
       - service: media_player.select_source
         data:
-          entity_id: media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
+          entity_id: media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
           source: 'Spotify'
       - service: switch.turn_on
         data:
@@ -84,12 +84,12 @@ script:
       - service: snapcast.snapcast_snapshot
         data:
           entity_id:
-            - media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
+            - media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
             - media_player.snapcast_client_b827ebc8b2f8
             - media_player.snapcast_client_b827ebacb8f7
       - service: media_player.select_source
         data:
-          entity_id: media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
+          entity_id: media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
           source: TTS
       - service: media_player.volume_set
         data:
@@ -108,7 +108,7 @@ script:
       - service: snapcast.snapcast_restore
         data:
           entity_id:
-            - media_player.snapcast_group_0cf71a2ae7f4714e27fa32012d5f373a
+            - media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
             - media_player.snapcast_client_b827ebc8b2f8
             - media_player.snapcast_client_b827ebacb8f7
 

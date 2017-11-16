@@ -1,4 +1,4 @@
-- platform: verizonwireless
-  username: !secret vzw_username
-  password: !secret vzw_password
-  secret: !secret vzw_secret
+#- platform: verizonwireless
+#  username: !secret vzw_username
+#  password: !secret vzw_password
+#  secret: !secret vzw_secret

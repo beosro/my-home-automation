@@ -1,7 +1,7 @@
 homeassistant:
   customize:
     script.living_room_lights:
-      emulated_hue: True
+      emulated_hue_hidden: True
       emulated_hue_name: 'Living Room Lights'
 
 script:
@@ -11,6 +11,7 @@ script:
         entity_id:
           - light.living_room_lamps
           - light.living_room_fan_light
+          - switch.zwave_switch_7_switch
 
 automation:
   - alias: Bedroom light occupancy
@@ -45,7 +46,7 @@ automation:
         entity_id:
           - switch.zwave_switch_1_switch
           - switch.zwave_switch_3_switch
-  - alias: Turn on foyer and kitchen lights after dark when door opens
+  - alias: Turn various lights after dark when door opens
     trigger:
       platform: state
       entity_id: binary_sensor.door_two
@@ -54,9 +55,11 @@ automation:
       - condition: numeric_state
         entity_id: sun.sun
         value_template: '{{ state.attributes.elevation }}'
-        below: 0
+        below: 5
     action:
       - service: switch.turn_on
         entity_id:
           - switch.zwave_switch_3_switch
           - switch.zwave_switch_1_switch
+          - switch.zwave_switch_6_switch
+          - switch.zwave_switch_7_switch

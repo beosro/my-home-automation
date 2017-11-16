@@ -133,7 +133,6 @@
           "Have a great day!",
           "Enjoy your day.",
           "Have fun today!",
-          "Crush your enemies, salt their fields, umm, I mean, take it easy!",
           "Go get 'em!"
         ] %}
         {{closings|random}}

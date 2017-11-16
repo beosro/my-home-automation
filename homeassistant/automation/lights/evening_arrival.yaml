@@ -20,3 +20,5 @@ action:
     entity_id:
     - switch.zwave_switch_2_switch
     - switch.zwave_switch_3_switch
+    - switch.zwave_switch_6_switch
+    - switch.zwave_switch_3_switch

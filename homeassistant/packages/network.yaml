@@ -37,6 +37,7 @@ sensor:
     scan_interval: 600
     host: localhost:8032
   - platform: speedtest
+    hour: [0, 6, 12, 18]
     monitored_conditions:
       - ping
       - download

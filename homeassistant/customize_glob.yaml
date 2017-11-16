@@ -1,6 +1,4 @@
 'sensor.smoke_co_*':
   icon: mdi:alert
-'sensor.*_battery':
-  icon: mdi:battery
 #'*.*':
 #  custom_ui_state_card: custom-ui

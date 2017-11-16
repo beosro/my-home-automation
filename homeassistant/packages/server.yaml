@@ -3,10 +3,10 @@ homeassistant:
     sensor.glances_sensor_cpu_load:
       friendly_name: CPU Load
       icon: mdi:memory
-    sensor.glances_sensor_disk_use:
+    sensor.glances_sensor_disk_used:
       friendly_name: Disk
       icon: mdi:harddisk
-    sensor.glances_sensor_ram_use:
+    sensor.glances_sensor_ram_used:
       friendly_name: Memory
       icon: mdi:server
     sensor.process_mosquitto:
@@ -24,8 +24,8 @@ homeassistant:
 group:
   Server:
     - sensor.glances_sensor_cpu_load
-    - sensor.glances_sensor_disk_use
-    - sensor.glances_sensor_ram_use
+    - sensor.glances_sensor_disk_used
+    - sensor.glances_sensor_ram_used
     - sensor.ups_battery
     - sensor.ssl_certificate_expiry
   Services:
@@ -57,15 +57,5 @@ sensor:
     resources:
       - bcharge
   - platform: cert_expiry
-    host: !secret hass_base_url
+    host: !secret hass_cert_url
     name: SSL Certificate Expiry
-#  - platform: systemmonitor
-#    resources:
-#      - type: process
-#        arg: mosquitto
-#      - type: process
-#        arg: snapserver
-#      - type: process
-#        arg: glances
-#      - type: process
-#        arg: postgres

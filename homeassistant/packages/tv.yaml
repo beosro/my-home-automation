@@ -21,7 +21,7 @@ homeassistant:
     script.tv_power:
       friendly_name: TV Power
       icon: mdi:power
-      emulated_hue: true
+      emulated_hue_hidden: true
       emulated_hue_name: TV
 
 group:

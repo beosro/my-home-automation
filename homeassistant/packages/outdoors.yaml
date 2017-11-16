@@ -42,19 +42,22 @@ homeassistant:
       hidden: true
 
 group:
-  Outdoors:
+  Weather:
     - sensor.dark_sky_summary
-    - sun.sun
     - sensor.dark_sky_temperature
     - sensor.dark_sky_humidity
     - sensor.dark_sky_cloud_coverage
     - sensor.dark_sky_wind_speed
-    - sensor.air_quality
-    - sensor.moon
-    - sensor.season
+    - camera.weather_radar
+  Health:
     - sensor.pollen_level
     - sensor.cold_flu_risk
-    - camera.weather_radar
+    - sensor.air_quality
+  Orbits:
+    - sun.sun
+    - sensor.season
+    - sensor.moon
+    - binary_sensor.iss
 
 camera:
   - platform: generic
@@ -64,10 +67,10 @@ camera:
 sensor:
   - platform: moon
   - platform: season
-    #- platform: waqi
-    #token: !secret waqi_token
-    #locations:
-    #- !secret waqi_location
+  - platform: waqi
+    token: !secret waqi_token
+    locations:
+    - !secret waqi_location
   - platform: rest
     name: pollen
     resource: !secret pollen_url
@@ -140,3 +143,6 @@ sensor:
       - temperature_max
       - temperature_min
       - wind_speed
+
+binary_sensor:
+  - platform: iss

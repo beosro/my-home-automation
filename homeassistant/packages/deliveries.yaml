@@ -15,20 +15,20 @@ group:
     - sensor.packages_in_transit
     - camera.usps_mail
 
-usps:
-  username: !secret myusps_username
-  password: !secret myusps_password
-  name: 'USPS'
+#usps:
+#  username: !secret myusps_username
+#  password: !secret myusps_password
+#  name: 'USPS'
 
 sensor:
   - platform: ups
     name: 'UPS'
     username: !secret upsmychoice_username
     password: !secret upsmychoice_password
-  - platform: fedex
-    name: 'Fedex'
-    username: !secret fedexdeliverymanager_username
-    password: !secret fedexdeliverymanager_password
+#  - platform: fedex
+#    name: 'Fedex'
+#    username: !secret fedexdeliverymanager_username
+#    password: !secret fedexdeliverymanager_password
   - platform: template
     sensors:
       packages_in_transit:

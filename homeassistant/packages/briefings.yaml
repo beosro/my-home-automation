@@ -113,10 +113,13 @@ automation:
       - condition: state
         entity_id: switch.briefings
         state: 'on'
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
       - condition: time
         after: '04:00:00'
       - condition: time
-        before: '09:00:00'
+        before: '10:00:00'
     action:
       - service: script.turn_on
         entity_id: script.play_tts

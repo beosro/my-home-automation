@@ -2,48 +2,64 @@ lock.zwave_lock_locked:
   friendly_name: Front Door
 scene.mood_lighting:
   icon: mdi:heart
-  emulated_hue: true
+  emulated_hue_hidden: true
 scene.regular_lighting:
   icon: mdi:lightbulb
-  emulated_hue: true
+  emulated_hue_hidden: true
 switch.zwave_switch_1_switch:
   friendly_name: Kitchen Fluorescent
   icon: mdi:lightbulb
-  emulated_hue: true
+  emulated_hue_hidden: true
 switch.zwave_switch_2_switch:
   friendly_name: Porch Lanterns
   icon: mdi:lightbulb
-  emulated_hue: true
+  emulated_hue_hidden: true
 switch.zwave_switch_3_switch:
   friendly_name: Foyer Light
   icon: mdi:lightbulb
-  emulated_hue: true
+  emulated_hue_hidden: true
 light.zwave_dimmer_1_level:
   friendly_name: Den Light
-  emulated_hue: true
+  emulated_hue_hidden: true
 light.zwave_dimmer_2_level:
   friendly_name: Bedroom Light
-  emulated_hue: true
+  emulated_hue_hidden: true
 light.zwave_dimmer_3_level:
   friendly_name: Dining Room Chandelier
-  emulated_hue: true
+  icon: mdi:ceiling-light
+  emulated_hue_hidden: true
 switch.zwave_switch_4_switch:
   friendly_name: Dinette Light
   icon: mdi:lightbulb
-  emulated_hue: true
+  emulated_hue_hidden: true
+switch.zwave_switch_5_switch:
+  friendly_name: Bathroom Light
+  icon: mdi:lightbulb
+  emulated_hue_hidden: true
+switch.zwave_switch_6_switch:
+  friendly_name: Hall Lights
+  icon: mdi:lightbulb
+  emulated_hue_hidden: true
+switch.zwave_switch_7_switch:
+  friendly_name: Living Room Downlights
+  icon: mdi:ceiling-light
+  emulated_hue_hidden: true
 cover.zwave_garage_door_opener_open:
   friendly_name: Garage Door
 binary_sensor.zwave_water_sensor_1_sensor:
   friendly_name: Water Sensor
   icon: mdi:water
 light.bedroom_lamp:
-  emulated_hue: true
+  emulated_hue_hidden: true
   icon: mdi:lamp
 light.living_room_lamps:
-  emulated_hue: true
+  emulated_hue_hidden: true
   icon: mdi:lamp
 light.living_room_fan_light:
-  emulated_hue: true
+  emulated_hue_hidden: true
+fan.zwave_fan_1_level:
+  friendly_name: Bedroom Fan
+  emulated_hue_hidden: true
 sensor.quote:
   hidden: true
 sensor.vzw_number_1:

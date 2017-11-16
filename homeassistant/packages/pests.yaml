@@ -10,7 +10,6 @@ homeassistant:
 
 group:
   Pests:
-    - camera.backyard
     - script.scare_pests
     - binary_sensor.siren
 

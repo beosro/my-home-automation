@@ -4,14 +4,8 @@ homeassistant:
       hidden: True
     'binary_sensor.zwave_door_*':
       hidden: True
-    'zwave.*':
-      hidden: True
-
-#panel_iframe:
-#  ozwcp:
-#    title: OZWCP
-#    icon: mdi:signal-variant
-#    url: !secret ozwcp_url
+    #'zwave.*':
+    #  hidden: True
 
 cover:
   platform: zwave
@@ -19,3 +13,6 @@ cover:
 zwave:
   usb_path: /dev/ttyACM0
   config_path: !secret zwave_config_path
+  device_config:
+    fan.zwave_fan_1_level:
+      polling_intensity: 3

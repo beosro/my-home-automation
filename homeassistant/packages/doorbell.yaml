@@ -1,3 +1,30 @@
+homeassistant:
+  customize:
+    script.play_chime:
+      friendly_name: Play Chime
+      icon: mdi:bell-ring
+    counter.chime_counter:
+      friendly_name: Chime Count
+      unit_of_measurement: 'presses'
+
+group:
+  Doorbell:
+    - script.play_chime
+    - counter.chime_counter
+    - binary_sensor.doorbell_online
+
+counter:
+  chime_counter:
+    name: Chime Count
+
+binary_sensor:
+  - platform: mqtt
+    name: "Doorbell Online"
+    state_topic: "home/doorbell/online"
+    payload_on: "yes"
+    payload_off: "no"
+    device_class: "connectivity"
+
 automation:
   - alias: Announce doorbell presses
     trigger:
@@ -7,18 +34,43 @@ automation:
     action:
       - service: script.turn_on
         entity_id: script.play_chime
+  - alias: Turn on Porch Lights from Notification
+    trigger:
+      platform: event
+      event_type: html5_notification.clicked
+      event_data:
+        action: turn_on_porch_lights
+    action:
+      - service: switch.turn_on
+        entity_id:
+          - switch.zwave_switch_2_switch
+          - switch.zwave_switch_3_switch
 
 script:
   play_chime:
     sequence:
+      - service: counter.increment
+        data:
+          entity_id: counter.chime_counter
+      - service: notify.all
+        data_template:
+          message: 'Doorbell rang'
+          data:
+            image: !secret front_camera_snapshot_url
+            url: !secret front_camera_stream_url
+            tag: doorbell_rang
+            actions:
+              - action: turn_on_porch_lights
+                title: 'Turn On Porch Lights'
       - service: snapcast.snapcast_snapshot
         data:
           entity_id:
-            - media_player.snapcast_group_12a48ec83a0f70ea581539a0763918b6
+            - media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
             - media_player.snapcast_client_b827ebc8b2f8
+            - media_player.snapcast_client_b827ebacb8f7
       - service: media_player.select_source
         data:
-          entity_id: media_player.snapcast_group_12a48ec83a0f70ea581539a0763918b6
+          entity_id: media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
           source: TTS
       - service: media_player.volume_set
         data:
@@ -26,17 +78,14 @@ script:
           volume_level: 1.0
       - service: media_player.play_media
         data:
-          entity_id: media_player.tts
+          entity_id: media_player.mpd
           media_content_id: !secret doorbell_mp3
           media_content_type: 'music'
-      - delay:
-          seconds: 1
-      - wait_template: "{{states.media_player.tts.state == 'idle'}}"
+      - wait_template: "{{states.media_player.mpd.state == 'off'}}"
         timeout: 120
-      - delay:
-          seconds: 1
       - service: snapcast.snapcast_restore
         data:
           entity_id:
-            - media_player.snapcast_group_12a48ec83a0f70ea581539a0763918b6
+            - media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
             - media_player.snapcast_client_b827ebc8b2f8
+            - media_player.snapcast_client_b827ebacb8f7

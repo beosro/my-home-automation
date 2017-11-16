@@ -1,0 +1,28 @@
+mailbox:
+  - platform: generic
+
+automation:
+  - trigger:
+      platform: event
+      event_type: opensky_exit
+    action:
+      - service: generic_mailbox.add_message
+        data_template:
+          text: 'Flight {{trigger.event.data.callsign}} exited the area.'
+          source: 'OpenSky'
+  - trigger:
+      platform: event
+      event_type: opensky_entry
+    action:
+      - service: generic_mailbox.add_message
+        data_template:
+          text: 'Flight {{trigger.event.data.callsign}} entered the area.'
+          source: 'OpenSky'
+  - trigger:
+      platform: event
+      event_type: crimealerts_incident
+    action:
+      - service: generic_mailbox.add_message
+        data_template:
+           text: '{{trigger.event.data}}'
+           source: 'Crime Reports'

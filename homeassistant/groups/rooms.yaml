@@ -1,10 +1,14 @@
 Living Room:
+  - switch.zwave_switch_7_switch
   - light.living_room_lamps
   - light.living_room_fan_light
   - binary_sensor.door_four
+Bathroom:
+  - switch.zwave_switch_5_switch
 Bedroom:
   - light.bedroom_lamp
   - light.zwave_dimmer_2_level
+  - fan.zwave_fan_1_level
   - binary_sensor.bedroom_occupancy
   - sensor.bedroom_temperature
 Kitchen:
@@ -30,11 +34,12 @@ Dining Room:
 Foyer:
   - switch.zwave_switch_3_switch
   - switch.zwave_switch_2_switch
+  - switch.zwave_switch_6_switch
   - lock.zwave_lock_locked
   - binary_sensor.door_two
   - binary_sensor.thermostat_occupancy
   - sensor.thermostat_temperature
   - sensor.thermostat_humidity
 Garage:
-  - cover.zwave_garage_door_opener
+  - cover.zwave_garage_door_opener_open
   - binary_sensor.zwave_water_sensor_1_sensor

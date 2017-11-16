@@ -12,6 +12,14 @@ homeassistant:
     script.cam_right:
       icon: mdi:arrow-right
       friendly_name: Camera Right
+    script.cam_ir_on:
+      hidden: true
+    script.cam_ir_off:
+      hidden: true
+    switch.cam_ir:
+      friendly_name: 'Camera IR'
+      assumed_state: true
+      icon: mdi:eye
     camera.camera:
       friendly_name: Front
   customize_glob:
@@ -23,14 +31,16 @@ homeassistant:
 group:
   Camera:
     - camera.camera
-    - camera.last_motion
+    #- camera.last_motion
     - binary_sensor.cam_motion
     - script.cam_up
     - script.cam_down
     - script.cam_left
     - script.cam_right
+    - switch.cam_ir
     - camera.den
     - camera.kitchen
+    - camera.backyard
 
 #panel_iframe:
 #  cams:
@@ -39,14 +49,14 @@ group:
 #    url: !secret cams_url
 
 android_ip_webcam:
-  - host: !secret android_ip_1
-    scan_interval: 20
-    name: Kitchen
-    motion_sensor: true
-    sensors:
-      - battery_level
-      - light
-      - sound
+  #  - host: !secret android_ip_1
+  #  scan_interval: 20
+  #  name: Kitchen
+  #  motion_sensor: true
+  #  sensors:
+  #    - battery_level
+  #    - light
+  #    - sound
   - host: !secret android_ip_2
     scan_interval: 20
     name: Den
@@ -60,16 +70,29 @@ camera:
   - platform: generic
     still_image_url: !secret cam_image_url
     name: Camera
-  - platform: local_file
-    name: Last Motion
-    file_path: !secret cam_latest_file
-#  - platform: ffmpeg
-#    input: !secret wansview_rtsp
-#    name: Backyard
+#  - platform: local_file
+#    name: Last Motion
+#    file_path: !secret cam_latest_file
+  - platform: ffmpeg
+    input: !secret wansview_rtsp
+    name: Backyard
 
 shell_command:
   cam_direction: !secret cam_direction_script
 
+switch:
+  - platform: template
+    switches:
+      cam_ir:
+        value_template: "off"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.cam_ir_on
+        turn_off:
+          service: script.turn_on
+          data:
+            entity_id: script.cam_ir_off
 script:
   cam_down:
     sequence:
@@ -91,3 +114,13 @@ script:
       - service: shell_command.cam_direction
         data:
           direction: 'right'
+  cam_ir_on:
+    sequence:
+      - service: shell_command.cam_direction
+        data:
+          direction: 'ir_on'
+  cam_ir_off:
+    sequence:
+      - service: shell_command.cam_direction
+        data:
+          direction: 'ir_off'

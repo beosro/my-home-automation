@@ -4,7 +4,7 @@
 #  is 'home' if ANY tracked device is home, and 'not_home'
 #  if EVERY tracked device is not home.
 
-alias: Turn off lights and set thermostat away mode
+alias: Turn off things when everyone leaves
 trigger:
   platform: state
   entity_id: group.all_devices
@@ -19,6 +19,19 @@ condition:
 action:
 - service: light.turn_off
   entity_id: group.all_lights
+- service: lock.lock
+  entity_id: group.all_locks
+- service: fan.turn_off
+  entity_id: group.all_fans
+- service: switch.turn_off
+  entity_id:
+    - switch.zwave_switch_1_switch
+    - switch.zwave_switch_2_switch
+    - switch.zwave_switch_3_switch
+    - switch.zwave_switch_4_switch
+    - switch.zwave_switch_5_switch
+    - switch.zwave_switch_6_switch
+    - switch.zwave_switch_7_switch
 - service: climate.set_away_mode
   data:
     entity_id: climate.thermostat

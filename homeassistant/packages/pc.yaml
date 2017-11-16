@@ -6,7 +6,7 @@ homeassistant:
     switch.pc_sound:
       icon: mdi:volume-off
       friendly_name: Mute
-    input_slider.pc_volume:
+    input_number.pc_volume:
       icon: mdi:volume-high
     switch.turn_on_pc:
       icon: mdi:power
@@ -14,11 +14,11 @@ homeassistant:
 group:
   Computer:
     - switch.turn_on_pc
-    - input_slider.pc_volume
+    - input_number.pc_volume
     - switch.pc_sound
     - switch.pc_monitors
 
-input_slider:
+input_number:
   pc_volume:
     name: Volume
     initial: 100
@@ -47,8 +47,8 @@ automation:
   - alias: PC volume control
     trigger:
       - platform: state
-        entity_id: input_slider.pc_volume
+        entity_id: input_number.pc_volume
     action:
       service: shell_command.pc_volume
       data_template:
-        volume: '{{states.input_slider.pc_volume.state}}'
+        volume: '{{states.input_number.pc_volume.state}}'

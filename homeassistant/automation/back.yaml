@@ -1,4 +1,4 @@
-alias: Turn off thermostat away mode
+alias: Turn on things when people arrive
 trigger:
   platform: state
   entity_id: group.all_devices
@@ -15,3 +15,5 @@ action:
   data:
     entity_id: climate.thermostat
     away_mode: false
+- service: lock.unlock
+  entity_id: group.all_locks

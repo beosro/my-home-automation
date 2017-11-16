@@ -2,8 +2,12 @@ Batteries:
   - sensor.first_floor_smoke_co_battery
   - sensor.second_floor_smoke_co_battery
   - sensor.front_door_lock_battery
-  - sensor.door_one_battery
-  - sensor.door_two_battery
+  - sensor.door_sensor_1_battery
+  - sensor.door_sensor_2_battery
+  - sensor.door_sensor_3_battery
+  - sensor.door_sensor_4_battery
+  - sensor.door_sensor_5_battery
+  - sensor.water_sensor_1_battery
   - sensor.ups_battery
   - sensor.his_phone_battery
   - sensor.her_phone_battery

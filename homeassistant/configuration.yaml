@@ -9,6 +9,9 @@ homeassistant:
   customize_glob: !include customize_glob.yaml
   packages:  !include_dir_named packages
 
+system_log:
+  max_entries: 100
+
 google:
   client_id: !secret google_client_id
   client_secret: !secret google_client_secret
@@ -32,12 +35,16 @@ mqtt:
   port: 1883
   client_id: hass
   keepalive: 60
+  username: !secret mqtt_username
+  password: !secret mqtt_password
 
 emulated_hue:
   host_ip: !secret system_ip
   expose_by_default: false
   off_maps_to_on_domains:
     - script
+
+map:
 
 http:
   api_password: !secret hass_api_password
