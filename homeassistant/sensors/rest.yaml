@@ -1,9 +1,9 @@
 - platform: rest
   scan_interval: 3600
-  resource: 'http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en'
+  resource: 'http://api.forismatic.com/api/1.0/?method=getQuote&format=text&lang=en'
   method: GET
   name: Quote
-  value_template: '{{value_json.quoteText}}'
+  value_template: '{{value.split(" (")[0]}}'
 - platform: rest
   scan_interval: 7200
   resource: !secret horoscope_url

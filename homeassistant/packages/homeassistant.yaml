@@ -32,14 +32,17 @@ sensor:
   - platform: command_line
     name: New Commits
     scan_interval: 600
+    unit_of_measurement: commits
     command: "git fetch origin && git log dev..origin/dev --pretty=oneline | wc -l"
   - platform: command_line
     name: Home Assistant Errors
-    scan_interval: 3600
+    scan_interval: 30
+    unit_of_measurement: errors
     command: !secret ha_error_command
   - platform: command_line
     name: Home Assistant Warnings
-    scan_interval: 3600
+    scan_interval: 30
+    unit_of_measurement: warnings
     command: !secret ha_warning_command
   - platform: uptime
     unit_of_measurement: hours

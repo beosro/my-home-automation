@@ -1,11 +1,11 @@
 - platform: template
   sensors:
     front_door_lock_battery:
-      value_template: '{{states.zwave.zwave_lock.attributes.battery_level}}'
+      value_template: '{{(states.zwave.zwave_lock.attributes|default).battery_level|default|int(0)}}'
       unit_of_measurement: '%'
       friendly_name: 'Front Door Lock Battery'
       icon_template: >
-        {% set battery_level = states.zwave.zwave_lock.attributes.battery_level | default(0) | int %}
+        {% set battery_level = (states.zwave.zwave_lock.attributes|default).battery_level|default|int(0) %}
         {% set battery_round = (battery_level / 10) |int * 10 %}
         {% if battery_round >= 100 %}
           mdi:battery
@@ -15,11 +15,11 @@
           mdi:battery-alert
         {% endif %}
     first_floor_smoke_co_battery:
-      value_template: '{{states.zwave.zwave_detector_1.attributes.battery_level}}'
+      value_template: '{{(states.zwave.zwave_detector_1.attributes|default).battery_level|default|int(0)}}'
       unit_of_measurement: '%'
       friendly_name: 'First Floor Smoke/CO Alarm Battery'
       icon_template: >
-        {% set battery_level = states.zwave.zwave_detector_1.attributes.battery_level | default(0) | int %}
+        {% set battery_level = (states.zwave.zwave_detector_1.attributes|default).battery_level|default|int(0) %}
         {% set battery_round = (battery_level / 10) |int * 10 %}
         {% if battery_round >= 100 %}
           mdi:battery
@@ -29,11 +29,11 @@
           mdi:battery-alert
         {% endif %}
     second_floor_smoke_co_battery:
-      value_template: '{{states.zwave.zwave_detector_2.attributes.battery_level}}'
+      value_template: '{{(states.zwave.zwave_detector_2.attributes|default).battery_level|default|int(0)}}'
       unit_of_measurement: '%'
       friendly_name: 'Second Floor Smoke/CO Alarm Battery'
       icon_template: >
-        {% set battery_level = states.zwave.zwave_detector_2.attributes.battery_level | default(0) | int %}
+        {% set battery_level = (states.zwave.zwave_detector_2.attributes|default).battery_level|default|int(0) %}
         {% set battery_round = (battery_level / 10) |int * 10 %}
         {% if battery_round >= 100 %}
           mdi:battery
@@ -43,11 +43,11 @@
           mdi:battery-alert
         {% endif %}
     door_sensor_1_battery:
-      value_template: '{{states.zwave.zwave_door_sensor_1.attributes.battery_level}}'
+      value_template: '{{(states.zwave.zwave_door_sensor_1.attributes|default).battery_level|default|int(0)}}'
       unit_of_measurement: '%'
       friendly_name: 'Side Door Sensor Battery'
       icon_template: >
-        {% set battery_level = states.zwave.zwave_door_sensor_1.attributes.battery_level | default(0) | int %}
+        {% set battery_level = (states.zwave.zwave_door_sensor_1.attributes|default).battery_level|default|int(0) %}
         {% set battery_round = (battery_level / 10) |int * 10 %}
         {% if battery_round >= 100 %}
           mdi:battery
@@ -57,11 +57,11 @@
           mdi:battery-alert
         {% endif %}
     door_sensor_2_battery:
-      value_template: '{{states.zwave.zwave_door_sensor_2.attributes.battery_level}}'
+      value_template: '{{(states.zwave.zwave_door_sensor_2.attributes|default).battery_level|default|int(0)}}'
       unit_of_measurement: '%'
       friendly_name: 'Front Door Sensor Battery'
       icon_template: >
-        {% set battery_level = states.zwave.zwave_door_sensor_2.attributes.battery_level | default(0) | int %}
+        {% set battery_level = (states.zwave.zwave_door_sensor_2.attributes|default).battery_level|default|int(0) %}
         {% set battery_round = (battery_level / 10) |int * 10 %}
         {% if battery_round >= 100 %}
           mdi:battery
@@ -71,11 +71,11 @@
           mdi:battery-alert
         {% endif %}
     door_sensor_3_battery:
-      value_template: '{{states.zwave.zwave_door_sensor_3.attributes.battery_level}}'
+      value_template: '{{(states.zwave.zwave_door_sensor_3.attributes|default).battery_level|default|int(0)}}'
       unit_of_measurement: '%'
       friendly_name: 'Den Door Sensor Battery'
       icon_template: >
-        {% set battery_level = states.zwave.zwave_door_sensor_3.attributes.battery_level | default(0) | int %}
+        {% set battery_level = (states.zwave.zwave_door_sensor_3.attributes|default).battery_level|default|int(0) %}
         {% set battery_round = (battery_level / 10) |int * 10 %}
         {% if battery_round >= 100 %}
           mdi:battery
@@ -85,11 +85,11 @@
           mdi:battery-alert
         {% endif %}
     door_sensor_4_battery:
-      value_template: '{{states.zwave.zwave_door_sensor_4.attributes.battery_level}}'
+      value_template: '{{(states.zwave.zwave_door_sensor_4.attributes|default).battery_level|default|int(0)}}'
       unit_of_measurement: '%'
       friendly_name: 'Porch Door Sensor Battery'
       icon_template: >
-        {% set battery_level = states.zwave.zwave_door_sensor_4.attributes.battery_level | default(0) | int %}
+        {% set battery_level = (states.zwave.zwave_door_sensor_4.attributes|default).battery_level|default|int(0) %}
         {% set battery_round = (battery_level / 10) |int * 10 %}
         {% if battery_round >= 100 %}
           mdi:battery
@@ -99,11 +99,11 @@
           mdi:battery-alert
         {% endif %}
     door_sensor_5_battery:
-      value_template: '{{states.zwave.zwave_door_sensor_5.attributes.battery_level}}'
+      value_template: '{{(states.zwave.zwave_door_sensor_5.attributes|default).battery_level|default|int(0)}}'
       unit_of_measurement: '%'
       friendly_name: 'Cat Door Sensor Battery'
       icon_template: >
-        {% set battery_level = states.zwave.zwave_door_sensor_5.attributes.battery_level | default(0) | int %}
+        {% set battery_level = (states.zwave.zwave_door_sensor_5.attributes|default).battery_level|default|int(0) %}
         {% set battery_round = (battery_level / 10) |int * 10 %}
         {% if battery_round >= 100 %}
           mdi:battery
@@ -113,11 +113,11 @@
           mdi:battery-alert
         {% endif %}
     water_sensor_1_battery:
-      value_template: '{{states.zwave.zwave_water_sensor_1.attributes.battery_level}}'
+      value_template: "{{ (states.zwave.zwave_water_sensor_1.attributes|default).battery_level|default|int(0) }}"
       unit_of_measurement: '%'
       friendly_name: 'Garage Water Sensor Battery'
       icon_template: >
-        {% set battery_level = states.zwave.zwave_water_sensor_1.attributes.battery_level | default(0) | int %}
+        {% set battery_level = (states.zwave.zwave_water_sensor_1.attributes|default).battery_level|default|int(0) %}
         {% set battery_round = (battery_level / 10) |int * 10 %}
         {% if battery_round >= 100 %}
           mdi:battery

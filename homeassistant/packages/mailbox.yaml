@@ -4,20 +4,28 @@ mailbox:
 automation:
   - trigger:
       platform: event
-      event_type: opensky_exit
+      event_type: mailgun_message_received
     action:
       - service: generic_mailbox.add_message
         data_template:
-          text: 'Flight {{trigger.event.data.callsign}} exited the area.'
-          source: 'OpenSky'
-  - trigger:
-      platform: event
-      event_type: opensky_entry
-    action:
-      - service: generic_mailbox.add_message
-        data_template:
-          text: 'Flight {{trigger.event.data.callsign}} entered the area.'
-          source: 'OpenSky'
+          text: '{{trigger.event.data.subject}}'
+          source: '{{trigger.event.data.from.split(" <")[0]}}'
+#  - trigger:
+#      platform: event
+#      event_type: opensky_exit
+#    action:
+#      - service: generic_mailbox.add_message
+#        data_template:
+#          text: 'Flight {{trigger.event.data.callsign}} exited the area.'
+#          source: 'OpenSky'
+#  - trigger:
+#      platform: event
+#      event_type: opensky_entry
+#    action:
+#      - service: generic_mailbox.add_message
+#        data_template:
+#          text: 'Flight {{trigger.event.data.callsign}} entered the area.'
+#          source: 'OpenSky'
   - trigger:
       platform: event
       event_type: crimealerts_incident

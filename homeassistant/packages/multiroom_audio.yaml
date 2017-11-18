@@ -3,12 +3,12 @@ homeassistant:
     script.all_rooms_audio:
       friendly_name: Spotify Everywhere
       icon: mdi:spotify
-      emulated_hue_hidden: true
+      emulated_hue_hidden: false
     script.ui_tts:
       friendly_name: Play TTS
       icon: mdi:play
     media_player.spotify:
-      emulated_hue_hidden: true
+      emulated_hue_hidden: false
       emulated_hue_name: speakers
 
 group:

@@ -13,24 +13,23 @@ binary_sensor:
   - platform: template
     sensors:
       door_one:
-        value_template: "{{ states.sensor.zwave_door_sensor_1_alarm_level.state == '255' }}"
-        icon_template: "{% if states.sensor.zwave_door_sensor_1_alarm_level.state == '255' %}mdi:door-closed{% else %}mdi:door-open{% endif %}"
+        value_template: "{{ is_state('sensor.zwave_door_sensor_1_alarm_level', '255') }}"
         friendly_name: 'Side Door'
         device_class: 'opening'
       door_two:
-        value_template: "{{ states.sensor.zwave_door_sensor_2_alarm_level.state == '255' }}"
+        value_template: "{{ is_state('sensor.zwave_door_sensor_2_alarm_level', '255') }}"
         friendly_name: 'Front Door'
         device_class: 'opening'
       door_three:
-        value_template: "{{ states.sensor.zwave_door_sensor_3_alarm_level.state == '255' }}"
+        value_template: "{{ is_state('sensor.zwave_door_sensor_3_alarm_level', '255') }}"
         friendly_name: 'Den Door'
         device_class: 'opening'
       door_four:
-        value_template: "{{ states.sensor.zwave_door_sensor_4_alarm_level.state == '255' }}"
+        value_template: "{{ is_state('sensor.zwave_door_sensor_4_alarm_level', '255') }}"
         friendly_name: 'Porch Door'
         device_class: 'opening'
       door_five:
-        value_template: "{{ states.sensor.zwave_door_sensor_5_alarm_level.state == '255' }}"
+        value_template: "{{ is_state('sensor.zwave_door_sensor_5_alarm_level', '255') }}"
         friendly_name: 'Cat Door'
         device_class: 'opening'
       any_door_open:
@@ -49,7 +48,7 @@ binary_sensor:
         entity_id: lock.zwave_lock_locked
         value_template: >
           {% macro error_state(entity) %}
-            {% if states.lock[entity].attributes.notification %}
+            {% if entity in states.lock and states.lock[entity].attributes.notification %}
               {%- for state in ['Keypad Lock', 'Keypad Unlock', 'Manual Lock', 'Manual Unlock'] -%}
                {%- if is_state_attr('lock.' ~ entity, 'notification', state) -%}1{%- endif -%}
               {%- endfor -%}

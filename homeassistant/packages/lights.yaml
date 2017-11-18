@@ -1,7 +1,7 @@
 homeassistant:
   customize:
     script.living_room_lights:
-      emulated_hue_hidden: True
+      emulated_hue_hidden: false
       emulated_hue_name: 'Living Room Lights'
 
 script:

@@ -2,7 +2,7 @@ homeassistant:
   customize:
     switch.sleeping:
       icon: mdi:sleep
-      emulated_hue_hidden: true
+      emulated_hue_hidden: false
       emulated_hue_name: Sleep Mode
     switch.vacation:
       icon: mdi:airplane
