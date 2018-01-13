@@ -1,0 +1,45 @@
+homeassistant:
+  customize:
+    switch.tree_lights:
+      icon: mdi:pine-tree
+    switch.mantle_lights:
+      icon: mdi:alarm-light
+
+group:
+  Christmas:
+    - switch.tree_lights
+    - switch.mantle_lights
+    - automation.turn_on_christmas_lights
+    - automation.turn_off_christmas_lights
+
+switch:
+  - platform: orvibo
+    discovery: false
+    switches:
+    - host: 192.168.2.69
+      name: Mantle Lights
+    - host: 192.168.2.70
+      name: Tree Lights
+
+automation:
+  - alias: Turn on christmas lights
+    trigger:
+      platform: numeric_state
+      entity_id: sun.sun
+      value_template: '{{ state.attributes.elevation }}'
+      below: 10
+    action:
+      service: switch.turn_on
+      entity_id:
+        - switch.mantle_lights
+        - switch.tree_lights
+  - alias: Turn off christmas lights
+    trigger:
+      platform: state
+      entity_id: switch.sleeping
+      to: 'on'
+    action:
+      service: switch.turn_off
+      entity_id:
+        - switch.mantle_lights
+        - switch.tree_lights
