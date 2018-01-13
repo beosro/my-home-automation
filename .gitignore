@@ -11,7 +11,6 @@ homeassistant/html5_push_registrations.conf
 homeassistant/.HA_VERSION
 homeassistant/OZW_Log.txt
 homeassistant/.google.token
-homeassistant/zwcfg_*
 homeassistant/pyozw.sqlite
 homeassistant/zwscene.xml
 homeassistant/secrets.yaml

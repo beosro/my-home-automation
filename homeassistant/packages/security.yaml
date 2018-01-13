@@ -45,7 +45,6 @@ binary_sensor:
         device_class: 'opening'
       lock_error:
         friendly_name: "Lock Error"
-        entity_id: lock.zwave_lock_locked
         value_template: >
           {% macro error_state(entity) %}
             {% if entity in states.lock and states.lock[entity].attributes.notification %}
