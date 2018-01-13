@@ -69,6 +69,9 @@ automation:
       event_data:
         from: !secret usps_sender
     condition:
+      - condition: state
+        entity_id: switch.sleeping
+        state: 'off'
       - condition: template
         value_template: '{{"Delivered" in trigger.event.data.subject}}'
     action:
@@ -88,6 +91,9 @@ automation:
       event_data:
         from: !secret fedex_sender
     condition:
+      - condition: state
+        entity_id: switch.sleeping
+        state: 'off'
       - condition: template
         value_template: '{{"been delivered" in trigger.event.data.subject}}'
     action:
@@ -107,6 +113,9 @@ automation:
       event_data:
         from: !secret ups_sender
     condition:
+      - condition: state
+        entity_id: switch.sleeping
+        state: 'off'
       - condition: template
         value_template: '{{"was delivered" in trigger.event.data.subject}}'
     action:

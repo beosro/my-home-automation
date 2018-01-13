@@ -5,6 +5,10 @@ automation:
       event_type: mailgun_message_received
       event_data:
         from: !secret regional_notification_sender
+    condition:
+      - condition: state
+        entity_id: switch.sleeping
+        state: 'off'
     action:
       - service: persistent_notification.create
         data_template:

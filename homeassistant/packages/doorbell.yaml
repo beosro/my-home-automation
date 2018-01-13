@@ -31,6 +31,10 @@ automation:
       platform: mqtt
       topic: 'home/doorbell/pressed'
       payload: 'yes'
+    condition:
+      - condition: state
+        entity_id: switch.sleeping
+        state: 'off'
     action:
       - service: script.turn_on
         entity_id: script.play_chime
@@ -62,19 +66,23 @@ script:
             actions:
               - action: turn_on_porch_lights
                 title: 'Turn On Porch Lights'
-      - service: snapcast.snapcast_snapshot
+      - service: media_player.snapcast_snapshot
         data:
           entity_id:
-            - media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
-            - media_player.snapcast_client_b827ebc8b2f8
-            - media_player.snapcast_client_b827ebacb8f7
+            - !secret snapcast_group_1
+            - !secret snapcast_hifiberry1
+            - !secret snapcast_hifiberry2
+            - !secret snapcast_raspberrypi
       - service: media_player.select_source
         data:
-          entity_id: media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
+          entity_id: !secret snapcast_group_1
           source: TTS
       - service: media_player.volume_set
         data:
-          entity_id: media_player.snapcast_client_b827ebc8b2f8
+          entity_id:
+            - !secret snapcast_hifiberry1
+            - !secret snapcast_hifiberry2
+            - !secret snapcast_raspberrypi
           volume_level: 1.0
       - service: media_player.play_media
         data:
@@ -83,9 +91,10 @@ script:
           media_content_type: 'music'
       - wait_template: "{{states.media_player.mpd.state == 'off'}}"
         timeout: 120
-      - service: snapcast.snapcast_restore
+      - service: media_player.snapcast_restore
         data:
           entity_id:
-            - media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
-            - media_player.snapcast_client_b827ebc8b2f8
-            - media_player.snapcast_client_b827ebacb8f7
+            - !secret snapcast_group_1
+            - !secret snapcast_hifiberry1
+            - !secret snapcast_hifiberry2
+            - !secret snapcast_raspberrypi

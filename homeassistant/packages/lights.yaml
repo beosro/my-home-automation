@@ -11,6 +11,8 @@ script:
         entity_id:
           - light.living_room_lamps
           - light.living_room_fan_light
+      - service: switch.toggle
+        entity_id:
           - switch.zwave_switch_7_switch
 
 automation:

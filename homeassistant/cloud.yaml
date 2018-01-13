@@ -1,0 +1,14 @@
+alexa:
+  filter:
+    include_entities:
+      - switch.zwave_switch_3_switch
+      - script.sleeping
+    exclude_domains:
+      - automation
+      - switch
+      - light
+      - lock
+      - fan
+      - group
+      - media_player
+      - scene

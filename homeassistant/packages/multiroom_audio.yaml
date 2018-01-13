@@ -13,10 +13,10 @@ homeassistant:
 
 group:
   Snapclients:
-    - media_player.snapcast_client_74da3868e5f1
-    - media_player.snapcast_client_b827ebc8b2f8
-    - media_player.snapcast_client_b827ebacb8f7
-    - media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
+    - !secret snapcast_group_1
+    - !secret snapcast_hifiberry1
+    - !secret snapcast_hifiberry2
+    - !secret snapcast_raspberrypi
     - script.all_rooms_audio
   TTS:
     - media_player.mpd
@@ -60,7 +60,7 @@ script:
           source: 'Multi-Room Audio'
       - service: media_player.select_source
         data:
-          entity_id: media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
+          entity_id: !secret snapcast_group_1
           source: 'Spotify'
       - service: switch.turn_on
         data:
@@ -81,23 +81,23 @@ script:
             message: '{{states.input_text.tts.state}}'
   play_tts:
     sequence:
-      - service: snapcast.snapcast_snapshot
+      - service: media_player.snapcast_snapshot
         data:
           entity_id:
-            - media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
-            - media_player.snapcast_client_b827ebc8b2f8
-            - media_player.snapcast_client_b827ebacb8f7
+            - !secret snapcast_group_1
+            - !secret snapcast_hifiberry1
+            - !secret snapcast_hifiberry2
+            - !secret snapcast_raspberrypi
       - service: media_player.select_source
         data:
-          entity_id: media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
+          entity_id: !secret snapcast_group_1
           source: TTS
       - service: media_player.volume_set
         data:
-          entity_id: media_player.snapcast_client_b827ebc8b2f8
-          volume_level: 0.5
-      - service: media_player.volume_set
-        data:
-          entity_id: media_player.snapcast_client_b827ebacb8f7
+          entity_id:
+            - !secret snapcast_hifiberry1
+            - !secret snapcast_hifiberry2
+            - !secret snapcast_raspberrypi
           volume_level: 1.0
       - service_template: "tts.{{states.input_select.tts_engine.state}}_say"
         data_template:
@@ -105,12 +105,13 @@ script:
           message: "{{message}}"
       - wait_template: "{{states.media_player.mpd.state == 'off'}}"
         timeout: 120
-      - service: snapcast.snapcast_restore
+      - service: media_player.snapcast_restore
         data:
           entity_id:
-            - media_player.snapcast_group_d4cd5033c1e3b1fc5eb6440060851f00
-            - media_player.snapcast_client_b827ebc8b2f8
-            - media_player.snapcast_client_b827ebacb8f7
+            - !secret snapcast_group_1
+            - !secret snapcast_hifiberry1
+            - !secret snapcast_hifiberry2
+            - !secret snapcast_raspberrypi
 
 automation:
   - alias: Multi-Room Audio Pause
