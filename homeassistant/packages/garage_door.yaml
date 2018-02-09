@@ -1,0 +1,20 @@
+homeassistant:
+  customize:
+    cover.garage_door:
+      #icon: mdi:garage
+
+cover:
+  - platform: mqtt
+    name: "Garage Door"
+    command_topic: "home/garage_door/toggle"
+    state_topic: "home/garage_door/state"
+    availability_topic: "home/garage_door/online"
+    device_class: garage
+    qos: 0
+    retain: true
+    payload_open: ""
+    payload_close: ""
+    state_open: "yes"
+    state_closed: "no"
+    payload_available: "yes"
+    payload_not_available: "no"

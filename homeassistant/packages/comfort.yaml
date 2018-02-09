@@ -1,0 +1,36 @@
+homeassistant:
+  customize:
+    weather.thermostat:
+      hidden: true
+    sensor.low_target:
+      icon: mdi:format-vertical-align-bottom
+    sensor.high_target:
+      icon: mdi:format-vertical-align-top
+    sensor.thermostat_temperature:
+      friendly_name: Foyer Temperature
+
+sensor:
+  - platform: template
+    sensors:
+      low_target:
+        friendly_name: "Minimum Temperature"
+        value_template: "{{states.climate.thermostat.attributes.target_temp_low}}"
+      high_target:
+        friendly_name: "Maximum Temperature"
+        value_template: "{{states.climate.thermostat.attributes.target_temp_high}}"
+
+
+group:
+  Temperatures:
+    - sensor.kitchen_temperature
+    - sensor.den_temperature
+    - sensor.bedroom_temperature
+    - sensor.thermostat_temperature
+    - sensor.high_target
+    - sensor.low_target
+
+
+ecobee:
+  api_key: !secret ecobee_api_key
+
+

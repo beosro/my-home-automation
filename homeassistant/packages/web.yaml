@@ -1,0 +1,15 @@
+vultr:
+  api_key: !secret vultr_api_key
+
+binary_sensor:
+  - platform: digital_ocean
+    droplets:
+      - !secret digitalocean_droplet
+  - platform: vultr
+    name: !secret vultr_name
+    subscription: !secret vultr_subscription
+
+sensor:
+  - platform: vultr
+    name: !secret vultr_name
+    subscription: !secret vultr_subscription
