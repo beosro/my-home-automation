@@ -1,4 +1,4 @@
-#- platform: xiaomi_miio
-#  name: Vacuum
-#  host: 192.168.2.103
-#  token: !secret xiaomi_token
+- platform: xiaomi_miio
+  name: Vacuum
+  host: 192.168.2.103
+  token: !secret xiaomi_token

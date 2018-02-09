@@ -25,10 +25,10 @@ sensor:
     name: 'UPS'
     username: !secret upsmychoice_username
     password: !secret upsmychoice_password
-#  - platform: fedex
-#    name: 'Fedex'
-#    username: !secret fedexdeliverymanager_username
-#    password: !secret fedexdeliverymanager_password
+  - platform: fedex
+    name: 'Fedex'
+    username: !secret fedexdeliverymanager_username
+    password: !secret fedexdeliverymanager_password
   - platform: template
     sensors:
       packages_in_transit:

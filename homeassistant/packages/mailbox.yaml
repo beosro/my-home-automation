@@ -6,7 +6,7 @@ automation:
       platform: event
       event_type: mailgun_message_received
     action:
-      - service: generic_mailbox.add_message
+      - service: mailbox.add_message
         data_template:
           text: '{{trigger.event.data.subject}}'
           source: '{{trigger.event.data.from.split(" <")[0]}}'
@@ -30,7 +30,7 @@ automation:
       platform: event
       event_type: crimealerts_incident
     action:
-      - service: generic_mailbox.add_message
+      - service: mailbox.add_message
         data_template:
            text: '{{trigger.event.data}}'
            source: 'Crime Reports'

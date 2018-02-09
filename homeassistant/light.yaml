@@ -12,9 +12,10 @@
       type: white
       name: Living Room Fan Light
       fade: true
-      #- number: 3
-      #type: white
-      #name: Group 3
+    - number: 3
+      type: rgbw
+      name: Stair Lighting
+      fade: true
     - number: 4
       type: rgbw
       name: Living Room Lamps

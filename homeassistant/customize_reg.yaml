@@ -44,6 +44,9 @@ switch.zwave_switch_7_switch:
   friendly_name: Living Room Downlights
   icon: mdi:ceiling-light
   emulated_hue_hidden: false
+switch.zwave_water_valve_switch:
+  friendly_name: Main Water Shutoff
+  icon: mdi:water-pump
 cover.zwave_garage_door_opener_open:
   friendly_name: Garage Door
 binary_sensor.zwave_water_sensor_1_sensor:
@@ -55,6 +58,8 @@ light.bedroom_lamp:
 light.living_room_lamps:
   emulated_hue_hidden: false
   icon: mdi:lamp
+light.stair_lighting:
+  icon: mdi:led-on
 light.living_room_fan_light:
   emulated_hue_hidden: false
 fan.zwave_fan_1_level:

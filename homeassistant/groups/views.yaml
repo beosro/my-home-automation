@@ -36,7 +36,8 @@ Security:
     - group.doors
     - group.doorbell
     - group.camera
-    - group.pests
+      #- group.pests
+    - group.garage_door
     - lock.zwave_lock_locked
     - binary_sensor.any_door_open
 Media:
@@ -54,6 +55,12 @@ Outdoors:
     - group.weather
     - group.health
     - group.orbits
+Comfort:
+  view: yes
+  icon: mdi:thermometer
+  entities:
+    - group.temperatures
+    - climate.thermostat
 Admin:
   view: yes
   icon: mdi:settings

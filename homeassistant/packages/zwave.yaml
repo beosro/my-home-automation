@@ -12,7 +12,6 @@ cover:
 
 zwave:
   usb_path: /dev/ttyACM0
-  config_path: !secret zwave_config_path
   device_config:
     fan.zwave_fan_1_level:
       polling_intensity: 3

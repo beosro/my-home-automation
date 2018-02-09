@@ -16,6 +16,76 @@ script:
           - switch.zwave_switch_7_switch
 
 automation:
+  - alias: Living Room Scene On
+    trigger:
+      - event_type: zwave.scene_activated
+        platform: event
+        event_data:
+          entity_id: zwave.zwave_switch_7
+          scene_id: 1
+          scene_data: 3
+    action:
+      - service: light.turn_on
+        entity_id:
+          - light.living_room_lamps
+          - light.living_room_fan_light
+      - service: switch.turn_on
+        entity_id:
+          - switch.zwave_switch_7_switch
+  - alias: Living Room Scene Off
+    trigger:
+      - event_type: zwave.scene_activated
+        platform: event
+        event_data:
+          entity_id: zwave.zwave_switch_7
+          scene_id: 2
+          scene_data: 3
+    action:
+      - service: light.turn_off
+        entity_id:
+          - light.living_room_lamps
+          - light.living_room_fan_light
+      - service: switch.turn_off
+        entity_id:
+          - switch.zwave_switch_7_switch
+  - alias: Hall Scene On
+    trigger:
+      - event_type: zwave.scene_activated
+        platform: event
+        event_data:
+          entity_id: zwave.zwave_switch_6
+          scene_id: 1
+          scene_data: 3
+    action:
+      - service: light.turn_on
+        entity_id: light.stair_lighting
+        data:
+          brightness: 50
+          color_name: white
+  - alias: Hall Scene Off
+    trigger:
+      - event_type: zwave.scene_activated
+        platform: event
+        event_data:
+          entity_id: zwave.zwave_switch_6
+          scene_id: 2
+          scene_data: 3
+    action:
+      - service: light.turn_off
+        entity_id: light.stair_lighting
+  - alias: Gentle bedroom light
+    trigger:
+      - event_type: zwave.scene_activated
+        platform: event
+        event_data:
+          entity_id: zwave.zwave_dimmer_2
+          scene_id: 1
+          scene_data: 3
+    action:
+      - service: light.turn_on
+        entity_id: light.zwave_dimmer_2_level
+        data:
+          brightness: 5
   - alias: Bedroom light occupancy
     trigger:
       - platform: state
@@ -58,6 +128,8 @@ automation:
         entity_id: sun.sun
         value_template: '{{ state.attributes.elevation }}'
         below: 5
+      - condition: time
+        after: '12:00:00'
     action:
       - service: switch.turn_on
         entity_id:

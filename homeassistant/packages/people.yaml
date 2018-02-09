@@ -71,6 +71,11 @@ automation:
             message: "Good night."
       - service: light.turn_off
         entity_id: group.all_lights
+      - service: light.turn_on
+        entity_id: light.stair_lighting
+        data:
+          brightness: 10
+          color_name: red
       - service: switch.turn_off
         entity_id:
           - switch.zwave_switch_1_switch
@@ -110,6 +115,8 @@ automation:
     action:
       - service: switch.turn_off
         entity_id: switch.sleeping
+      - service: light.turn_off
+        entity_id: light.stair_lighting
       - service: script.turn_on
         entity_id: script.play_tts
         data_template:
