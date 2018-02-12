@@ -1,4 +1,5 @@
 Batteries:
+  - sensor.vacuum_battery
   - sensor.first_floor_smoke_co_battery
   - sensor.second_floor_smoke_co_battery
   - sensor.front_door_lock_battery
