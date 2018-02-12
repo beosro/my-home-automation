@@ -73,6 +73,31 @@ automation:
     action:
       - service: light.turn_off
         entity_id: light.stair_lighting
+  - alias: Hall Scene On (Red)
+    trigger:
+      - event_type: zwave.scene_activated
+        platform: event
+        event_data:
+          entity_id: zwave.zwave_switch_6
+          scene_id: 1
+          scene_data: 4
+    action:
+      - service: light.turn_on
+        entity_id: light.stair_lighting
+        data:
+          brightness: 10
+          color_name: red
+  - alias: Hall Scene Off (Red)
+    trigger:
+      - event_type: zwave.scene_activated
+        platform: event
+        event_data:
+          entity_id: zwave.zwave_switch_6
+          scene_id: 2
+          scene_data: 4
+    action:
+      - service: light.turn_off
+        entity_id: light.stair_lighting
   - alias: Gentle bedroom light
     trigger:
       - event_type: zwave.scene_activated

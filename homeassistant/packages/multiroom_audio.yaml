@@ -47,6 +47,10 @@ media_player:
     host: localhost
   - platform: mpd
     host: localhost
+  - platform: mpd
+    name: Local Music
+    host: localhost
+    port: 7600
   - platform: spotify
     client_id: !secret spotify_client_id
     client_secret: !secret spotify_client_secret
@@ -130,3 +134,61 @@ automation:
     action:
       service_template: media_player.media_play
       entity_id: media_player.multiroom_audio
+  - alias: Autoswitch to Spotify source
+    trigger:
+      platform: state
+      to: playing
+      entity_id: media_player.spotify
+    condition:
+      - condition: template
+        value_template: "{{states.media_player.spotify.attributes.source=='Multi-Room Audio'}}"
+    action:
+      - service: media_player.select_source
+        data:
+          entity_id: !secret snapcast_group_1
+          source: Spotify
+      - service: media_player.media_pause
+        entity_id:
+          - media_player.local_music
+  - alias: Autoswitch to Local source
+    trigger:
+      platform: state
+      to: playing
+      entity_id: media_player.local_music
+    action:
+      - service: media_player.select_source
+        data:
+          entity_id: !secret snapcast_group_1
+          source: Local
+      - service: media_player.media_pause
+        entity_id:
+          - media_player.spotify
+  - alias: Autoswitch to TTS source
+    trigger:
+      platform: state
+      to: playing
+      entity_id: media_player.mpd
+    action:
+      - service: media_player.select_source
+        data:
+          entity_id: !secret snapcast_group_1
+          source: TTS
+      - service: media_player.media_pause
+        entity_id:
+          - media_player.local_music
+          - media_player.spotify
+  - alias: Match source when switching to Multi-Room Audio Spotify source
+    trigger:
+      platform: template
+      value_template: "{{states.media_player.spotify.attributes.source=='Multi-Room Audio'}}"
+    action:
+      - service: media_player.select_source
+        data:
+          entity_id: !secret snapcast_group_1
+          source: Spotify
+      - service: media_player.media_pause
+        entity_id:
+          - media_player.local_music
+      - service: media_player.media_play
+        entity_id:
+          - media_player.spotify

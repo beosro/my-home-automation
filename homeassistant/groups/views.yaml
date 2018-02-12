@@ -48,6 +48,7 @@ Media:
     - group.snapclients
     - group.tts
     - media_player.spotify
+    - media_player.local_music
 Outdoors:
   view: yes
   icon: mdi:pine-tree

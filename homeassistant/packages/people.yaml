@@ -140,3 +140,30 @@ automation:
       service: homeassistant.turn_off
       data:
         entity_id: switch.sleeping
+  - alias: Silent sleep mode
+    trigger:
+      - event_type: zwave.scene_activated
+        platform: event
+        event_data:
+          entity_id: zwave.zwave_dimmer_2
+          scene_id: 2
+          scene_data: 3
+    action:
+      - service: light.turn_off
+        entity_id: group.all_lights
+      - service: light.turn_on
+        entity_id: light.stair_lighting
+        data:
+          brightness: 10
+          color_name: red
+      - service: switch.turn_off
+        entity_id:
+          - switch.zwave_switch_1_switch
+          - switch.zwave_switch_2_switch
+          - switch.zwave_switch_3_switch
+          - switch.zwave_switch_4_switch
+          - switch.zwave_switch_5_switch
+          - switch.zwave_switch_6_switch
+          - switch.zwave_switch_7_switch
+          - switch.smart_socket_1
+          - switch.smart_socket_2
