@@ -69,6 +69,9 @@ automation:
       to: 'off'
     condition:
     - condition: state
+      entity_id: switch.guests
+      state: 'off'
+    - condition: state
       entity_id: group.all_devices
       state: 'home'
     - condition: state
@@ -113,6 +116,9 @@ automation:
           scene_id: 1
           scene_data: 0
     condition:
+      - condition: state
+        entity_id: switch.guests
+        state: 'off'
       - condition: state
         entity_id: switch.briefings
         state: 'on'

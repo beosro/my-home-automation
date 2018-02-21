@@ -4,6 +4,7 @@ exclude:
     - proximity.home
   domains:
     - calendar
+    - zwave
     - zone
     - persistent_notification
     - script

@@ -11,6 +11,7 @@ exclude:
     - proximity.his_home
     - proximity.home
   domains:
+    - zwave
     - group
     - persistent_notification
 include:

@@ -66,6 +66,9 @@ automation:
       to: 'on'
     condition:
       - condition: state
+        entity_id: switch.guests
+        state: 'off'
+      - condition: state
         entity_id: binary_sensor.any_door_open
         state: 'off'
     action:
