@@ -1,3 +1,9 @@
+#########################################################################
+# Server
+#
+#  Monitor the server running Home Assistant.
+#########################################################################
+
 homeassistant:
   customize:
     sensor.glances_sensor_cpu_load:
@@ -21,6 +27,7 @@ homeassistant:
     'sensor.process_*':
       icon: mdi:check
 
+# Group entities by server and services.
 group:
   Server:
     - sensor.glances_sensor_cpu_load
@@ -34,10 +41,12 @@ group:
     - sensor.process_glances
     - sensor.process_snapserver
 
+# Connect to server UPS.
 apcupsd:
   host: localhost
   port: 3551
 
+# Link to server monitor UI.
 panel_iframe:
   system:
     title: Server
@@ -45,6 +54,7 @@ panel_iframe:
     url: !secret glances_url
 
 sensor:
+  # Monitor various server metrics.
   - platform: glances
     name: Glances sensor
     host: localhost
@@ -53,9 +63,11 @@ sensor:
       - disk_use_percent
       - memory_use_percent
       - processor_load
+  # Monitor UPS battery level.
   - platform: apcupsd
     resources:
       - bcharge
+  # Monitor SSL certificate expiry.
   - platform: cert_expiry
     host: !secret hass_cert_url
     name: SSL Certificate Expiry
