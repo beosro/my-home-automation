@@ -220,3 +220,6 @@ sensor.zwave_detector_2_alarm_level:
 light.zwave_dimmer_2_level:
   platform: zwave
   unique_id: 44-72057594780942337
+cover.zwave_garage_door_opener_barrier_state_label:
+  platform: zwave
+  unique_id: 25-72057594463223828

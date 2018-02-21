@@ -37,6 +37,18 @@ homeassistant:
       icon: mdi:chart-bar
     sensor.cold_flu_risk:
       icon: mdi:chart-bubble
+    sensor.capitalweather_daily_digit:
+      friendly_name: 'Weather Rating'
+      icon: mdi:emoticon-cool
+    sensor.capitalweather_day_description:
+      friendly_name: 'Day Description'
+      icon: mdi:weather-partlycloudy
+    sensor.capitalweather_snow_potential_index:
+      friendly_name: 'Snow Likelihood'
+      icon: mdi:snowflake
+    sensor.capitalweather_snow_forecast:
+      friendly_name: 'Snow Forecast'
+      icon: mdi:weather-snowy
   customize_glob:
     'sensor.waqi*':
       hidden: true
@@ -48,6 +60,9 @@ group:
     - sensor.dark_sky_humidity
     - sensor.dark_sky_cloud_coverage
     - sensor.dark_sky_wind_speed
+    - sensor.capitalweather_daily_digit
+    - sensor.capitalweather_snow_potential_index
+    - sensor.daily_earthquakes
     - camera.weather_radar
   Health:
     - sensor.pollen_level
@@ -65,6 +80,18 @@ camera:
     name: Weather Radar
 
 sensor:
+  - platform: twitter
+    consumer_key: !secret twitter_consumer_key
+    consumer_secret: !secret twitter_consumer_secret
+    access_token_key: !secret twitter_access_token_key
+    access_token_secret: !secret twitter_access_token_secret
+    screen_names:
+      capitalweather:
+        - 'igit: +(?P<daily_digit>[-0-9]+)/10[^A-Za-z]+(?P<day_description>.+?[\.!\?])'
+        - 'potential index: +(?P<snow_potential_index>[-0-9]+)/10[^A-Za-z]+(?P<snow_forecast>.+?[\.!\?])'
+  - platform: usgs
+    name: Daily Earthquakes
+    radius: 1600
   - platform: moon
   - platform: season
   - platform: waqi

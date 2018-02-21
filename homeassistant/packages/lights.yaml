@@ -1,8 +1,29 @@
 homeassistant:
   customize:
-    script.living_room_lights:
+    group.living_room:
       emulated_hue_hidden: false
       emulated_hue_name: 'Living Room Lights'
+
+group:
+  Switched Lighting:
+    - switch.zwave_switch_1_switch
+    - switch.zwave_switch_4_switch
+    - switch.zwave_switch_7_switch
+    - switch.zwave_switch_3_switch
+    - switch.zwave_switch_2_switch
+    - switch.zwave_switch_6_switch
+    - switch.zwave_switch_5_switch
+  Dimmable Lighting:
+    - light.bedroom_lamp
+    - light.zwave_dimmer_2_level
+    - light.zwave_dimmer_3_level
+    - light.zwave_dimmer_1_level
+    - light.living_room_lamps
+    - light.living_room_fan_light
+    - light.stair_lighting
+  All Lighting:
+    - group.switched_lighting
+    - group.dimmable_lighting
 
 script:
   living_room_lights:
@@ -32,6 +53,7 @@ automation:
       - service: switch.turn_on
         entity_id:
           - switch.zwave_switch_7_switch
+
   - alias: Living Room Scene Off
     trigger:
       - event_type: zwave.scene_activated
@@ -48,6 +70,7 @@ automation:
       - service: switch.turn_off
         entity_id:
           - switch.zwave_switch_7_switch
+
   - alias: Hall Scene On
     trigger:
       - event_type: zwave.scene_activated
@@ -62,6 +85,7 @@ automation:
         data:
           brightness: 50
           color_name: white
+
   - alias: Hall Scene Off
     trigger:
       - event_type: zwave.scene_activated
@@ -73,6 +97,7 @@ automation:
     action:
       - service: light.turn_off
         entity_id: light.stair_lighting
+
   - alias: Hall Scene On (Red)
     trigger:
       - event_type: zwave.scene_activated
@@ -87,6 +112,7 @@ automation:
         data:
           brightness: 10
           color_name: red
+
   - alias: Hall Scene Off (Red)
     trigger:
       - event_type: zwave.scene_activated
@@ -98,6 +124,7 @@ automation:
     action:
       - service: light.turn_off
         entity_id: light.stair_lighting
+
   - alias: Gentle bedroom light
     trigger:
       - event_type: zwave.scene_activated
@@ -111,6 +138,7 @@ automation:
         entity_id: light.zwave_dimmer_2_level
         data:
           brightness: 5
+
   - alias: Bedroom light occupancy
     trigger:
       - platform: state
@@ -122,6 +150,7 @@ automation:
         entity_id:
           - light.bedroom_lamp
           - light.zwave_dimmer_2_level
+
   - alias: Den light occupancy
     trigger:
       - platform: state
@@ -132,6 +161,7 @@ automation:
       - service: light.turn_off
         entity_id:
           - light.zwave_dimmer_1_level
+
   - alias: Kitchen light occupancy
     trigger:
       - platform: state
@@ -143,6 +173,7 @@ automation:
         entity_id:
           - switch.zwave_switch_1_switch
           - switch.zwave_switch_3_switch
+
   - alias: Turn various lights after dark when door opens
     trigger:
       platform: state
@@ -159,6 +190,50 @@ automation:
       - service: switch.turn_on
         entity_id:
           - switch.zwave_switch_3_switch
-          - switch.zwave_switch_1_switch
-          - switch.zwave_switch_6_switch
-          - switch.zwave_switch_7_switch
+          - switch.zwave_switch_2_switch
+      - service: light.turn_on
+        entity_id:
+          - light.stair_lighting
+        data:
+          brightness: 50
+          color_name: white
+
+  - alias: turn on porch light
+    trigger:
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: '{{state.attributes.elevation}}'
+        below: 15
+      - platform: numeric_state
+        entity_id: sensor.dark_sky_cloud_coverage
+        above: 80
+    action:
+      service: switch.turn_on
+      entity_id: switch.zwave_switch_2_switch
+
+  - alias: turn off porch light
+    trigger:
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: '{{state.attributes.elevation}}'
+        above: 15
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.dark_sky_cloud_coverage
+        below: 80
+    action:
+      service: switch.turn_off
+      entity_id: switch.zwave_switch_2_switch
+
+  - alias: turn off lights when house is empty
+    trigger:
+      - platform: state
+        entity_id: group.tracked_people
+        to: not_home
+    condition:
+      - condition: state
+        entity_id: switch.guests
+        state: 'off'
+    action:
+      - service: homeassistant.turn_off
+        entity_id: group.all_lighting

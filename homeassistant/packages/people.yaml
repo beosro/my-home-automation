@@ -8,6 +8,8 @@ homeassistant:
       icon: mdi:airplane
     switch.guests:
       icon: mdi:human-male-female
+      emulated_hue_hidden: false
+      emulated_hue_name: Guest Mode
 
 group:
   People:
@@ -16,6 +18,9 @@ group:
     - switch.sleeping
     - switch.vacation
     - switch.guests
+  Tracked People:
+    - device_tracker.her_phone
+    - device_tracker.his_phone
 
 switch:
   - platform: mqtt
@@ -93,7 +98,7 @@ automation:
         entity_id:
           - media_player.living_room
           - media_player.firetv
-      - service: media_player.pause
+      - service: media_player.media_pause
         entity_id:
           - media_player.spotify
       - condition: numeric_state
@@ -167,3 +172,23 @@ automation:
           - switch.zwave_switch_7_switch
           - switch.smart_socket_1
           - switch.smart_socket_2
+
+  - alias: automatic vacation mode
+    trigger:
+      - platform: state
+        entity_id: group.tracked_people
+        to: not_home
+        for:
+          hours: 24
+    action:
+      - service: switch.turn_on
+        entity_id: switch.vacation
+
+  - alias: turn off vacation mode
+    trigger:
+      - platform: state
+        entity_id: group.tracked_people
+        to: home
+    action:
+      - service: switch.turn_off
+        entity_id: switch.vacation

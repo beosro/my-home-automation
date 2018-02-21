@@ -163,32 +163,34 @@ automation:
       - service: media_player.media_pause
         entity_id:
           - media_player.spotify
-  - alias: Autoswitch to TTS source
-    trigger:
-      platform: state
-      to: playing
-      entity_id: media_player.mpd
-    action:
-      - service: media_player.select_source
-        data:
-          entity_id: !secret snapcast_group_1
-          source: TTS
-      - service: media_player.media_pause
-        entity_id:
-          - media_player.local_music
-          - media_player.spotify
-  - alias: Match source when switching to Multi-Room Audio Spotify source
-    trigger:
-      platform: template
-      value_template: "{{states.media_player.spotify.attributes.source=='Multi-Room Audio'}}"
-    action:
-      - service: media_player.select_source
-        data:
-          entity_id: !secret snapcast_group_1
-          source: Spotify
-      - service: media_player.media_pause
-        entity_id:
-          - media_player.local_music
-      - service: media_player.media_play
-        entity_id:
-          - media_player.spotify
+#  - alias: Autoswitch to TTS source
+#    trigger:
+#      platform: state
+#      to: playing
+#      entity_id: media_player.mpd
+#    action:
+#      - service: media_player.select_source
+#        data:
+#          entity_id: !secret snapcast_group_1
+#          source: TTS
+#      - service: media_player.media_pause
+#        entity_id: media_player.local_music
+#      - condition: template
+#        value_template: "{{states.media_player.spotify.attributes.source=='Multi-Room Audio'}}"
+#      - service: media_player.media_pause
+#        entity_id: media_player.spotify
+#  - alias: Match source when switching to Multi-Room Audio Spotify source
+#    trigger:
+#      platform: template
+#      value_template: "{{states.media_player.spotify.attributes.source=='Multi-Room Audio'}}"
+#    action:
+#      - service: media_player.select_source
+#        data:
+#          entity_id: !secret snapcast_group_1
+#          source: Spotify
+#      - service: media_player.media_pause
+#        entity_id:
+#          - media_player.local_music
+#      - service: media_player.media_play
+#        entity_id:
+#          - media_player.spotify

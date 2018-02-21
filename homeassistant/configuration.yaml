@@ -9,6 +9,9 @@ homeassistant:
   customize_glob: !include customize_glob.yaml
   packages:  !include_dir_named packages
 
+customizer:
+  custom_ui: hosted
+
 system_log:
   max_entries: 100
 

@@ -32,10 +32,7 @@
 
       {# Friendly time #}
       {% macro friendly_time(timestamp) -%}
-        {{as_timestamp(timestamp)|timestamp_custom('%-I', true)}}
-        {%- if as_timestamp(timestamp)|timestamp_custom('%-M', true) != '0' -%}
-          {{ ' ' }}{{as_timestamp(timestamp)|timestamp_custom('%-M', true)}}
-        {%- endif %}
+        {{as_timestamp(timestamp)|timestamp_custom('%I:%M', true)}}
       {%- endmacro %}
 
       {# Hours until a given event, approximately #}
@@ -139,10 +136,17 @@
       {%- endmacro %}
 
       {# Weather sentence #}
-      {% macro weather_sentence() -%}
+      {% macro weather_sentence(extended) -%}
         It is {{states.sensor.dark_sky_summary.state.lower()}} and {{states.sensor.dark_sky_temperature.state|int|round}} degrees outside.
         {{- ' ' -}}
         {{- states.sensor.dark_sky_hourly_summary.state-}}
+        {% if extended %}
+          Today is rated {{states.sensor.capitalweather_daily_digit.state}} out of 10.
+          {{ states.sensor.capitalweather_day_description.state -}}
+          {% if states.sensor.season.state == 'Winter' %}
+            {{ states.sensor.capitalweather_snow_forecast.state -}}
+          {% endif %}
+        {% endif %}
       {%- endmacro %}
 
       {# Get person's device #}
@@ -269,12 +273,19 @@
         {%- endif -%}
       {%- endmacro %}
 
-      {# Cold/Flue sentence #}
+      {# Cold/Flu sentence #}
       {% macro cold_flu_sentence() -%}
         {%- if states.sensor.cold_flu.state|float > 7.2 -%}
           High risk for airborne sickness today. Be careful!
         {%- endif -%}
       {%- endmacro %}
+
+      {# Org status sentence #}
+      {% macro org_status_sentence() -%}
+        {% if states.sensor.org_operating_status.state != 'Open' %}
+          {{states.sensor.org_operating_status_message.state}}
+        {% endif %}
+      {% endmacro %}
 
       {# Validate requested person #}
       {% macro validate_and_brief(person) -%}
@@ -294,9 +305,10 @@
       {# Morning briefing - generic #}
       {% macro morning_briefing_generic() -%}
         Good morning!
-        {{weather_sentence()}}
+        {{weather_sentence(true)}}
         {{pollen_sentence()}}
         {{cold_flu_sentence()}}
+        {{org_status_sentence()}}
         {{everyones_commute_sentence()}}
         {{morning_closing_sentence("")}}
       {% endmacro %}
@@ -304,9 +316,10 @@
       {# Morning briefing #}
       {% macro morning_briefing(person) -%}
         {{morning_greeting_sentence(person)}}
-        {{weather_sentence()}}
+        {{weather_sentence(true)}}
         {{pollen_sentence()}}
         {{cold_flu_sentence()}}
+        {{org_status_sentence()}}
         {{commute_sentence(person)}}
         {{horoscope_sentence(person)}}
         {{morning_closing_sentence(person)}}
@@ -318,7 +331,7 @@
         {{evening_greeting_sentence(person)}}
         {{holiday_sentence()}}
         {{battery_sentence(person)}}
-        {{weather_sentence()}}
+        {{weather_sentence(false)}}
         {{omw_sentence(other_person)}}
         {{deliveries_sentence()}}
         {{market_sentence()}}

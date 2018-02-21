@@ -26,3 +26,6 @@
 - name: call
   platform: twilio_call
   from_number: !secret twilio_number
+- name: discord
+  platform: discord
+  token: !secret discord_token

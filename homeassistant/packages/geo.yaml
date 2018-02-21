@@ -6,6 +6,12 @@ homeassistant:
       friendly_name: Her proximity
     proximity.his_home:
       friendly_name: His proximity
+    sensor.org_operating_status:
+      friendly_name: !secret org_operating_status_name
+      icon: mdi:briefcase-check
+    sensor.org_operating_status_message:
+      friendly_name: !secret org_operating_status_desc_name
+      icon: mdi:briefcase-check
   customize_glob:
     'sensor.*_commute':
       icon: mdi:car
@@ -21,6 +27,11 @@ group:
     - proximity.her_home
     - proximity.his_home
     - proximity.home
+    - sensor.his_departure_time
+    - sensor.her_departure_time
+    - sensor.traveling_away
+    - sensor.traveling_home
+    - sensor.org_operating_status
 
 zone:
   - name: Home
@@ -74,7 +85,36 @@ proximity:
     tolerance: 50
     unit_of_measurement: !secret proximity_unit_of_measurement
 
+binary_sensor:
+  - platform: trend
+    sensors:
+      traveling_home:
+        entity_id: proximity.his_home
+        device_class: presence
+      traveling_away:
+        entity_id: proximity.his_home
+        device_class: presence
+    invert: true
+
 sensor:
+  - platform: mqtt
+    name: "His Departure Time"
+    state_topic: "home/departure/his"
+  - platform: mqtt
+    name: "Her Departure Time"
+    state_topic: "home/departure/her"
+  - platform: rest
+    scan_interval: 3600
+    resource: !secret org_operating_status
+    method: GET
+    name: org_operating_status
+    value_template: '{{value_json.StatusSummary}}'
+  - platform: rest
+    scan_interval: 3600
+    resource: !secret org_operating_status
+    method: GET
+    name: org_operating_status_message
+    value_template: '{{value_json.ShortStatusMessage}}'
   - platform: statistics
     name: Her Distance
     entity_id: proximity.her_home
@@ -109,3 +149,18 @@ sensor:
     destination: !secret home_address
     options:
       mode: driving
+
+automation:
+  - alias: track departure time
+    trigger:
+      - platform: state
+        entity_id:
+          - device_tracker.his_phone
+          - device_tracker.her_phone
+        from: home
+        to: not_home
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: 'home/departure/{{trigger.entity_id.split(".")[1].split("_")[0]}}'
+          payload: '{{now().hour}}:{{now().minute}}'
