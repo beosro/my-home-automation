@@ -1,3 +1,9 @@
+#########################################################################
+# Lights
+#
+#  Handle everything primarily lighting-related.
+#########################################################################
+
 homeassistant:
   customize:
     group.living_room:
@@ -5,6 +11,7 @@ homeassistant:
       emulated_hue_name: 'Living Room Lights'
 
 group:
+  # Group switched lighting together.
   Switched Lighting:
     - switch.zwave_switch_1_switch
     - switch.zwave_switch_4_switch
@@ -13,6 +20,7 @@ group:
     - switch.zwave_switch_2_switch
     - switch.zwave_switch_6_switch
     - switch.zwave_switch_5_switch
+  # Group dimmable lighting together.
   Dimmable Lighting:
     - light.bedroom_lamp
     - light.zwave_dimmer_2_level
@@ -21,22 +29,15 @@ group:
     - light.living_room_lamps
     - light.living_room_fan_light
     - light.stair_lighting
+  # Master lighting group with switched and dimmable lighting.
   All Lighting:
     - group.switched_lighting
     - group.dimmable_lighting
 
-script:
-  living_room_lights:
-    sequence:
-      - service: light.toggle
-        entity_id:
-          - light.living_room_lamps
-          - light.living_room_fan_light
-      - service: switch.toggle
-        entity_id:
-          - switch.zwave_switch_7_switch
-
 automation:
+  # The living room has several lamps and overhead lights. When the wall
+  # switch is double-tapped on, turn on all the lighting (rather then the single
+  # pair of lights physicallly wired to the switch).
   - alias: Living Room Scene On
     trigger:
       - event_type: zwave.scene_activated
@@ -54,6 +55,7 @@ automation:
         entity_id:
           - switch.zwave_switch_7_switch
 
+  # Turn off all the lights when the switched is double-tapped off.
   - alias: Living Room Scene Off
     trigger:
       - event_type: zwave.scene_activated
@@ -71,7 +73,9 @@ automation:
         entity_id:
           - switch.zwave_switch_7_switch
 
-  - alias: Hall Scene On
+  # The stairs have LED lighting, unconnected to a physical switch.
+  # Turn it on when the overhead lighting switch is double-tapped on.
+  - alias: Stair Scene On
     trigger:
       - event_type: zwave.scene_activated
         platform: event
@@ -86,7 +90,9 @@ automation:
           brightness: 50
           color_name: white
 
-  - alias: Hall Scene Off
+  # Turn off the stair LED lighting when the overhead lighting switch
+  # is double-tapped off.
+  - alias: Stairs Scene Off
     trigger:
       - event_type: zwave.scene_activated
         platform: event
@@ -98,7 +104,10 @@ automation:
       - service: light.turn_off
         entity_id: light.stair_lighting
 
-  - alias: Hall Scene On (Red)
+  # Turn on dim red night-lighting on the stair LEDs
+  # when the overhead lighting physical switch is
+  # triple-tapped on.
+  - alias: Stair Scene On (Red)
     trigger:
       - event_type: zwave.scene_activated
         platform: event
@@ -113,7 +122,9 @@ automation:
           brightness: 10
           color_name: red
 
-  - alias: Hall Scene Off (Red)
+  # Turn off stair LEDs when the overhead lighting physical
+  # switch is triple-tapped off.
+  - alias: Stair Scene Off (Red)
     trigger:
       - event_type: zwave.scene_activated
         platform: event
@@ -125,6 +136,8 @@ automation:
       - service: light.turn_off
         entity_id: light.stair_lighting
 
+  # Turn on the bedroom light at the dimmest setting
+  # when the switch is double-tapped on.
   - alias: Gentle bedroom light
     trigger:
       - event_type: zwave.scene_activated
@@ -139,6 +152,8 @@ automation:
         data:
           brightness: 5
 
+  # Automatically turn off the bedroom light when
+  # the occupancy sensor goes off.
   - alias: Bedroom light occupancy
     trigger:
       - platform: state
@@ -151,6 +166,8 @@ automation:
           - light.bedroom_lamp
           - light.zwave_dimmer_2_level
 
+  # Automatically turn off the den light when
+  # the occupancy sensor goes off.
   - alias: Den light occupancy
     trigger:
       - platform: state
@@ -162,6 +179,8 @@ automation:
         entity_id:
           - light.zwave_dimmer_1_level
 
+  # Automatically turn off the kitchen lights when
+  # the occupancy sensor goes off.
   - alias: Kitchen light occupancy
     trigger:
       - platform: state
@@ -174,6 +193,9 @@ automation:
           - switch.zwave_switch_1_switch
           - switch.zwave_switch_3_switch
 
+  # If it's dark outside in the evening and the front door
+  # is opened, turn on the foyer lights, porch lights,
+  # and stair LED lighting.
   - alias: Turn various lights after dark when door opens
     trigger:
       platform: state
@@ -198,6 +220,8 @@ automation:
           brightness: 50
           color_name: white
 
+  # If it is dark outside (either sun is going down, or significant
+  # cloud coverage), turn on the porch lanterns.
   - alias: turn on porch light
     trigger:
       - platform: numeric_state
@@ -211,6 +235,8 @@ automation:
       service: switch.turn_on
       entity_id: switch.zwave_switch_2_switch
 
+  # Turn off the porch light if it's light outside, except
+  # if there's a lot of cloud coverage.
   - alias: turn off porch light
     trigger:
       - platform: numeric_state
@@ -225,6 +251,8 @@ automation:
       service: switch.turn_off
       entity_id: switch.zwave_switch_2_switch
 
+  # If all tracked occupants have left, and there's no guests,
+  # turn off all the house lights.
   - alias: turn off lights when house is empty
     trigger:
       - platform: state
