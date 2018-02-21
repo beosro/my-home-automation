@@ -1,3 +1,10 @@
+#########################################################################
+# Comfort
+#
+#  Configuration related to maintaining a comfortable environment in the
+#  house.
+#########################################################################
+
 homeassistant:
   customize:
     weather.thermostat:
@@ -9,6 +16,7 @@ homeassistant:
     sensor.thermostat_temperature:
       friendly_name: Foyer Temperature
 
+# Pull out target high and low temperatures from thermostat.
 sensor:
   - platform: template
     sensors:
@@ -19,7 +27,7 @@ sensor:
         friendly_name: "Maximum Temperature"
         value_template: "{{states.climate.thermostat.attributes.target_temp_high}}"
 
-
+# Group temperatures from each monitored room for easy viewing.
 group:
   Temperatures:
     - sensor.kitchen_temperature
@@ -29,11 +37,14 @@ group:
     - sensor.high_target
     - sensor.low_target
 
-
+# Set up thermostat.
 ecobee:
   api_key: !secret ecobee_api_key
 
 automation:
+
+  # Turn off fans and turn on thermostat "away" mode after
+  # everyone leaves the house.
   - alias: turn on away mode when everyone leaves
     trigger:
       - platform: state
@@ -51,6 +62,7 @@ automation:
           entity_id: climate.thermostat
           away_mode: true
 
+  # Turn off thermostat "away" mode when anyone gets home.
   - alias: turn off away mode
     trigger:
       - platform: state
@@ -62,6 +74,8 @@ automation:
           entity_id: climate.thermostat
           away_mode: false
 
+  # Turn on the bedroom fan when the temperature exceeds
+  # a threshold and we're sleeping.
   - alias: turn on fan while sleeping
     trigger:
       - platform: numeric_state
@@ -77,6 +91,8 @@ automation:
         data:
           speed: 'low'
 
+  # Turn off the bedroom fan when the temperature goes below
+  # a threshold and we're sleeping.
   - alias: turn off fan while sleeping
     trigger:
       - platform: numeric_state
