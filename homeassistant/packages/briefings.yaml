@@ -1,8 +1,19 @@
+#########################################################################
+# Briefings
+#
+#  Briefings are short messages that relay timely information. They can
+#  be played via TTS, sent in a text message, appear in the Home
+#  Assistant UI, etc. Briefings can be context dependent. For example,
+#  the time of day changes the type of information relayed, or the
+#  message can be tailored for a specific person.
+#########################################################################
+
 homeassistant:
   customize:
     switch.briefings:
       icon: mdi:voice
 
+# Group various briefing-related entities.
 group:
   Briefings:
     entities:
@@ -14,12 +25,14 @@ group:
       - switch.briefings
 
 input_select:
+  # Manual control for selecting briefing target.
   briefing_target:
     name: Briefing Target
     options:
       - 'Select a person'
       - !secret her_name
       - !secret his_name
+  # Options for TTS engine (voice provider).
   tts_engine:
     name: TTS Engine
     options:
@@ -28,11 +41,13 @@ input_select:
       - 'voicerss'
 
 sensor:
+  # Sensor that maintains the current briefing target.
   - platform: mqtt
     name: 'Briefing Target'
     state_topic: 'home/briefing_target'
 
 script:
+  # Create a persistent notification with the briefing message.
   persistent_briefing:
     sequence:
       - service: persistent_notification.create
@@ -42,6 +57,7 @@ script:
           message: !include ../templates/briefing.yaml
 
 switch:
+  # Enable or disable briefings entirely.
   - platform: mqtt
     name: Briefings
     state_topic: 'home/briefings'
@@ -52,6 +68,7 @@ switch:
     retain: true
 
 automation:
+  # Set a briefing target manually.
   - alias: Set Briefing Target
     trigger:
       platform: state
@@ -62,7 +79,11 @@ automation:
           payload: "{{states.input_select.briefing_target.state}}"
           topic: 'home/briefing_target'
           retain: true
-  - alias: Play a briefing
+  # Play the evening briefing. Arrivals to the house are tracked,
+  # so we can guess who is opening the door. When the door opens,
+  # wait a few seconds and then play the targeted briefing over TTS.
+  # This briefing plays after individuals get home from work.
+  - alias: Play an evening briefing
     trigger:
       platform: state
       entity_id: binary_sensor.door_two
@@ -79,12 +100,9 @@ automation:
       state: 'on'
     - condition: time
       after: '15:00:00'
-      weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
     - condition: template
       value_template: >
         {{states("binary_sensor." ~ states.sensor.latest_arrival.state ~ "_first_arrival") == "off"}}
@@ -107,6 +125,8 @@ automation:
       data_template:
         variables:
           message: !include ../templates/briefing.yaml
+  # Play the morning briefing. This briefing is triggered
+  # when the bedroom light switch is turned on.
   - alias: Play morning bedroom briefing
     trigger:
       - event_type: zwave.scene_activated
