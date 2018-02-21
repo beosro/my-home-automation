@@ -1,3 +1,11 @@
+#########################################################################
+# Doorbell
+#
+#  Configuration for doorbell integration. The doorbell button is wired
+#  directly to the pins of a NodeMCU. When pressed, it sends an MQTT
+#  message.
+#########################################################################
+
 homeassistant:
   customize:
     script.play_chime:
@@ -7,16 +15,19 @@ homeassistant:
       friendly_name: Chime Count
       unit_of_measurement: 'presses'
 
+# Group the doorbell entities.
 group:
   Doorbell:
     - script.play_chime
     - counter.chime_counter
     - binary_sensor.doorbell_online
 
+# Maintain a counter of doorbell presses.
 counter:
   chime_counter:
     name: Chime Count
 
+# Track connectivity of doorbell NodeMCU.
 binary_sensor:
   - platform: mqtt
     name: "Doorbell Online"
@@ -26,6 +37,7 @@ binary_sensor:
     device_class: "connectivity"
 
 automation:
+  # Handle doorbell presses, if we're not sleeping.
   - alias: Announce doorbell presses
     trigger:
       platform: mqtt
@@ -38,6 +50,8 @@ automation:
     action:
       - service: script.turn_on
         entity_id: script.play_chime
+  # The notification sent on a press gives an option to turn
+  # on the lights. Watch for that request.
   - alias: Turn on Porch Lights from Notification
     trigger:
       platform: event
@@ -51,6 +65,10 @@ automation:
           - switch.zwave_switch_3_switch
 
 script:
+  # Chime sequence. Increment the chime counter, play the chime
+  # over the multi-room audio system (pausing music if necessary),
+  # and send a notification with a snapshot from porch-facing camera,
+  # with an option to turn on porch lights.
   play_chime:
     sequence:
       - service: counter.increment
