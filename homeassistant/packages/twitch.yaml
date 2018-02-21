@@ -1,3 +1,9 @@
+#########################################################################
+# Twitch
+#
+#  Monitor streamers on twitch.tv.
+#########################################################################
+
 homeassistant:
   customize:
     switch.twitch:
@@ -11,14 +17,6 @@ sensor:
       - fopt_membrillo
       - tyrant_theviper
       - t90official
-
-# does not work 
-
-#weblink:
-#  entities:
-#    - name: Twitch
-#      url: "http://twitch.tv/directory/game/Age of Empires II%3A The Conquerors"
-#      icon: mdi:twitch
 
 switch:
   - platform: mqtt
@@ -39,6 +37,7 @@ group:
     - switch.twitch
 
 automation:
+  # Streamer online notifications.
   - alias: Streaming
     trigger:
       platform: state
