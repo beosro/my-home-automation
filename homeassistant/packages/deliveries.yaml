@@ -1,3 +1,9 @@
+#########################################################################
+# Deliveries
+#
+#  Track deliveries from all major carriers.
+#########################################################################
+
 homeassistant:
   customize:
     sensor.deliveries_today:
@@ -5,6 +11,7 @@ homeassistant:
     sensor.packages_in_transit:
       icon: mdi:truck-delivery
 
+# Set up a group with delivery information.
 group:
   Deliveries:
     - sensor.usps_mail
@@ -15,6 +22,7 @@ group:
     - sensor.packages_in_transit
     - camera.usps_mail
 
+# Configure USPS Informed Delivery access.
 usps:
   username: !secret myusps_username
   password: !secret myusps_password
@@ -22,16 +30,19 @@ usps:
   driver: 'chrome'
 
 sensor:
+  # Configure UPS MyChoice access.
   - platform: ups
     name: 'UPS'
     username: !secret upsmychoice_username
     password: !secret upsmychoice_password
+  # Configure Fedex Delivery Manager access.
 #  - platform: fedex
 #    name: 'Fedex'
 #    username: !secret fedexdeliverymanager_username
 #    password: !secret fedexdeliverymanager_password
   - platform: template
     sensors:
+      # Calculate how many packages are in transit (anything not yet delivered).
       packages_in_transit:
         friendly_name: "Packages in Transit"
         value_template: >
@@ -50,6 +61,7 @@ sensor:
             {% endif %}
           {% endmacro %}
           {{in_transit(states.sensor.usps_packages)|int + in_transit(states.sensor.ups)|int + in_transit(states.sensor.fedex)|int}}
+      # Calculate how many packages were delivered today.
       deliveries_today:
         friendly_name: "Today's Deliveries"
         value_template: >
@@ -63,6 +75,7 @@ sensor:
           {{delivered(states.sensor.usps_packages)|int + delivered(states.sensor.ups)|int + delivered(states.sensor.fedex)|int}}
 
 automation:
+  # Notify when a USPS package is delivered by monitoring email updates.
   - alias: USPS delivery notification
     trigger:
       platform: event
@@ -85,6 +98,7 @@ automation:
         data_template:
           variables:
             message: '{{trigger.event.data.subject.split("for")[0]}}'
+  # Notify when a Fedex package is delivered by monitoring email updates.
   - alias: Fedex delivery notification
     trigger:
       platform: event
@@ -107,6 +121,7 @@ automation:
         data_template:
           variables:
             message: 'Fedex package delivered'
+  # Notify when a UPS package is delivered by monitoring email updates.
   - alias: UPS delivery notification
     trigger:
       platform: event
