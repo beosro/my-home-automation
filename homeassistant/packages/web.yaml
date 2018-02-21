@@ -1,5 +1,15 @@
+#########################################################################
+# Virtual Private Servers
+#
+#  Track VPSes.
+#########################################################################
+
+
 vultr:
   api_key: !secret vultr_api_key
+
+group:
+  VPS:
 
 binary_sensor:
   - platform: digital_ocean
