@@ -1,3 +1,9 @@
+#########################################################################
+# Network
+#
+#  Monitor the local network.
+#########################################################################
+
 homeassistant:
   customize_glob:
     sensor.canon_ix6800:
@@ -14,6 +20,7 @@ homeassistant:
       icon: mdi:timer
       friendly_name: Ping
 
+# Group all the network entities.
 group:
   Network:
     - sensor.speedtest_upload
@@ -26,6 +33,7 @@ group:
     - sensor.pihole_domains_blocked
     - weblink.router
 
+# Add an iframe for pi-hole access.
 panel_iframe:
   dns:
     title: DNS
@@ -36,12 +44,14 @@ sensor:
   #  - platform: pi_hole
   #  scan_interval: 600
   #  host: localhost:8032
+  # Test internet speed every 6 hours.
   - platform: speedtest
     hour: [0, 6, 12, 18]
     monitored_conditions:
       - ping
       - download
       - upload
+  # Track printer status.
   - platform: cups
     printers:
       - Canon_iX6800
