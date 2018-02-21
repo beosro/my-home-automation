@@ -1,4 +1,14 @@
+#########################################################################
+# Regional Notifications
+#
+#  Emails from the local regional notification service are sent to
+#  Mailgun (a programmable email account). When received, Mailgun
+#  triggers Home Assistant with the contents of the email.
+#########################################################################
+
 automation:
+  # When receiving a regional alert, notify via persistent notification
+  # and TTS.
   - alias: Notify regional alerts
     trigger:
       platform: event
