@@ -1,10 +1,11 @@
+#########################################################################
+# Home Assistant
+#
+#  Manage meta-switches and Home Assistant-specific states.
+#########################################################################
+
 homeassistant:
   customize:
-    switch.presence:
-      icon: mdi:account-multiple
-      friendly_name: Detect Presence
-    switch.alert_motion:
-      icon: mdi:walk
     switch.alert_delays:
       icon: mdi:car
     sensor.new_commits:
@@ -16,11 +17,9 @@ homeassistant:
     sensor.connected_clients:
       icon: mdi:account-multiple
 
+# Group meta entities.
 group:
   Home Assistant:
-    - switch.detect_motion
-    - switch.presence
-    - switch.alert_motion
     - switch.alert_delays
     - sensor.connected_clients
     - sensor.home_assistant_errors
@@ -29,41 +28,32 @@ group:
     - sensor.new_commits
 
 sensor:
+  # Since we run the "dev" branch, see how many new commit there are.
   - platform: command_line
     name: New Commits
     scan_interval: 600
     unit_of_measurement: commits
     command: "git fetch origin && git log dev..origin/dev --pretty=oneline | wc -l"
+  # Track how many errors are in the log.
   - platform: command_line
     name: Home Assistant Errors
     scan_interval: 30
     unit_of_measurement: errors
     command: !secret ha_error_command
+  # Track how many warnings are in the log.
   - platform: command_line
     name: Home Assistant Warnings
     scan_interval: 30
     unit_of_measurement: warnings
     command: !secret ha_warning_command
+  # Track Home Assistant uptime.
   - platform: uptime
     unit_of_measurement: hours
+  # Track number of connected clients.
+  - platform: api_streams
 
 switch:
-  - platform: mqtt
-    name: "Detect Motion"
-    state_topic: "nfc/detect_motion"
-    command_topic: "nfc/detect_motion"
-    qos: 1
-    payload_on: "yes"
-    payload_off: "no"
-    retain: true
-  - platform: mqtt
-    name: "Alert Motion"
-    state_topic: "nfc/alert_motion"
-    command_topic: "nfc/alert_motion"
-    qos: 1
-    payload_on: "yes"
-    payload_off: "no"
-    retain: true
+  # Enable/Disable delay alerts.
   - platform: mqtt
     name: "Alert Delays"
     state_topic: "nfc/alert_delays"
@@ -72,18 +62,3 @@ switch:
     payload_on: "yes"
     payload_off: "no"
     retain: true
-  - platform: mqtt
-    name: "Presence"
-    state_topic: "nfc/presence"
-    command_topic: "nfc/presence"
-    qos: 1
-    payload_on: "yes"
-    payload_off: "no"
-    retain: true
-
-#automation:
-#  - alias: "Startup Notification"
-#    trigger:
-#      platform: homeassistant
-#      event_type: homeassistant_start
-#    action:
