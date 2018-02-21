@@ -1,3 +1,12 @@
+#########################################################################
+# Arrivials
+#
+#  Track individuals arriving at the house. We want to know when they
+#  arrive, but only care about the first time, which is the initial
+#  arrival after work.
+#########################################################################
+
+# Group arrival-related entities.
 group:
   Arrivals:
     entities:
@@ -6,6 +15,7 @@ group:
       - sensor.latest_arrival
       - script.first_arrival_off
 
+# Keep track of whether the first arrival has happened.
 binary_sensor:
   - platform: mqtt
     name: "Her First Arrival"
@@ -14,12 +24,14 @@ binary_sensor:
     name: "His First Arrival"
     state_topic: "home/first_arrival/his"
 
+# Keep track of the person who most recently arrived.
 sensor:
   - platform: mqtt
     name: "Latest Arrival"
     state_topic: "home/latest_arrival"
 
 automation:
+  # Set the most recent arrival.
   - alias: Set arrival
     trigger:
       platform: state
@@ -33,7 +45,8 @@ automation:
           payload: '{{trigger.entity_id.split(".")[1].split("_")[0]}}'
           topic: 'home/latest_arrival'
           retain: true
-  - alias: First Arrival Off
+  # Reset the first arrival daily.
+  - alias: Reset first arrival
     trigger:
         platform: time
         at: '15:00:00'
@@ -42,6 +55,7 @@ automation:
       entity_id: script.first_arrival_off
 
 script:
+  # Reset the first arrival for all tracked individuals.
   first_arrival_off:
     sequence:
       - service: mqtt.publish
