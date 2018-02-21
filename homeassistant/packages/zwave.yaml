@@ -1,17 +1,25 @@
+#########################################################################
+# Z-Wave
+#
+#  Configure Z-Wave.
+#########################################################################
+
 homeassistant:
+  # Hide entity types we don't need to see. Z-Wave devices can
+  # have quite a few sensors.
   customize_glob:
     'sensor.zwave_*':
       hidden: True
     'binary_sensor.zwave_door_*':
       hidden: True
-    #'zwave.*':
-    #  hidden: True
 
 cover:
   platform: zwave
 
 zwave:
+  # Location of the Z-Wave USB stick.
   usb_path: /dev/ttyACM0
   device_config:
+    # Poll fan state - it doesn't support instant status.
     fan.zwave_fan_1_level:
       polling_intensity: 3
