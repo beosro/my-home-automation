@@ -1,3 +1,9 @@
+#########################################################################
+# Geographic
+#
+#  Anything to do with zones, travel, etc.
+#########################################################################
+
 homeassistant:
   customize:
     proximity.home:
@@ -16,6 +22,7 @@ homeassistant:
     'sensor.*_commute':
       icon: mdi:car
 
+# Group geo-related entities.
 group:
   Geo:
     - sensor.his_morning_commute
@@ -34,50 +41,59 @@ group:
     - sensor.org_operating_status
 
 zone:
+  # Home zone.
   - name: Home
     latitude: !secret home_latitude
     longitude: !secret home_longitude
     radius: !secret zone_radius
     icon: mdi:people
-  - name: !secret his_work_name
-    latitude: !secret his_work_latitude
-    longitude: !secret his_work_longitude
+  # His work location 1.
+  - name: !secret his_work_name_1
+    latitude: !secret his_work_latitude_1
+    longitude: !secret his_work_longitude_1
     radius: !secret work_zone_radius
+  # His work location 2.
+  - name: !secret his_work_name_2
+    latitude: !secret his_work_latitude_2
+    longitude: !secret his_work_longitude_2
+    radius: !secret work_zone_radius
+  # Her work location 1.
   - name: !secret her_work_name_1
     latitude: !secret her_work_latitude_1
     longitude: !secret her_work_longitude_1
     radius: !secret work_zone_radius
+  # Her work location 2.
   - name: !secret her_work_name_2
     latitude: !secret her_work_latitude_2
     longitude: !secret her_work_longitude_2
     radius: !secret work_zone_radius
+  # Her home (for proximity tracking).
   - name: Her Home
     latitude: !secret home_latitude
     longitude: !secret home_longitude
     radius: !secret zone_radius
     passive: true
+  # His home (for proximity tracking).
   - name: His Home
     latitude: !secret home_latitude
     longitude: !secret home_longitude
     radius: !secret zone_radius
     passive: true
-  - name: Neighborhood
-    latitude: !secret home_latitude
-    longitude: !secret home_longitude
-    radius: !secret neighborhood_radius
-    passive: true
 
 proximity:
+  # Her proximity to home.
   her_home:
     devices:
       - device_tracker.her_phone
     tolerance: 50
     unit_of_measurement: !secret proximity_unit_of_measurement
+  # His proximity to home.
   his_home:
     devices:
       - device_tracker.his_phone
     tolerance: 50
     unit_of_measurement: !secret proximity_unit_of_measurement
+  # Nearest proximity to home.
   home:
     devices:
       - device_tracker.his_phone
@@ -85,6 +101,7 @@ proximity:
     tolerance: 50
     unit_of_measurement: !secret proximity_unit_of_measurement
 
+# TBD
 binary_sensor:
   - platform: trend
     sensors:
@@ -97,44 +114,53 @@ binary_sensor:
     invert: true
 
 sensor:
+  # His home departure time.
   - platform: mqtt
     name: "His Departure Time"
     state_topic: "home/departure/his"
+  # Her home departure time.
   - platform: mqtt
     name: "Her Departure Time"
     state_topic: "home/departure/her"
+  # Organization operating status.
   - platform: rest
     scan_interval: 3600
     resource: !secret org_operating_status
     method: GET
     name: org_operating_status
     value_template: '{{value_json.StatusSummary}}'
+  # Organization operating status message.
   - platform: rest
     scan_interval: 3600
     resource: !secret org_operating_status
     method: GET
     name: org_operating_status_message
     value_template: '{{value_json.ShortStatusMessage}}'
+  # Her average distance from home.
   - platform: statistics
     name: Her Distance
     entity_id: proximity.her_home
+  # His average distance from home.
   - platform: statistics
     name: His Distance
     entity_id: proximity.his_home
+  # Travel time on his morning commute.
   - platform: google_travel_time
     name: His Morning Commute
     api_key: !secret google_api_key
     origin: !secret home_address
-    destination: !secret his_work_address
+    destination: !secret his_work_address_1
     options:
       mode: driving
+  # Travel time on his evening commute.
   - platform: google_travel_time
     name: His Evening Commute
     api_key: !secret google_api_key
-    origin: !secret his_work_address
+    origin: !secret his_work_address_1
     destination: !secret home_address
     options:
       mode: driving
+  # Travel time on her morning commute.
   - platform: google_travel_time
     name: Her Morning Commute
     api_key: !secret google_api_key
@@ -142,6 +168,7 @@ sensor:
     destination: !secret her_work_address_1
     options:
       mode: driving
+  # Travel time on her evening commute.
   - platform: google_travel_time
     name: Her Evening Commute
     api_key: !secret google_api_key
@@ -151,6 +178,7 @@ sensor:
       mode: driving
 
 automation:
+  # Track and record departure time from home for everyone.
   - alias: track departure time
     trigger:
       - platform: state
