@@ -1,5 +1,5 @@
 #########################################################################
-# Arrivials
+# Arrivals
 #
 #  Track individuals arriving at the house. We want to know when they
 #  arrive, but only care about the first time, which is the initial
