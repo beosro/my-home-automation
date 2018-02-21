@@ -1,14 +1,8 @@
-
-#homeassistant:
-#  customize:
-#    binary_sensor.floorplan:
-#      custom_ui_state_card: floorplan
-#      config: !include ../floorplan.yaml
-
-#binary_sensor:
-#  - platform: mqtt
-#    state_topic: dummy/floorplan/sensor
-#    name: Floorplan
+#########################################################################
+# Floorplan
+#
+#  Configure the floorplan.
+#########################################################################
 
 panel_custom: 
   - name: floorplan
