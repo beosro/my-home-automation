@@ -1,3 +1,9 @@
+#########################################################################
+# Vehicles
+#
+#  Everything to do with vehicles.
+#########################################################################
+
 homeassistant:
   customize:
    sensor.2014_jeep_patriot:
@@ -27,10 +33,12 @@ homeassistant:
      icon: 'mdi:bullhorn'
 
 sensor:
+  # Connect to Mopar uConnect online portal.
   - platform: mopar
     username: !secret mopar_username
     password: !secret mopar_password
     pin: !secret mopar_pin
+  # Get local gas price.
   - platform: rest
     scan_interval: 3600
     resource: !secret gas_buddy_resource
@@ -38,6 +46,7 @@ sensor:
     name: Gas Price
     value_template: '{{value_json.trend.Today}}'
     unit_of_measurement: '$/gal'
+  # Extract fuel level from device tracker.
   - platform: template
     sensors:
       gas_tank:
@@ -45,6 +54,7 @@ sensor:
         friendly_name: 'Gas Tank'
         unit_of_measurement: '%'
 
+# Track vehicle with Automatic (3G OBD-II adapter).
 device_tracker:
   - platform: automatic
     client_id: !secret automatic_client_id
@@ -52,30 +62,35 @@ device_tracker:
     current_location: false
 
 script:
+  # Send a remote command to lock vehicle.
   lock_truck:
     sequence:
       - service: mopar.remote_command
         data:
           vehicle_index: 0
           command: lock
+  # Send a remote command to unlock vehicle.
   unlock_truck:
     sequence:
       - service: mopar.remote_command
         data:
           vehicle_index: 0
           command: unlock
+  # Send a remote command to start vehicle.
   truck_on:
     sequence:
       - service: mopar.remote_comand
         data:
           vehicle_index: 0
           command: engineon
+  # Send a remote command to turn off vehicle.
   truck_off:
     sequence:
       - service: mopar.remote_command
         data:
           vehicle_index: 0
           command: engineoff
+  # Send a remote command to trigger panic mode (horn & lights).
   truck_horn:
     sequence:
       - service: mopar.remote_command
@@ -83,6 +98,7 @@ script:
           vehicle_index: 0
           command: horn
 
+# Group vehicle-related entities.
 group:
   Vehicles:
     - device_tracker.2015_ram_1500
