@@ -1,4 +1,11 @@
+#########################################################################
+# Cats
+#
+#  Sorry, cats can't be automated.
+#########################################################################
+
 automation:
+  # Announce over TTS when the cat door is opened.
   - alias: Announce when cat door is opened
     trigger:
       platform: state
@@ -11,6 +18,7 @@ automation:
         data:
           variables:
             message: "The cat door was opened."
+  # Announce over TTS when the cat door is closed.
   - alias: Announce when cat door is closed
     trigger:
       platform: state
@@ -23,10 +31,11 @@ automation:
         data:
           variables:
             message: "The cat door is now closed."
+  # Text a warning if the cat door is open and no one is home.
   - alias: Warn if cat door is open when not home
     trigger:
       platform: state
-      entity_id: group.all_devices
+      entity_id: group.tracked_people
       from: 'home'
       to: 'not_home'
     condition:
