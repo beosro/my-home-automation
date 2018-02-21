@@ -1,3 +1,10 @@
+#########################################################################
+# Security
+#
+#  Handle everything related to home security.
+#########################################################################
+
+# Group door sensors.
 group:
   Doors:
     entities:
@@ -12,26 +19,32 @@ group:
 binary_sensor:
   - platform: template
     sensors:
+      # Friendly version of side door state.
       door_one:
         value_template: "{{ is_state('sensor.zwave_door_sensor_1_alarm_level', '255') }}"
         friendly_name: 'Side Door'
         device_class: 'opening'
+      # Friendly version of front door state.
       door_two:
         value_template: "{{ is_state('sensor.zwave_door_sensor_2_alarm_level', '255') }}"
         friendly_name: 'Front Door'
         device_class: 'opening'
+      # Friendly version of den door state.
       door_three:
         value_template: "{{ is_state('sensor.zwave_door_sensor_3_alarm_level', '255') }}"
         friendly_name: 'Den Door'
         device_class: 'opening'
+      # Friendly version of porch door state.
       door_four:
         value_template: "{{ is_state('sensor.zwave_door_sensor_4_alarm_level', '255') }}"
         friendly_name: 'Porch Door'
         device_class: 'opening'
+      # Friendly version of cat door state.
       door_five:
         value_template: "{{ is_state('sensor.zwave_door_sensor_5_alarm_level', '255') }}"
         friendly_name: 'Cat Door'
         device_class: 'opening'
+      # Track if any door is open.
       any_door_open:
         value_template: >
           {% set doors = ["door_one", "door_two", "door_three", "door_four", "door_five"] %}
@@ -43,6 +56,7 @@ binary_sensor:
           {{is_open()|int != 0}}
         friendly_name: 'Any door open'
         device_class: 'opening'
+      # Check for lock error states.
       lock_error:
         friendly_name: "Lock Error"
         value_template: >
@@ -59,6 +73,8 @@ binary_sensor:
           {{error_state('zwave_lock_locked')|int == 0}}
 
 automation:
+  # If there's a lock error state, notify. We don't want to 
+  # think the door locked when it actually did not.
   - alias: Warn if door fails to lock
     trigger:
       platform: state
@@ -75,6 +91,8 @@ automation:
           variables:
             message: 'Door lock error: {{states.lock.zwave_lock_locked.attributes.notification}}'
 
+  # When all tracked people leave the house, lock the door
+  # if it isn't already.
   - alias: lock door when everyone leaves
     trigger:
       - platform: state
