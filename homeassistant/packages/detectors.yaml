@@ -1,6 +1,13 @@
+#########################################################################
+# Detectors.
+#
+#  Detectors are safety devices - smoke and carbon monoxide alarms.
+#########################################################################
+
 sensor:
   - platform: template
     sensors:
+      # Friendly state for first floor detector.
       smoke_co_first_floor:
         value_template: >-
             {%- if is_state("sensor.zwave_detector_1_alarm_type", "13") %}
@@ -15,6 +22,7 @@ sensor:
                 Unknown
             {%- endif %}
         friendly_name: 'First Floor Smoke/CO Alarm'
+      # Friendly state for second floor detector.
       smoke_co_second_floor:
         value_template: >-
             {%- if is_state("sensor.zwave_detector_2_alarm_type", "13") %}
@@ -31,6 +39,7 @@ sensor:
         friendly_name: 'Second Floor Smoke/CO Alarm'
 
 automation:
+  # Notify if smoke is detected.
   - alias: Smoke detected
     trigger:
       platform: state
@@ -47,6 +56,8 @@ automation:
         data:
           variables:
             message: 'Smoke detected!'
+
+  # Notify if carbon monoxide is detected.
   - alias: Carbon monoxide detected
     trigger:
       platform: state
