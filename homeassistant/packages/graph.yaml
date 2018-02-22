@@ -1,12 +1,21 @@
+#########################################################################
+# Interaction Graph
+#
+#  Generate an entity interaction graph using "home-assistant-graph".
+#########################################################################
+
+# Add panel to display graph.
 panel_iframe:
   graph:
     title: Graph
     icon: mdi:vector-polyline
     url: !secret graph_url
 
+# Define command used to generate the graph.
 shell_command:
   generate_graph: !secret graph_command
 
+# Automatically generate the graph when Home Assistant starts.
 automation:
   - alias: Generate graph
     trigger:
