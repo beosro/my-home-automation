@@ -1,3 +1,9 @@
+#########################################################################
+# Cameras
+#
+#  Camera management.
+#########################################################################
+
 homeassistant:
   customize:
     script.cam_up:
@@ -28,6 +34,7 @@ homeassistant:
     'sensor.*_video_connections':
       hidden: true
 
+# Group camera entities.
 group:
   Camera:
     - camera.camera
@@ -41,13 +48,8 @@ group:
     - camera.den
     - camera.kitchen
     - camera.backyard
-
-#panel_iframe:
-#  cams:
-#    title: Cameras
-#    icon: mdi:video
-#    url: !secret cams_url
-
+ 
+# Set up Android phone webcams.
 android_ip_webcam:
   #  - host: !secret android_ip_1
   #  scan_interval: 20
@@ -66,20 +68,22 @@ android_ip_webcam:
       - light
       - sound
 
+# Set up standard security webcam.
 camera:
   - platform: generic
     still_image_url: !secret cam_image_url
     name: Camera
-#  - platform: local_file
-#    name: Last Motion
-#    file_path: !secret cam_latest_file
 #  - platform: ffmpeg
 #    input: !secret wansview_rtsp
 #    name: Backyard
 
+# Script that relays camera commands.
 shell_command:
   cam_direction: !secret cam_direction_script
 
+# IR can be turned on and off. Represent this as
+# a switch in the UI by linking the on and off
+# functions to the corresponding script.
 switch:
   - platform: template
     switches:
@@ -93,32 +97,39 @@ switch:
           service: script.turn_on
           data:
             entity_id: script.cam_ir_off
+
 script:
+  # Send a command to rotate the camera down.
   cam_down:
     sequence:
       - service: shell_command.cam_direction
         data:
           direction: 'down'
+  # Send a command to rotate the camera up.
   cam_up:
     sequence:
       - service: shell_command.cam_direction
         data:
           direction: 'up'
+  # Send a command to rotate the camera left.
   cam_left:
     sequence:
       - service: shell_command.cam_direction
         data:
           direction: 'left'
+  # Send a command to rotate the camera right.
   cam_right:
     sequence:
       - service: shell_command.cam_direction
         data:
           direction: 'right'
+  # Send a command to turn IR on.
   cam_ir_on:
     sequence:
       - service: shell_command.cam_direction
         data:
           direction: 'ir_on'
+  # Send a command to turn IR off.
   cam_ir_off:
     sequence:
       - service: shell_command.cam_direction
