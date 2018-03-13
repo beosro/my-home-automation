@@ -128,17 +128,3 @@ class TwitterSensor(Entity):
         """Update the sensor state."""
         self._twitter.update()
         self._state = self._twitter.data.get(self._key)
-
-
-"""
-sensor:
-  platform: twitter
-  consumer_key: 'jXkgiploamClwm282wQHZNQKH'
-  consumer_secret: 'ti0mWl8j7wjMkduRgjM5z5Bu4b9V913tikVDunmgau4g8olKPm'
-  access_token_key: '963784522490892288-x2KZa0XsdJzBUAL4aEfQdSMlBYGrKcs'
-  access_token_secret: 'X57b3H2QzdRsVCT5PR3i4ABkmSvZrLbEg5ZMZW49HZT7E'
-  screen_names:
-    capitalweather:
-      - 'igit: +(?P<Daily Digit>[-0-9]+)/10[^A-Za-z]+(?P<Day Description>.+?\.)'
-      - 'potential index: +(?P<Snow Potential Index>[-0-9]+)/10[^A-Za-z]+(?P<Snow Forecast>.+?\.)'
-"""
