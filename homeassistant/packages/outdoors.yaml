@@ -96,8 +96,8 @@ sensor:
     access_token_secret: !secret twitter_access_token_secret
     screen_names:
       capitalweather:
-        - 'igit: +(?P<daily_digit>[-0-9]+)/10[^A-Za-z]+(?P<day_description>.+?[\.!\?])'
-        - 'potential index: +(?P<snow_potential_index>[-0-9]+)/10[^A-Za-z]+(?P<snow_forecast>.+?[\.!\?])'
+        - 'igit[^A-Za-z]+(?P<daily_digit>[-0-9]+)/10[^A-Za-z]+(?P<day_description>.+?)(( *\-? *[A-Za-z]+, CWG)|(\n))'
+        - 'potential index[^A-Za-z]+(?P<snow_potential_index>[-0-9]+)/10[^A-Za-z]+(?P<snow_forecast>.+?)(( *\-? *[A-Za-z]+, CWG)|(\n))'
   # Check how many earthquakes happened nearby (spoiler: none).
   - platform: usgs
     name: Daily Earthquakes
