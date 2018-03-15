@@ -98,7 +98,6 @@ class TwitterData:
     @Throttle(MIN_TIME_BETWEEN_UPDATES)
     def update(self):
         """Update data values on scheduled interval."""
-        print('updating')
         for screen_name, regexes in self._screen_names.items():
             for key, value in self._query_twitter(screen_name, regexes):
                 entity_id = _get_entity_id(screen_name, key)
