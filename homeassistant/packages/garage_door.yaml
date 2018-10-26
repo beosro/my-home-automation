@@ -1,6 +1,6 @@
-homeassistant:
-  customize:
-    cover.garage_door:
+#homeassistant:
+#  customize:
+#    cover.garage_door:
       #icon: mdi:garage
 
 cover:

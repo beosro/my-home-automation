@@ -1,0 +1,108 @@
+homeassistant:
+  customize:
+    sensor.aoe2net:
+      icon: mdi:chess-rook
+      friendly_name: In Game
+    sensor.aoe2_map:
+      icon: mdi:map
+      friendly_name: Map
+    sensor.aoe2_players:
+      icon: mdi:account-multiple
+      friendly_name: Players
+    sensor.aoe2_current_match:
+      icon: mdi:television
+      friendly_name: Current Match
+
+group:
+  aoe2.net:
+    - sensor.aoe2net
+    - sensor.aoe2_players
+    - sensor.aoe2_map
+    - automation.aoe2_joined
+    - automation.aoe2_someone_joined
+    - automation.aoe2_left
+    - automation.aoe2_someone_left
+    - automation.aoe2_game_full
+  Matches:
+    - calendar.httpsaoe2calendarcomical
+    - sensor.aoe2_current_match
+
+sensor:
+  - platform: aoe2net
+    track:
+      - !secret aoe2_name_1
+      - !secret aoe2_name_2
+  - platform: template
+    sensors:
+      aoe2_players:
+        value_template: >
+          {% if states.sensor.aoe2net.state == 'True' %}
+            {{states.sensor.aoe2net.attributes.players}}/{{states.sensor.aoe2net.attributes.slots}}
+          {% endif %}
+      aoe2_map:
+        value_template: "{{states.sensor.aoe2net.attributes['map']}}"
+      aoe2_current_match:
+        value_template: >
+          {% if states.calendar.httpsaoe2calendarcomical.state == 'On' %}
+            {{states.calendar.httpsaoe2calendarcomical.attributes.description}}
+          {% endif %}
+
+automation:
+  - alias: 'aoe2 joined'
+    trigger:
+      platform: state
+      entity_id: sensor.aoe2net
+      to: 'True'
+    action:
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: 'You just joined a {{states.sensor.aoe2_map.state}} game.'
+  - alias: 'aoe2 someone joined'
+    trigger:
+      platform: state
+      entity_id: sensor.aoe2net
+    condition:
+      condition: template
+      value_template: "{{trigger.to_state.attributes.players > trigger.from_state.attributes.players}}"
+    action:
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: 'Someone just joined the game.'
+  - alias: 'aoe2 someone left'
+    trigger:
+      platform: state
+      entity_id: sensor.aoe2net
+    condition:
+      condition: template
+      value_template: "{{trigger.to_state.attributes.players < trigger.from_state.attributes.players}}"
+    action:
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: 'Someone just left the game.'
+  - alias: 'aoe2 left'
+    trigger:
+      platform: state
+      entity_id: sensor.aoe2net
+      to: 'False'
+    action:
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: 'You just left a game.'
+  - alias: 'aoe2 game full'
+    trigger:
+      platform: template
+      value_template: "{{states.sensor.aoe2net.attributes.full == 'true'}}"
+    action:
+      - service: script.turn_on
+        entity_id: script.play_tts
+        data_template:
+          variables:
+            message: 'Your {{states.sensor.aoe2_map.state}} game is full!'

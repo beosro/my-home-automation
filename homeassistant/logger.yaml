@@ -1,4 +1,5 @@
 default: info
 logs:
   homeassistant.components.http: warn
+  homeassistant.components.sensor.command_line: warn
   pycec: warn

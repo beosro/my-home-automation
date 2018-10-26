@@ -59,6 +59,10 @@ class CreditKarmaSensor(Entity):
         """Return the state of the sensor."""
         return self._data.get('value')
 
+    @property
+    def unit_of_measurement(self):
+        return "points"
+
     def update(self):
         """Update device state."""
         self._data = self._hass.data[DATA_CREDITKARMA]['data'][self._bureau][0]

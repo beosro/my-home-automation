@@ -23,23 +23,23 @@ group:
     - camera.usps_mail
 
 # Configure USPS Informed Delivery access.
-usps:
-  username: !secret myusps_username
-  password: !secret myusps_password
-  name: 'USPS'
-  driver: 'chrome'
+#usps:
+#  username: !secret myusps_username
+#  password: !secret myusps_password
+#  name: 'USPS'
+#  driver: 'chrome'
 
 sensor:
   # Configure UPS MyChoice access.
-  - platform: ups
-    name: 'UPS'
-    username: !secret upsmychoice_username
-    password: !secret upsmychoice_password
+  #- platform: ups
+  #  name: 'UPS'
+  #  username: !secret upsmychoice_username
+  #  password: !secret upsmychoice_password
   # Configure Fedex Delivery Manager access.
-#  - platform: fedex
-#    name: 'Fedex'
-#    username: !secret fedexdeliverymanager_username
-#    password: !secret fedexdeliverymanager_password
+  #- platform: fedex
+  #  name: 'Fedex'
+  #  username: !secret fedexdeliverymanager_username
+  #  password: !secret fedexdeliverymanager_password
   - platform: template
     sensors:
       # Calculate how many packages are in transit (anything not yet delivered).

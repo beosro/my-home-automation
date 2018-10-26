@@ -4,6 +4,17 @@
 #  Sorry, cats can't be automated.
 #########################################################################
 
+homeassistant:
+  customize:
+    sensor.litter_box:
+      icon: mdi:emoticon-poop
+
+sensor:
+  - platform: mqtt
+    state_topic: "home/scale/state"
+    name: "Litter Box"
+    unit_of_measurement: "g"
+
 automation:
   # Announce over TTS when the cat door is opened.
   - alias: Announce when cat door is opened

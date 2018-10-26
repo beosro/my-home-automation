@@ -9,11 +9,19 @@
 				<Instance index="1" />
 				<Value type="byte" genre="basic" instance="1" index="0" label="Basic" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
+			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="2">
+				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+			</CommandClass>
 		</CommandClasses>
 	</Node>
 	<Node id="7" name="zwave_lock" location="" basic="4" generic="64" specific="3" type="Secure Keypad Door Lock" listening="false" frequentListening="true" beaming="true" routing="true" max_baud_rate="40000" version="4" secured="true" query_stage="Complete">
-		<Manufacturer id="0" name="">
-			<Product type="0" id="0" name="" />
+		<Manufacturer id="0" name="Unknown: id=0000">
+			<Product type="0" id="0" name="Unknown: type=0000, id=0000" />
 		</Manufacturer>
 		<CommandClasses>
 			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1" request_flags="4" issecured="true" mapping="98">
@@ -47,7 +55,7 @@
 				<Value type="raw" genre="user" instance="1" index="0" label="Enrollment Code" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00" length="10" />
 				<Value type="raw" genre="user" instance="1" index="1" label="Code 1:" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0x2a 0x2a 0x2a 0x2a 0x2a 0x2a 0x2a 0x2a 0x2a 0x2a" length="10" />
 				<Value type="raw" genre="user" instance="1" index="2" label="Code 2:" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0x2a 0x2a 0x2a 0x2a 0x2a 0x2a 0x2a 0x2a 0x2a 0x2a" length="10" />
-				<Value type="raw" genre="user" instance="1" index="3" label="Code 3:" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00" length="10" />
+				<Value type="raw" genre="user" instance="1" index="3" label="Code 3:" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0x00" length="1" />
 				<Value type="raw" genre="user" instance="1" index="4" label="Code 4:" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00" length="10" />
 				<Value type="raw" genre="user" instance="1" index="5" label="Code 5:" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00" length="10" />
 				<Value type="raw" genre="user" instance="1" index="6" label="Code 6:" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00" length="10" />
@@ -83,15 +91,20 @@
 			</CommandClass>
 			<CommandClass id="113" name="COMMAND_CLASS_ALARM" version="1" request_flags="6" issecured="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Alarm Type" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="9" />
-				<Value type="byte" genre="user" instance="1" index="1" label="Alarm Level" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Alarm Type" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="22" />
+				<Value type="byte" genre="user" instance="1" index="1" label="Alarm Level" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="1" />
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="6" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="128" name="COMMAND_CLASS_BATTERY" version="1" request_flags="4" issecured="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="33" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="89" />
 			</CommandClass>
 			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="6" issecured="true">
 				<Instance index="1" />
@@ -113,7 +126,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="8" name="zwave_door_sensor_1" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3079" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="8" name="zwave_door_sensor_1" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3079" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Associations">
 		<Manufacturer id="109" name="Vision">
 			<Product type="2001" id="106" name="ZD2102 EU Door/Window Sensor" />
 		</Manufacturer>
@@ -155,6 +168,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -264,6 +282,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -306,7 +329,7 @@
 			</CommandClass>
 			<CommandClass id="128" name="COMMAND_CLASS_BATTERY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="100" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="90" />
 			</CommandClass>
 			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="2" request_flags="2" innif="true">
 				<Instance index="1" />
@@ -342,7 +365,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -362,6 +385,19 @@
 			<CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0">
 				<Instance index="1" />
 				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="list" genre="user" instance="1" index="1" label="Scene KeyAttribute" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="0">
+					<Item label="Pressed 1 Time" value="0" />
+					<Item label="Key Released" value="1" />
+					<Item label="Key Held down" value="2" />
+					<Item label="Pressed 2 Times" value="3" />
+					<Item label="Pressed 3 Times" value="4" />
+					<Item label="Pressed 4 Times" value="5" />
+					<Item label="Pressed 5 Times" value="6" />
+				</Value>
+				<Value type="byte" genre="user" instance="1" index="2" label="Scene ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="button" genre="user" instance="1" index="3" label="Button" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="byte" genre="user" instance="1" index="4" label="Scenes Identical" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="128" label="Scene Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
 			<CommandClass id="94" name="COMMAND_CLASS_ZWAVE_PLUS_INFO" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -385,6 +421,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -471,6 +512,19 @@
 			<CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0">
 				<Instance index="1" />
 				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="list" genre="user" instance="1" index="1" label="Scene KeyAttribute" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="0">
+					<Item label="Pressed 1 Time" value="0" />
+					<Item label="Key Released" value="1" />
+					<Item label="Key Held down" value="2" />
+					<Item label="Pressed 2 Times" value="3" />
+					<Item label="Pressed 3 Times" value="4" />
+					<Item label="Pressed 4 Times" value="5" />
+					<Item label="Pressed 5 Times" value="6" />
+				</Value>
+				<Value type="byte" genre="user" instance="1" index="2" label="Scene ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="button" genre="user" instance="1" index="3" label="Button" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="byte" genre="user" instance="1" index="4" label="Scenes Identical" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="128" label="Scene Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
 			<CommandClass id="94" name="COMMAND_CLASS_ZWAVE_PLUS_INFO" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -494,6 +548,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -560,7 +619,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -580,6 +639,19 @@
 			<CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0">
 				<Instance index="1" />
 				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="list" genre="user" instance="1" index="1" label="Scene KeyAttribute" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="0">
+					<Item label="Pressed 1 Time" value="0" />
+					<Item label="Key Released" value="1" />
+					<Item label="Key Held down" value="2" />
+					<Item label="Pressed 2 Times" value="3" />
+					<Item label="Pressed 3 Times" value="4" />
+					<Item label="Pressed 4 Times" value="5" />
+					<Item label="Pressed 5 Times" value="6" />
+				</Value>
+				<Value type="byte" genre="user" instance="1" index="2" label="Scene ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="button" genre="user" instance="1" index="3" label="Button" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="byte" genre="user" instance="1" index="4" label="Scenes Identical" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="128" label="Scene Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
 			<CommandClass id="94" name="COMMAND_CLASS_ZWAVE_PLUS_INFO" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -603,6 +675,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -693,6 +770,19 @@
 			<CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0">
 				<Instance index="1" />
 				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="list" genre="user" instance="1" index="1" label="Scene KeyAttribute" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="0">
+					<Item label="Pressed 1 Time" value="0" />
+					<Item label="Key Released" value="1" />
+					<Item label="Key Held down" value="2" />
+					<Item label="Pressed 2 Times" value="3" />
+					<Item label="Pressed 3 Times" value="4" />
+					<Item label="Pressed 4 Times" value="5" />
+					<Item label="Pressed 5 Times" value="6" />
+				</Value>
+				<Value type="byte" genre="user" instance="1" index="2" label="Scene ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="button" genre="user" instance="1" index="3" label="Button" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="byte" genre="user" instance="1" index="4" label="Scenes Identical" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="128" label="Scene Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
 			<CommandClass id="94" name="COMMAND_CLASS_ZWAVE_PLUS_INFO" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -714,6 +804,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -803,7 +898,12 @@
 			</CommandClass>
 			<CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0">
 				<Instance index="1" />
-				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="2" />
+				<Value type="int" genre="user" instance="1" index="1" label="Top Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="user" instance="1" index="2" label="Bottom Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="button" genre="user" instance="1" index="3" label="Button" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="byte" genre="user" instance="1" index="4" label="Scenes Identical" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="128" label="Scene Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
 			<CommandClass id="94" name="COMMAND_CLASS_ZWAVE_PLUS_INFO" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -849,6 +949,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -935,6 +1040,19 @@
 			<CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0">
 				<Instance index="1" />
 				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="list" genre="user" instance="1" index="1" label="Scene KeyAttribute" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="0">
+					<Item label="Pressed 1 Time" value="0" />
+					<Item label="Key Released" value="1" />
+					<Item label="Key Held down" value="2" />
+					<Item label="Pressed 2 Times" value="3" />
+					<Item label="Pressed 3 Times" value="4" />
+					<Item label="Pressed 4 Times" value="5" />
+					<Item label="Pressed 5 Times" value="6" />
+				</Value>
+				<Value type="byte" genre="user" instance="1" index="2" label="Scene ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="button" genre="user" instance="1" index="3" label="Button" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="byte" genre="user" instance="1" index="4" label="Scenes Identical" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="128" label="Scene Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
 			<CommandClass id="94" name="COMMAND_CLASS_ZWAVE_PLUS_INFO" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -958,6 +1076,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1016,7 +1139,7 @@
 	</Node>
 	<Node id="25" name="zwave_garage_door_opener" location="" basic="4" generic="64" specific="7" type="Secure Barrier AddOn" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" secured="true" query_stage="Complete">
 		<Manufacturer id="14f" name="Linear">
-			<Product type="4744" id="3030" name="Unknown: type=4744, id=3030" />
+			<Product type="4744" id="3030" name="GD00Z-4 Garage Door Opener Remote Controller" />
 		</Manufacturer>
 		<CommandClasses>
 			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1">
@@ -1029,25 +1152,6 @@
 			<CommandClass id="90" name="COMMAND_CLASS_DEVICE_RESET_LOCALLY" version="1" innif="true">
 				<Instance index="1" />
 			</CommandClass>
-			<CommandClass id="102" name="COMMAND_CLASS_BARRIER_OPERATOR" version="1" issecured="true">
-				<Instance index="1" />
-				<Value type="list" genre="user" instance="1" index="1" label="Barrier State Label" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="6">
-					<Item label="Closed" value="0" />
-					<Item label="Closing" value="1" />
-					<Item label="Stopped" value="2" />
-					<Item label="Opening" value="3" />
-					<Item label="Opened" value="4" />
-					<Item label="Unknown" value="5" />
-				</Value>
-				<Value type="list" genre="config" instance="1" index="2" label="Supported Signals" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="3" size="4">
-					<Item label="None" value="0" />
-					<Item label="Audible" value="1" />
-					<Item label="Visual" value="2" />
-					<Item label="Both" value="3" />
-				</Value>
-				<Value type="bool" genre="config" instance="1" index="3" label="Audible Notification" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
-				<Value type="bool" genre="config" instance="1" index="4" label="Visual Notification" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
-			</CommandClass>
 			<CommandClass id="113" name="COMMAND_CLASS_ALARM" version="4" request_flags="2" issecured="true">
 				<Instance index="1" />
 				<Value type="byte" genre="user" instance="1" index="0" label="Alarm Type" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
@@ -1058,6 +1162,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="2" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="4" issecured="true">
 				<Instance index="1" />
@@ -1079,7 +1188,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="26" name="zwave_door_sensor_3" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3079" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="26" name="zwave_door_sensor_3" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3079" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="109" name="Vision">
 			<Product type="2001" id="106" name="ZD2102 EU Door/Window Sensor" />
 		</Manufacturer>
@@ -1123,6 +1232,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1234,6 +1348,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1302,7 +1421,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="28" name="zwave_door_sensor_5" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3079" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="28" name="zwave_door_sensor_5" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3079" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="109" name="Vision">
 			<Product type="2001" id="106" name="ZD2102 EU Door/Window Sensor" />
 		</Manufacturer>
@@ -1344,6 +1463,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1493,6 +1617,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1582,6 +1711,9 @@
 				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="2" />
 				<Value type="int" genre="user" instance="1" index="1" label="Top Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
 				<Value type="int" genre="user" instance="1" index="2" label="Bottom Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="button" genre="user" instance="1" index="3" label="Button" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="byte" genre="user" instance="1" index="4" label="Scenes Identical" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="128" label="Scene Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
 			<CommandClass id="94" name="COMMAND_CLASS_ZWAVE_PLUS_INFO" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1605,6 +1737,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1691,8 +1828,11 @@
 			<CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0">
 				<Instance index="1" />
 				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="2" />
-				<Value type="int" genre="user" instance="1" index="1" label="Top Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3" />
-				<Value type="int" genre="user" instance="1" index="2" label="Bottom Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3" />
+				<Value type="int" genre="user" instance="1" index="1" label="Top Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="4" />
+				<Value type="int" genre="user" instance="1" index="2" label="Bottom Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="button" genre="user" instance="1" index="3" label="Button" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="byte" genre="user" instance="1" index="4" label="Scenes Identical" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="128" label="Scene Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
 			<CommandClass id="94" name="COMMAND_CLASS_ZWAVE_PLUS_INFO" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1716,6 +1856,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1802,8 +1947,11 @@
 			<CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0">
 				<Instance index="1" />
 				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="2" />
-				<Value type="int" genre="user" instance="1" index="1" label="Top Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="1" />
-				<Value type="int" genre="user" instance="1" index="2" label="Bottom Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="user" instance="1" index="1" label="Top Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="user" instance="1" index="2" label="Bottom Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3" />
+				<Value type="button" genre="user" instance="1" index="3" label="Button" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="byte" genre="user" instance="1" index="4" label="Scenes Identical" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="128" label="Scene Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
 			<CommandClass id="94" name="COMMAND_CLASS_ZWAVE_PLUS_INFO" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1827,6 +1975,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1885,7 +2038,7 @@
 	</Node>
 	<Node id="37" name="zwave_fan_1" location="" basic="4" generic="17" specific="8" roletype="5" devicetype="1024" nodetype="0" type="Multilevel Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="63" name="GE">
-			<Product type="4944" id="3131" name="Unknown: type=4944, id=3131" />
+			<Product type="4944" id="3131" name="14287 Fan Control Switch" />
 		</Manufacturer>
 		<CommandClasses>
 			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1" request_flags="4" mapping="38">
@@ -1928,6 +2081,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1987,8 +2145,8 @@
 		</CommandClasses>
 	</Node>
 	<Node id="38" name="zwave_water_valve" location="" basic="4" generic="16" specific="6" roletype="5" devicetype="5376" nodetype="0" type="Valve Open Close" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" secured="true" query_stage="Complete">
-		<Manufacturer id="21f" name="Unknown: id=021f">
-			<Product type="3" id="2" name="Unknown: type=0003, id=0002" />
+		<Manufacturer id="21f" name="Dome">
+			<Product type="3" id="2" name="Water Shut-Off Valve" />
 		</Manufacturer>
 		<CommandClasses>
 			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1" request_flags="4" innif="true" mapping="37">
@@ -2026,6 +2184,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -2117,6 +2280,11 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -2188,7 +2356,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="42" name="zwave_detector_1" location="" basic="4" generic="161" specific="0" type="Alarm Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" secured="true" query_stage="CacheLoad">
+	<Node id="42" name="zwave_detector_1" location="" basic="4" generic="161" specific="0" type="Alarm Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" secured="true" query_stage="Associations">
 		<Manufacturer id="138" name="First Alert">
 			<Product type="1" id="2" name="ZCombo Smoke and Carbon Monoxide Detector" />
 		</Manufacturer>
@@ -2211,10 +2379,15 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="128" name="COMMAND_CLASS_BATTERY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="96" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="88" />
 			</CommandClass>
 			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="1" request_flags="2">
 				<Instance index="1" />
@@ -2259,10 +2432,15 @@
 			</CommandClass>
 			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Loaded Config Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="1" label="Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="system" instance="1" index="2" label="Latest Available Config File Revision" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="string" genre="system" instance="1" index="3" label="Device ID" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
+				<Value type="string" genre="system" instance="1" index="4" label="Serial Number" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="" />
 			</CommandClass>
 			<CommandClass id="128" name="COMMAND_CLASS_BATTERY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="97" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="89" />
 			</CommandClass>
 			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="1" request_flags="2">
 				<Instance index="1" />
@@ -2284,7 +2462,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="44" name="zwave_dimmer_2" location="" basic="4" generic="17" specific="1" roletype="5" devicetype="1536" nodetype="0" type="Multilevel Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" secured="true" query_stage="Complete">
+	<Node id="47" name="zwave_dimmer_2" location="" basic="4" generic="17" specific="1" roletype="5" devicetype="1536" nodetype="0" type="Multilevel Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" secured="true" query_stage="Complete">
 		<Manufacturer id="c" name="HomeSeer">
 			<Product type="4447" id="3034" name="HS-WD100+ Wall Dimmer" />
 		</Manufacturer>
@@ -2294,7 +2472,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="1" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="98" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -2318,7 +2496,7 @@
 			<CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0">
 				<Instance index="1" />
 				<Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="2" />
-				<Value type="int" genre="user" instance="1" index="1" label="Top Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
+				<Value type="int" genre="user" instance="1" index="1" label="Top Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="1" />
 				<Value type="int" genre="user" instance="1" index="2" label="Bottom Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
 			</CommandClass>
 			<CommandClass id="94" name="COMMAND_CLASS_ZWAVE_PLUS_INFO" version="1" request_flags="4" innif="true">

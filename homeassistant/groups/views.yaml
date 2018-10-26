@@ -62,6 +62,13 @@ Comfort:
   entities:
     - group.temperatures
     - climate.thermostat
+AoC:
+  view: yes
+  icon: mdi:sword-cross
+  entities:
+    - group.aoe2net
+    - group.matches
+    - group.twitch
 Admin:
   view: yes
   icon: mdi:settings

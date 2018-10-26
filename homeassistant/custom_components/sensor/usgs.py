@@ -108,7 +108,6 @@ class USGSSensor(Entity):
             dist = vincenty.vincenty(
                 (self._latitude, self._longitude),
                 tuple(incident.get('geometry').get('coordinates')[:2]))
-            print(incident.get('properties').get('place'), dist)
             if dist > self._radius:
                 continue
             incident_count += 1

@@ -143,7 +143,7 @@
         {% if extended %}
           Today is rated {{states.sensor.capitalweather_daily_digit.state}} out of 10.
           {{ states.sensor.capitalweather_day_description.state -}}
-          {% if states.sensor.season.state == 'winter' %}
+          {% if states.sensor.season.state == 'Winter' or states.sensor.capitalweather_snow_potential_index.state|int > 3 %}
             {{ states.sensor.capitalweather_snow_forecast.state -}}
           {% endif %}
         {% endif %}

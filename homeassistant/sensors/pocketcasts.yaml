@@ -1,3 +1,3 @@
-- platform: pocketcasts
-  username: !secret pocketcasts_username
-  password: !secret pocketcasts_password
+#- platform: pocketcasts
+#  username: !secret pocketcasts_username
+#  password: !secret pocketcasts_password

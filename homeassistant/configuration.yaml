@@ -8,9 +8,14 @@ homeassistant:
   customize: !include customize_reg.yaml
   customize_glob: !include customize_glob.yaml
   packages:  !include_dir_named packages
+  auth_providers:
+    - type: homeassistant
+    - type: legacy_api_password
 
-customizer:
-  custom_ui: hosted
+#customizer:
+#  custom_ui: hosted
+
+auth:
 
 system_log:
   max_entries: 100
@@ -22,9 +27,9 @@ google:
 digital_ocean:
   access_token: !secret digitalocean_api_key
 
-twilio:
-  account_sid: !secret twilio_account_sid
-  auth_token: !secret twilio_auth_token
+#twilio:
+#  account_sid: !secret twilio_account_sid
+#  auth_token: !secret twilio_auth_token
 
 mailgun:
   domain: !secret mailgun_domain
@@ -46,7 +51,7 @@ emulated_hue:
 
 map:
 
-cloud: !include cloud.yaml
+#cloud: !include cloud.yaml
 
 http:
   api_password: !secret hass_api_password

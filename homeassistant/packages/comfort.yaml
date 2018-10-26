@@ -15,6 +15,8 @@ homeassistant:
       icon: mdi:format-vertical-align-top
     sensor.thermostat_temperature:
       friendly_name: Foyer Temperature
+    sensor.avg_occupied_temp:
+      icon: mdi:thermometer-lines
 
 # Pull out target high and low temperatures from thermostat.
 sensor:
@@ -22,14 +24,44 @@ sensor:
     sensors:
       low_target:
         friendly_name: "Minimum Temperature"
+        unit_of_measurement: "°F"
         value_template: "{{states.climate.thermostat.attributes.target_temp_low}}"
       high_target:
         friendly_name: "Maximum Temperature"
+        unit_of_measurement: "°F"
         value_template: "{{states.climate.thermostat.attributes.target_temp_high}}"
+      avg_occupied_temp:
+        friendly_name: "Average Occupied Room Temperature"
+        unit_of_measurement: "°F"
+        entity_id:
+          - binary_sensor.bedroom_occupancy
+          - binary_sensor.den_occupancy
+          - binary_sensor.kitchen_occupancy
+          - binary_sensor.thermostat_occupancy
+          - sensor.bedroom_temperature
+          - sensor.den_temperature
+          - sensor.kitchen_temperature
+          - sensor.thermostat_temperature
+        value_template: >
+          {% set rooms = ['bedroom', 'den', 'kitchen', 'thermostat'] %}
+          {% macro get_temp() -%}
+            {% for room in rooms -%}
+              {%- if states.binary_sensor[room ~ "_occupancy"].state == "on" -%}
+                {{-states.sensor[room ~ "_temperature"].state-}},
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endmacro %}
+          {% set temps = (((get_temp()).split(",")|reject("eq", ""))|map('float'))|list %}
+          {% if temps|sum > 0 %}
+            {{(temps|sum/temps|length)|round}}
+          {% else %}
+            n/a
+          {% endif %}
 
 # Group temperatures from each monitored room for easy viewing.
 group:
   Temperatures:
+    - sensor.avg_occupied_temp
     - sensor.kitchen_temperature
     - sensor.den_temperature
     - sensor.bedroom_temperature

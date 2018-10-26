@@ -211,7 +211,6 @@ automation:
     action:
       - service: switch.turn_on
         entity_id:
-          - switch.zwave_switch_3_switch
           - switch.zwave_switch_2_switch
       - service: light.turn_on
         entity_id:
@@ -228,9 +227,6 @@ automation:
         entity_id: sun.sun
         value_template: '{{state.attributes.elevation}}'
         below: 15
-      - platform: numeric_state
-        entity_id: sensor.dark_sky_cloud_coverage
-        above: 80
     action:
       service: switch.turn_on
       entity_id: switch.zwave_switch_2_switch

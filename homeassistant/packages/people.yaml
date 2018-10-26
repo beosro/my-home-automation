@@ -126,6 +126,8 @@ automation:
           - switch.zwave_switch_7_switch
           - switch.smart_socket_1
           - switch.smart_socket_2
+      - service: fan.turn_off
+        entity_id: fan.zwave_fan_1_level
       - service: lock.lock
         entity_id: group.all_locks
       - service: media_player.turn_off
@@ -184,6 +186,16 @@ automation:
       service: homeassistant.turn_off
       data:
         entity_id: switch.sleeping
+
+  # When sleep mode is turned off, turn off the stair lighting.
+  - alias: When sleep mode is turned off
+    trigger:
+      platform: state
+      entity_id: switch.sleeping
+      to: 'off'
+    action:
+      - service: light.turn_off
+        entity_id: light.stair_lighting
 
   # Sometimes we want to turn on sleep mode without TTS,
   # especially if it isn't on, but someone is already sleeping.

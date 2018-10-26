@@ -13,6 +13,7 @@ homeassistant:
 sensor:
   - platform: twitch
     entity_namespace: twitch
+    client_id: !secret twitch_client_id
     channels:
       - fopt_membrillo
       - tyrant_theviper

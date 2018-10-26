@@ -1,4 +1,4 @@
-- platform: fitbit
-  monitored_resources:
-    - 'activities/distance'
-    - 'activities/steps'
+#- platform: fitbit
+#  monitored_resources:
+#    - 'activities/distance'
+#    - 'activities/steps'

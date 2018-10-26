@@ -4,6 +4,11 @@
 #  Detectors are safety devices - smoke and carbon monoxide alarms.
 #########################################################################
 
+homeassistant:
+  customize_glob:
+    'sensor.smoke_co_*':
+      icon: mdi:alert
+
 sensor:
   - platform: template
     sensors:

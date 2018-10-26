@@ -4,13 +4,13 @@
   method: GET
   name: Quote
   value_template: '{{value.split(" (")[0]}}'
-- platform: rest
-  scan_interval: 7200
-  resource: !secret horoscope_url
-  name: His Horoscope
-  value_template: !secret his_horoscope_path
-- platform: rest
-  scan_interval: 7200
-  resource: !secret horoscope_url
-  name: Her Horoscope
-  value_template: !secret her_horoscope_path
+#- platform: rest
+#  scan_interval: 7200
+#  resource: !secret horoscope_url
+#  name: His Horoscope
+#  value_template: !secret his_horoscope_path
+#- platform: rest
+#  scan_interval: 7200
+#  resource: !secret horoscope_url
+#  name: Her Horoscope
+#  value_template: !secret her_horoscope_path

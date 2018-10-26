@@ -4,3 +4,4 @@
     - name: DOW
       currency: USD
       symbol: DJIA
+  foreign_exchange:

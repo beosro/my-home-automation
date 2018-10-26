@@ -59,14 +59,14 @@ android_ip_webcam:
   #    - battery_level
   #    - light
   #    - sound
-  - host: !secret android_ip_2
-    scan_interval: 20
-    name: Den
-    motion_sensor: true
-    sensors:
-      - battery_level
-      - light
-      - sound
+  #- host: !secret android_ip_2
+  #  scan_interval: 20
+  #  name: Den
+  #  motion_sensor: true
+  #  sensors:
+  #    - battery_level
+  #    - light
+  #    - sound
 
 # Set up standard security webcam.
 camera:

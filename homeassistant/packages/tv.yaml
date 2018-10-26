@@ -38,8 +38,8 @@ group:
 
 media_player:
   - platform: cast
-  - platform: firetv
-    host: localhost
+#  - platform: firetv
+#    host: localhost
 
 input_select:
   tv_input:

@@ -128,7 +128,7 @@ sensor:
     resource: !secret org_operating_status
     method: GET
     name: org_operating_status
-    value_template: '{{value_json.StatusSummary}}'
+    value_template: '{{value_json.Icon}}'
   # Organization operating status message.
   - platform: rest
     scan_interval: 3600
@@ -145,37 +145,37 @@ sensor:
     name: His Distance
     entity_id: proximity.his_home
   # Travel time on his morning commute.
-  - platform: google_travel_time
-    name: His Morning Commute
-    api_key: !secret google_api_key
-    origin: !secret home_address
-    destination: !secret his_work_address_1
-    options:
-      mode: driving
+#  - platform: google_travel_time
+#    name: His Morning Commute
+#    api_key: !secret google_api_key
+#    origin: !secret home_address
+#    destination: !secret his_work_address_2
+#    options:
+#      mode: driving
   # Travel time on his evening commute.
-  - platform: google_travel_time
-    name: His Evening Commute
-    api_key: !secret google_api_key
-    origin: !secret his_work_address_1
-    destination: !secret home_address
-    options:
-      mode: driving
+#  - platform: google_travel_time
+#    name: His Evening Commute
+#    api_key: !secret google_api_key
+#    origin: !secret his_work_address_2
+#    destination: !secret home_address
+#    options:
+#      mode: driving
   # Travel time on her morning commute.
-  - platform: google_travel_time
-    name: Her Morning Commute
-    api_key: !secret google_api_key
-    origin: !secret home_address
-    destination: !secret her_work_address_1
-    options:
-      mode: driving
+#  - platform: google_travel_time
+#    name: Her Morning Commute
+#    api_key: !secret google_api_key
+#    origin: !secret home_address
+#    destination: !secret her_work_address_1
+#    options:
+#      mode: driving
   # Travel time on her evening commute.
-  - platform: google_travel_time
-    name: Her Evening Commute
-    api_key: !secret google_api_key
-    origin: !secret her_work_address_1
-    destination: !secret home_address
-    options:
-      mode: driving
+#  - platform: google_travel_time
+#    name: Her Evening Commute
+#    api_key: !secret google_api_key
+#    origin: !secret her_work_address_1
+#    destination: !secret home_address
+#    options:
+#      mode: driving
 
 automation:
   # Track and record departure time from home for everyone.

@@ -67,6 +67,7 @@ group:
     - sensor.dark_sky_humidity
     - sensor.dark_sky_cloud_coverage
     - sensor.dark_sky_wind_speed
+    - sensor.solar_irradiance
     - sensor.capitalweather_daily_digit
     - sensor.capitalweather_snow_potential_index
     - sensor.daily_earthquakes
@@ -177,6 +178,16 @@ sensor:
           {% else %}
               Unknown
           {%- endif %}
+      solar_irradiance:
+        friendly_name: Solar Irradiance
+        unit_of_measurement: "W/m²"
+        icon_template: mdi:weather-sunny
+        entity_id: sun.sun
+        value_template: >-
+          {% macro sin(x) -%}
+            {{ 4*x*(180-x)/(40500-x*(180-x)) }}
+          {%- endmacro %}
+          {{ ([0, 1120*(sin(states.sun.sun.attributes.elevation)|float)] | max)|round }}
   # Monitor various local weather conditions.
   - platform: darksky
     api_key: !secret darksky_api_key
@@ -187,8 +198,8 @@ sensor:
       - hourly_summary
       - daily_summary
       - cloud_cover
-      - temperature_max
-      - temperature_min
+      - temperature_high
+      - temperature_low
       - wind_speed
 
 binary_sensor:
